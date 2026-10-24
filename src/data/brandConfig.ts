@@ -7,7 +7,7 @@ export const brandConfig: BrandConfig = {
   subTagline: 'Direct operator commercial cabs starting from Berhampur to Bhubaneswar Airport, Puri, Gopalpur Beach, Tara Tarini, Daringbadi, and all 30 districts.',
   legalEntityNotice: 'Subham Travelers is an independent commercial cab & travel enquiry service operating out of Berhampur (Ganjam), Odisha, India.',
   headquarters: 'Berhampur (Brahmapur), Ganjam District, Odisha',
-  serviceArea: 'Starting from Berhampur (Railway Station, New Bus Stand, MKCG Medical) to Bhubaneswar Airport, Puri, and all destinations across Odisha & Andhra border',
+  serviceArea: 'Starting from Berhampur (Railway Station, New Bus Stand, MKCG Medical) to Bhubaneswar Airport, Puri, Konark, and all 30 districts across Odisha',
   contact: {
     // These use the configurable environment values or standard placeholders
     phoneDisplay: env.supportPhone,

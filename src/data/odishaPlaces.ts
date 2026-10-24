@@ -110,10 +110,10 @@ export const ODISHA_PRESET_LOCATIONS: SelectedPlace[] = [
     isPopularPreset: true,
   },
   {
-    displayName: 'Visakhapatnam (Vizag) City / Vizag Airport (VTZ)',
-    formattedAddress: 'Visakhapatnam, Andhra Pradesh 530009 (260 km from Berhampur on NH-16)',
-    coordinates: { lat: 17.7215, lng: 83.2185 },
-    placeId: 'vizag-city-airport',
+    displayName: 'Jeypore (Commercial Capital & Kolab Reservoir)',
+    formattedAddress: 'Jeypore, Koraput District, Odisha 764001 (225 km from Berhampur)',
+    coordinates: { lat: 18.8577, lng: 82.5694 },
+    placeId: 'jeypore-odisha',
     isPopularPreset: true,
   },
   {

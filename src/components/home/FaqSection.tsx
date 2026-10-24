@@ -23,7 +23,7 @@ const faqs: FaqItem[] = [
     category: 'booking',
     question: 'Where do your cab services start from and what routes do you cover?',
     answer:
-      'All our cab services are based in and start from Berhampur (Brahmapur, Ganjam), Odisha, connecting to everywhere across Odisha and neighboring interstate corridors. We provide one-way drops (e.g. Berhampur to Bhubaneswar Airport, Puri, Cuttack, Visakhapatnam, Koraput, Sambalpur), local Berhampur city transfers (MKCG Medical College & Hospital, BAM Railway Station, New/Old Bus Stand, Bada Bazaar), and multi-day round-trip tours with dedicated chauffeur assistance.',
+      'All our cab services are based in and start from Berhampur (Brahmapur, Ganjam), Odisha, connecting to everywhere across Odisha. We provide one-way drops (e.g. Berhampur to Bhubaneswar Airport, Puri, Cuttack, Konark, Koraput, Sambalpur), local Berhampur city transfers (MKCG Medical College & Hospital, BAM Railway Station, New/Old Bus Stand, Bada Bazaar), and multi-day round-trip tours with dedicated chauffeur assistance.',
   },
   {
     id: 'f3',
@@ -44,7 +44,7 @@ const faqs: FaqItem[] = [
     category: 'tours',
     question: 'Does Berhampur have an airport, and how do airport transfers work?',
     answer:
-      'Berhampur does not have a commercial airport. For all flight travel, we provide dedicated round-the-clock highway transfers connecting Berhampur directly to Biju Patnaik International Airport (BBI) in Bhubaneswar (~170 km along NH-16, taking approx. 3.5 to 4 hours) or Visakhapatnam Airport (VTZ, ~260 km). We provide doorstep pickup in Berhampur for flight departures, and monitor arrival schedules at BBI to welcome you at the arrivals gate.',
+      'Berhampur does not have a commercial airport. For all flight travel, we provide dedicated round-the-clock highway transfers connecting Berhampur directly to Biju Patnaik International Airport (BBI) in Bhubaneswar (~170 km along NH-16, taking approx. 3.5 hours). We provide doorstep pickup in Berhampur for flight departures, and monitor arrival schedules at BBI to welcome you at the arrivals gate.',
   },
   {
     id: 'f6',

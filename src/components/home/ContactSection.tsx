@@ -130,7 +130,7 @@ export function ContactSection() {
                 </span>
               </div>
               <p className="text-xs text-navy-600 leading-relaxed mb-4">
-                Serving travelers starting from Berhampur to Bhubaneswar Airport, Puri, Cuttack, Gopalpur Beach, Tara Tarini, Visakhapatnam, and all 30 Odisha district corridors.
+                Serving travelers starting from Berhampur to Bhubaneswar Airport, Puri, Cuttack, Gopalpur Beach, Tara Tarini, Konark, and all 30 Odisha district corridors.
               </p>
             </div>
 
