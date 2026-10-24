@@ -38,7 +38,7 @@ export const brandConfig: BrandConfig = {
       { label: 'Contact', path: '/contact' },
     ],
     footerServices: [
-      { label: 'Bhubaneswar Airport (BBI) Drops', path: '/routes' },
+      { label: 'Bhubaneswar Airport Drops', path: '/routes' },
       { label: 'Puri Jagannath Temple Cabs', path: '/routes' },
       { label: 'Gopalpur Beach & Tampara Lake', path: '/destinations' },
       { label: 'Tara Tarini Temple Tours', path: '/destinations' },

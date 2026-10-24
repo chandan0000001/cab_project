@@ -44,7 +44,7 @@ const faqs: FaqItem[] = [
     category: 'tours',
     question: 'Does Berhampur have an airport, and how do airport transfers work?',
     answer:
-      'Berhampur does not have a commercial airport. For all flight travel, we provide dedicated round-the-clock highway transfers connecting Berhampur directly to Biju Patnaik International Airport (BBI) in Bhubaneswar (~170 km along NH-16, taking approx. 3.5 hours). We provide doorstep pickup in Berhampur for flight departures, and monitor arrival schedules at BBI to welcome you at the arrivals gate.',
+      'Berhampur does not have a commercial airport. For all flight travel, we provide dedicated round-the-clock highway transfers connecting Berhampur directly to Bhubaneswar Airport (Biju Patnaik International Airport) (~170 km along NH-16, taking approx. 3.5 hours). We provide doorstep pickup in Berhampur for flight departures, and monitor arrival schedules at Bhubaneswar Airport to welcome you at the arrivals gate.',
   },
   {
     id: 'f6',

@@ -23,7 +23,7 @@ export function PopularRoutes() {
           <SectionHeading
             eyebrow="Highway Corridors"
             title="Popular Intercity Routes from Berhampur"
-            subtitle="Fixed transparent route options starting from Berhampur to Bhubaneswar Airport (BBI), Puri, Gopalpur Beach, Tara Tarini, Daringbadi, and beyond."
+            subtitle="Fixed transparent route options starting from Berhampur to Bhubaneswar Airport, Puri, Gopalpur Beach, Tara Tarini, Daringbadi, and beyond."
             className="mb-0"
           />
 

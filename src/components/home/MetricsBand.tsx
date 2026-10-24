@@ -27,11 +27,11 @@ export function MetricsBand() {
     },
     {
       id: 'airport',
-      route: 'Berhampur → BBI Airport',
+      route: 'Berhampur → Bhubaneswar Airport',
       label: 'Flight Catching Guarantee • NH-16 Express',
       discount: '10% OFF',
       tag: 'Airport Drop',
-      destination: 'Bhubaneswar Airport (BBI)',
+      destination: 'Bhubaneswar Airport',
     },
     {
       id: 'puri',

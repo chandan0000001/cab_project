@@ -5,7 +5,7 @@ export const sampleRoutes: TravelRoute[] = [
   {
     id: 'berhampur-to-bhubaneswar-airport',
     origin: 'Berhampur',
-    destination: 'Bhubaneswar Airport (BBI)',
+    destination: 'Bhubaneswar Airport',
     distanceKm: 170,
     durationEst: '3 hrs 15 mins (approx)',
     highlight: 'Direct NH-16 express transit from Berhampur doorstep to Biju Patnaik Airport departures terminal. 24x7 scheduled for early morning and late night flights.',

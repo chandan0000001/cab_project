@@ -43,7 +43,7 @@ export function ServiceCategories() {
       case 'airport-transfers':
         openBooking({
           tripType: 'one-way',
-          pickupLocation: 'Biju Patnaik International Airport (BBI), Bhubaneswar',
+          pickupLocation: 'Bhubaneswar Airport (Biju Patnaik International Airport)',
           pickupPlace: ODISHA_PRESET_LOCATIONS[0],
         });
         break;

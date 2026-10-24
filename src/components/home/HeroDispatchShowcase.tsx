@@ -78,8 +78,8 @@ const SHOWCASE_VEHICLES: VehicleShowcase[] = [
 const QUICK_ROUTES: QuickRoute[] = [
   {
     id: 'airport',
-    name: 'BBI Airport Transfer',
-    destination: 'Bhubaneswar Airport (BBI)',
+    name: 'Bhubaneswar Airport Transfer',
+    destination: 'Bhubaneswar Airport',
     distance: '170 km',
     duration: '~3.5 Hours',
     highlight: 'NH-16 Express (Direct to Departure Terminal)',

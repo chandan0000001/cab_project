@@ -68,10 +68,10 @@ export const ODISHA_PRESET_LOCATIONS: SelectedPlace[] = [
 
   // 2. MAJOR INTERCITY TRANSIT TARGETS ORIGINATING FROM BERHAMPUR
   {
-    displayName: 'Biju Patnaik International Airport (BBI), Bhubaneswar',
+    displayName: 'Bhubaneswar Airport (Biju Patnaik International Airport)',
     formattedAddress: 'Airport Road, Bhubaneswar, Odisha 751020 (170 km from Berhampur on NH-16)',
     coordinates: { lat: 20.2444, lng: 85.8178 },
-    placeId: 'bbi-airport-bhubaneswar',
+    placeId: 'bhubaneswar-airport',
     isPopularPreset: true,
   },
   {

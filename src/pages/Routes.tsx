@@ -150,7 +150,7 @@ export function Routes() {
                 <span>Doorstep Pickup & Drop</span>
               </div>
               <p className="text-xs text-navy-600 leading-relaxed">
-                Direct pickup from your residence, hotel, railway station, or Biju Patnaik International Airport (BBI) with direct drop at your destination.
+                Direct pickup from your residence, hotel, railway station, or Bhubaneswar Airport (Biju Patnaik International Airport) with direct drop at your destination.
               </p>
             </div>
 

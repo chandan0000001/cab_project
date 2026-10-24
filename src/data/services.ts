@@ -33,9 +33,9 @@ export const serviceCategories: ServiceCategory[] = [
   },
   {
     id: 'airport-transfers',
-    title: 'Berhampur to Bhubaneswar Airport (BBI) Transfers',
-    tagline: '24×7 Doorstep pickup to BBI flight departures',
-    description: 'Since Berhampur has no airport, we provide dedicated round-the-clock highway transfers connecting Berhampur directly to Biju Patnaik International Airport (BBI, ~170 km via NH-16) with 24x7 flight schedule tracking.',
+    title: 'Berhampur to Bhubaneswar Airport Transfers',
+    tagline: '24×7 Doorstep pickup to Bhubaneswar Airport flight departures',
+    description: 'Since Berhampur has no airport, we provide dedicated round-the-clock highway transfers connecting Berhampur directly to Bhubaneswar Airport (Biju Patnaik International Airport, ~170 km via NH-16) with 24x7 flight schedule tracking.',
     iconName: 'plane',
     features: ['Punctual flight synchronization', 'Doorstep pickup in Berhampur', 'Luggage handling support'],
     imageUrl: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&auto=format&fit=crop&q=80',

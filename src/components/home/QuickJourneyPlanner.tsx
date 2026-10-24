@@ -20,7 +20,7 @@ export function QuickJourneyPlanner() {
 
   const [tripType, setTripType] = useState<TripType>('one-way');
   const [pickupText, setPickupText] = useState('Berhampur');
-  const [destinationText, setDestinationText] = useState('Bhubaneswar Airport (BBI)');
+  const [destinationText, setDestinationText] = useState('Bhubaneswar Airport');
   const [travelDate, setTravelDate] = useState(todayStr);
 
   const handleLaunchBooking = (e: React.FormEvent) => {
@@ -143,7 +143,7 @@ export function QuickJourneyPlanner() {
               required={tripType !== 'local-rental'}
               value={destinationText}
               onChange={(e) => setDestinationText(e.target.value)}
-              placeholder={tripType === 'local-rental' ? 'e.g. Berhampur City / MKCG Hospital' : 'e.g. Bhubaneswar Airport (BBI) / Puri'}
+              placeholder={tripType === 'local-rental' ? 'e.g. Berhampur City / MKCG Hospital' : 'e.g. Bhubaneswar Airport / Puri'}
               className="w-full bg-slate-50 text-slate-900 font-medium border border-slate-300 rounded-xl py-2.5 px-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
             />
           </div>
@@ -185,7 +185,7 @@ export function QuickJourneyPlanner() {
         <div className="flex flex-wrap gap-1.5">
           <button
             type="button"
-            onClick={() => handlePresetSelect('Berhampur', 'Bhubaneswar Airport (BBI)')}
+            onClick={() => handlePresetSelect('Berhampur', 'Bhubaneswar Airport')}
             className="text-[11px] bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-3 py-1 text-slate-700 font-semibold transition-colors cursor-pointer"
           >
             Berhampur → Bhubaneswar Airport

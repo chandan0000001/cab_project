@@ -48,7 +48,7 @@ export function AboutSection() {
               Headquartered in <strong className="text-navy-950 font-semibold">{brandConfig.headquarters}</strong>, {brandConfig.brandName} was established to solve the persistent challenges of intercity road travel in Odisha: unpredictable taxi surge charges, poorly maintained cabins, and lack of driver punctuality.
             </p>
             <p>
-              We treat road journeys starting from Berhampur with high responsibility — whether conveying devotees to sacred Shree Jagannath Temple in Puri or Maa Tara Tarini Shakti Peetha, facilitating urgent patient transit to MKCG Medical College & Hospital or Bhubaneswar hospitals, or providing punctual transfers to Biju Patnaik International Airport (BBI).
+              We treat road journeys starting from Berhampur with high responsibility — whether conveying devotees to sacred Shree Jagannath Temple in Puri or Maa Tara Tarini Shakti Peetha, facilitating urgent patient transit to MKCG Medical College & Hospital or Bhubaneswar hospitals, or providing punctual transfers to Bhubaneswar Airport (Biju Patnaik International Airport).
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-navy-800">

@@ -47,7 +47,7 @@ export function HeroSection() {
             <ScrollReveal direction="up" delay={180}>
               {/* Clear value proposition */}
               <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl mx-auto lg:mx-0 font-normal">
-                Silk City's direct cab operator. Point-to-point one-way cabs, dedicated round-trip tours, Berhampur to Bhubaneswar Airport (BBI) transfers, BAM railway station & MKCG hospital transit across all 30 districts of Odisha. Fixed transparent quotes in 15 minutes.
+                Silk City's direct cab operator. Point-to-point one-way cabs, dedicated round-trip tours, Berhampur to Bhubaneswar Airport transfers, BAM railway station & MKCG hospital transit across all 30 districts of Odisha. Fixed transparent quotes in 15 minutes.
               </p>
             </ScrollReveal>
 

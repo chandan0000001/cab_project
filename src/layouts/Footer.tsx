@@ -166,7 +166,7 @@ export function Footer() {
               <li>
                 <Link to="/routes" className="hover:text-white transition-colors flex items-center gap-1.5">
                   <ChevronRight className="w-3 h-3 text-slate-600" />
-                  <span>Bhubaneswar Airport (BBI)</span>
+                  <span>Bhubaneswar Airport</span>
                 </Link>
               </li>
               <li>

@@ -348,7 +348,7 @@ export function Contact() {
                     <Input
                       label="Destination"
                       required
-                      placeholder="e.g. Bhubaneswar Airport (BBI) / Puri / Gopalpur"
+                      placeholder="e.g. Bhubaneswar Airport / Puri / Gopalpur"
                       value={formData.drop}
                       onChange={(e) => setFormData({ ...formData, drop: e.target.value })}
                     />

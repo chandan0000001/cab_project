@@ -176,7 +176,7 @@ export function WinterOfferPopup() {
               <span className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center shrink-0">
                 <Check className="w-2.5 h-2.5 text-emerald-700" />
               </span>
-              <span><strong>10% Off:</strong> Berhampur to Bhubaneswar Airport (BBI) transfers</span>
+              <span><strong>10% Off:</strong> Berhampur to Bhubaneswar Airport transfers</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center shrink-0">
