@@ -40,9 +40,9 @@ export function HeroSection() {
               to Everywhere in Odisha.
             </h1>
 
-            {/* Clear value proposition */}
-            <p className="text-xs sm:text-base text-slate-600 leading-relaxed max-w-xl mx-auto lg:mx-0 font-normal">
-              Silk City's direct cab operator. Point-to-point one-way cabs, dedicated round-trip tours, Berhampur to Bhubaneswar Airport transfers, BAM railway station & MKCG hospital transit across all 30 districts of Odisha. Fixed transparent quotes in 15 minutes.
+            {/* Clear concise value proposition */}
+            <p className="text-xs sm:text-base text-slate-600 leading-relaxed max-w-lg mx-auto lg:mx-0">
+              Reliable one-way cabs, round trips & Bhubaneswar Airport transfers across Odisha with transparent fixed quotes.
             </p>
 
             {/* Action Buttons: Dual high-impact CTAs */}
