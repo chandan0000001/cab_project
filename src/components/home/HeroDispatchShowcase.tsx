@@ -300,7 +300,7 @@ export function HeroDispatchShowcase() {
         {/* High-Converting Action CTAs */}
         <div className="space-y-2 pt-0.5">
           <Button
-            variant="book-cab"
+            variant="primary"
             size="lg"
             onClick={handleBookSelected}
             className="w-full justify-center text-sm font-bold shadow-md min-h-[48px]"

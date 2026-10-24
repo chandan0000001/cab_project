@@ -27,7 +27,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const baseStyles =
-      'inline-flex items-center justify-center font-semibold rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed select-none active:scale-[0.98] cursor-pointer';
+      'inline-flex items-center justify-center font-semibold rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed select-none active:scale-[0.98] cursor-pointer whitespace-nowrap';
 
     const variants = {
       primary:
@@ -43,7 +43,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       danger:
         'bg-red-600 text-white hover:bg-red-700 active:bg-red-800 focus-visible:ring-red-600 shadow-sm',
       'book-cab':
-        'bg-black text-white hover:bg-red-600 hover:text-green-400 active:bg-red-600 active:text-green-400 focus:bg-red-600 focus:text-green-400 shadow-md font-bold transition-all duration-200 border border-black hover:border-red-600 active:border-red-600',
+        'bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white shadow-sm font-bold transition-all duration-200 focus-visible:ring-blue-500',
     };
 
     const sizes = {

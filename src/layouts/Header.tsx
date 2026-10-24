@@ -48,24 +48,24 @@ export function Header() {
         <nav
           aria-label="Main Navigation"
           className={`border-b transition-all duration-200 ${
-            isScrolled ? 'border-slate-200 shadow-md bg-white/95 backdrop-blur-md' : 'border-slate-100 bg-white'
+            isScrolled ? 'border-slate-200 shadow-sm bg-white/95 backdrop-blur-md' : 'border-slate-100 bg-white'
           }`}
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between">
+          <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2">
             {/* Brand Logo & Identifier */}
             <Link
               to="/"
-              className="flex items-center gap-3 group focus-visible:ring-2 focus-visible:ring-blue-600 rounded-lg p-1"
+              className="flex items-center gap-2 sm:gap-3 group focus-visible:ring-2 focus-visible:ring-blue-600 rounded-lg p-0.5 sm:p-1 min-w-0"
               aria-label={`${brandConfig.brandName} - Return to Homepage`}
             >
-              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center text-white shadow-md transition-all group-hover:scale-105">
-                <Car className="w-6 h-6 text-blue-400" />
+              <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center text-white shadow-xs shrink-0 transition-transform group-hover:scale-105">
+                <Car className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
               </div>
-              <div className="flex flex-col">
-                <span className="text-xl sm:text-2xl font-black tracking-tight text-slate-900 font-sans">
+              <div className="flex flex-col min-w-0">
+                <span className="text-base sm:text-2xl font-black tracking-tight text-slate-900 font-sans leading-none truncate">
                   Subham <span className="text-blue-600">Travelers</span>
                 </span>
-                <span className="text-[10px] sm:text-xs tracking-wider uppercase font-extrabold text-slate-500">
+                <span className="text-[9px] sm:text-xs tracking-wider uppercase font-extrabold text-slate-500 leading-tight mt-0.5 truncate">
                   Odisha Intercity Cabs
                 </span>
               </div>
@@ -90,16 +90,17 @@ export function Header() {
               ))}
             </div>
 
-            {/* Action Buttons: Book a Cab & Call Now */}
-            <div className="flex items-center gap-2 sm:gap-2.5">
+            {/* Action Buttons: Book a Cab, Call Now & Mobile Hamburger */}
+            <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
               <Button
-                variant="book-cab"
+                variant="primary"
                 size="sm"
                 onClick={() => openBooking({ tripType: 'one-way' })}
-                className="font-bold text-xs min-h-[44px] px-3.5"
-                leftIcon={<Calendar className="w-4 h-4" />}
+                className="font-bold text-xs min-h-[38px] sm:min-h-[44px] px-3 sm:px-4 shadow-xs whitespace-nowrap"
+                leftIcon={<Calendar className="w-3.5 h-3.5 text-white shrink-0" />}
               >
-                Book a Cab
+                <span className="hidden sm:inline">Book a Cab</span>
+                <span className="sm:hidden">Book Cab</span>
               </Button>
 
               {phoneReady && (
@@ -111,8 +112,8 @@ export function Header() {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="font-semibold border-navy-300 text-navy-800"
-                    leftIcon={<Phone className="w-3.5 h-3.5 text-brand-600" />}
+                    className="font-semibold border-slate-300 text-slate-800"
+                    leftIcon={<Phone className="w-3.5 h-3.5 text-blue-600" />}
                   >
                     Call Now
                   </Button>
@@ -144,9 +145,9 @@ export function Header() {
                 aria-expanded={isMobileMenuOpen}
                 aria-controls="mobile-nav-menu"
                 aria-label={isMobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
-                className="lg:hidden min-w-[48px] min-h-[48px] flex items-center justify-center rounded-xl text-slate-800 hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 cursor-pointer"
+                className="lg:hidden w-10 h-10 min-w-[40px] min-h-[40px] flex items-center justify-center rounded-xl text-slate-800 hover:text-slate-950 hover:bg-slate-100 active:bg-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 cursor-pointer transition-colors"
               >
-                {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
             </div>
           </div>
@@ -191,13 +192,13 @@ export function Header() {
         <div className="flex-1 overflow-y-auto p-4 space-y-1">
           <div className="pb-3 mb-2 border-b border-slate-200">
             <Button
-              variant="book-cab"
+              variant="primary"
               size="md"
               onClick={() => {
                 setIsMobileMenuOpen(false);
                 openBooking({ tripType: 'one-way' });
               }}
-              className="w-full font-bold justify-center"
+              className="w-full font-bold justify-center min-h-[46px]"
               leftIcon={<Calendar className="w-4 h-4" />}
             >
               Book a Cab Online

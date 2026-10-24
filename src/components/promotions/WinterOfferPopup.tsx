@@ -253,10 +253,10 @@ export function WinterOfferPopup() {
           {/* High-Converting Action Buttons */}
           <div className="space-y-2.5 pt-1">
             <Button
-              variant="book-cab"
+              variant="primary"
               size="lg"
               onClick={handleClaimBooking}
-              className="w-full justify-center text-sm font-bold shadow-md"
+              className="w-full justify-center text-sm font-bold shadow-md min-h-[46px]"
               rightIcon={<ArrowRight className="w-4 h-4" />}
             >
               Claim 15% OFF & Book Cab Now

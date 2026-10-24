@@ -27,20 +27,21 @@ export function HeroSection() {
           {/* Left Column: Brand Message, Headlines & Dual CTAs */}
           <div className="lg:col-span-6 space-y-5 text-center lg:text-left">
             {/* Clean Trust Chip */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-slate-200 text-slate-800 text-xs font-bold tracking-wider shadow-sm uppercase">
-              <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>Direct Operator from Berhampur — Silk City, Odisha</span>
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-white border border-slate-200 text-slate-800 text-[11px] sm:text-xs font-bold tracking-wider shadow-xs uppercase max-w-full">
+              <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600 shrink-0" />
+              <span className="hidden sm:inline">Direct Operator from Berhampur — Silk City, Odisha</span>
+              <span className="sm:hidden">Direct Operator • Silk City, Berhampur</span>
             </div>
 
             {/* Authoritative Solid Headline */}
-            <h1 className="text-3xl sm:text-5xl lg:text-[3.5rem] font-black tracking-tight text-slate-900 leading-[1.08]">
+            <h1 className="text-2xl sm:text-4xl lg:text-[3.25rem] font-black tracking-tight text-slate-900 leading-[1.12]">
               Cab Service Starting from{' '}
               <span className="text-blue-600">Berhampur</span>{' '}
               to Everywhere in Odisha.
             </h1>
 
             {/* Clear value proposition */}
-            <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl mx-auto lg:mx-0 font-normal">
+            <p className="text-xs sm:text-base text-slate-600 leading-relaxed max-w-xl mx-auto lg:mx-0 font-normal">
               Silk City's direct cab operator. Point-to-point one-way cabs, dedicated round-trip tours, Berhampur to Bhubaneswar Airport transfers, BAM railway station & MKCG hospital transit across all 30 districts of Odisha. Fixed transparent quotes in 15 minutes.
             </p>
 
