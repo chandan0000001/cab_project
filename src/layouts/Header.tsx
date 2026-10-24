@@ -96,7 +96,7 @@ export function Header() {
                 variant="book-cab"
                 size="sm"
                 onClick={() => openBooking({ tripType: 'one-way' })}
-                className="font-bold text-xs min-h-[40px] px-3.5"
+                className="font-bold text-xs min-h-[44px] px-3.5"
                 leftIcon={<Calendar className="w-4 h-4" />}
               >
                 Book a Cab
@@ -181,7 +181,7 @@ export function Header() {
             type="button"
             onClick={() => setIsMobileMenuOpen(false)}
             aria-label="Close menu"
-            className="p-2 rounded-md text-slate-500 hover:text-slate-900 hover:bg-slate-100"
+            className="w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>

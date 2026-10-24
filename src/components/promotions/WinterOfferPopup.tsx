@@ -37,15 +37,69 @@ export function WinterOfferPopup() {
   useEffect(() => {
     // Check if user has already dismissed in this session
     const dismissed = sessionStorage.getItem('st_winter_offer_dismissed');
-    if (!dismissed) {
-      // Delay auto-popup to preserve optimal mobile First Contentful Paint and prevent layout interruptions
-      const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
-      const delayMs = isMobile ? 8000 : 4000;
-      const timer = setTimeout(() => {
-        setIsOpen(true);
-      }, delayMs);
-      return () => clearTimeout(timer);
-    }
+    if (dismissed) return;
+
+    let hasScrolledDown = false;
+    let lastScrollY = window.scrollY;
+    let triggered = false;
+
+    const triggerPopup = () => {
+      if (triggered) return;
+      if (sessionStorage.getItem('st_winter_offer_dismissed')) return;
+      triggered = true;
+      setIsOpen(true);
+      cleanup();
+    };
+
+    // 1. Mandatory Scroll Up trigger: when user scrolls down and then scrolls upward
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > 40) {
+        hasScrolledDown = true;
+      }
+      if (hasScrolledDown && lastScrollY - currentScrollY > 15) {
+        triggerPopup();
+      }
+      lastScrollY = currentScrollY;
+    };
+
+    // 2. Mandatory Touch / Window Interaction trigger: when user touches or clicks the window
+    const handleTouchOrClick = (e: Event) => {
+      const target = e.target as HTMLElement | null;
+      // Do not prematurely trigger if user is interacting with close/reopen controls
+      if (
+        target?.closest('button[aria-label="Close offer popup"]') ||
+        target?.closest('button[aria-label="Open Winter Offer: 15% OFF"]')
+      ) {
+        return;
+      }
+      triggerPopup();
+    };
+
+    // 3. Desktop exit intent: mouse moves toward browser chrome / tab bar
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 10) {
+        triggerPopup();
+      }
+    };
+
+    const cleanup = () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('touchstart', handleTouchOrClick);
+      window.removeEventListener('pointerdown', handleTouchOrClick);
+      window.removeEventListener('click', handleTouchOrClick);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('touchstart', handleTouchOrClick, { passive: true });
+    window.addEventListener('pointerdown', handleTouchOrClick, { passive: true });
+    window.addEventListener('click', handleTouchOrClick, { passive: true });
+    document.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      cleanup();
+    };
   }, []);
 
   const handleClose = () => {
@@ -85,7 +139,7 @@ export function WinterOfferPopup() {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 left-4 z-40 flex items-center gap-2 bg-slate-950 text-white min-h-[44px] py-2.5 px-4 rounded-full text-xs font-bold shadow-xl hover:bg-slate-900 transition-all duration-300 cursor-pointer border border-blue-500/50 hover:scale-105 animate-in fade-in"
+        className="fixed bottom-4 left-4 z-40 flex items-center gap-2 bg-slate-950 text-white min-h-[48px] py-2.5 px-4 rounded-full text-xs font-bold shadow-xl hover:bg-slate-900 transition-all duration-300 cursor-pointer border border-blue-500/50 hover:scale-105 animate-in fade-in"
         aria-label="Open Winter Offer: 15% OFF"
       >
         <Gift className="w-4 h-4 text-blue-400" />

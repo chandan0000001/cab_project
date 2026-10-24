@@ -78,19 +78,44 @@ export function Footer() {
           )}
         </div>
 
-        {/* Compact Horizontal Quick Links */}
-        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-slate-300 pt-1">
-          <Link to="/fleet" className="py-1 px-1 hover:text-white transition-colors">Our Fleet</Link>
-          <span className="text-slate-600">•</span>
-          <Link to="/routes" className="py-1 px-1 hover:text-white transition-colors">All Routes</Link>
-          <span className="text-slate-600">•</span>
-          <Link to="/destinations" className="py-1 px-1 hover:text-white transition-colors">Destinations</Link>
-          <span className="text-slate-600">•</span>
-          <Link to="/about" className="py-1 px-1 hover:text-white transition-colors">About</Link>
-          <span className="text-slate-600">•</span>
-          <Link to="/contact" className="py-1 px-1 hover:text-white transition-colors">Contact</Link>
-          <span className="text-slate-600">•</span>
-          <Link to="/terms" className="py-1 px-1 hover:text-white transition-colors">Terms</Link>
+        {/* Mobile Quick Links - Full WCAG & Lighthouse Compliant Touch Targets (min 44px) */}
+        <div className="grid grid-cols-3 gap-2 text-xs pt-1">
+          <Link
+            to="/routes"
+            className="flex items-center justify-center min-h-[44px] px-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-200 hover:text-white hover:bg-slate-800 font-medium transition-colors"
+          >
+            All Routes
+          </Link>
+          <Link
+            to="/fleet"
+            className="flex items-center justify-center min-h-[44px] px-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-200 hover:text-white hover:bg-slate-800 font-medium transition-colors"
+          >
+            Our Fleet
+          </Link>
+          <Link
+            to="/destinations"
+            className="flex items-center justify-center min-h-[44px] px-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-200 hover:text-white hover:bg-slate-800 font-medium transition-colors"
+          >
+            Destinations
+          </Link>
+          <Link
+            to="/about"
+            className="flex items-center justify-center min-h-[44px] px-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-200 hover:text-white hover:bg-slate-800 font-medium transition-colors"
+          >
+            About Us
+          </Link>
+          <Link
+            to="/contact"
+            className="flex items-center justify-center min-h-[44px] px-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-200 hover:text-white hover:bg-slate-800 font-medium transition-colors"
+          >
+            Contact
+          </Link>
+          <Link
+            to="/terms"
+            className="flex items-center justify-center min-h-[44px] px-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-200 hover:text-white hover:bg-slate-800 font-medium transition-colors"
+          >
+            Terms & Safety
+          </Link>
         </div>
 
         {/* Station Road Address & Copyright in 2 Lines */}

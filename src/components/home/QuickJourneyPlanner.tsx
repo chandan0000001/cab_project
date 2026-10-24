@@ -188,12 +188,12 @@ export function QuickJourneyPlanner() {
           <Compass className="w-3.5 h-3.5 text-blue-600" />
           <span>Popular Routes from Berhampur:</span>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2.5">
           <button
             type="button"
             onClick={() => handlePresetSelect('Berhampur', 'Bhubaneswar Airport')}
             aria-label="Route preset: Berhampur to Bhubaneswar Airport"
-            className="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-3.5 py-1.5 min-h-[36px] flex items-center text-slate-800 font-semibold transition-colors cursor-pointer"
+            className="text-xs sm:text-sm bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-4 py-2 min-h-[44px] flex items-center text-slate-800 font-semibold transition-colors cursor-pointer"
           >
             Berhampur → Bhubaneswar Airport
           </button>
@@ -201,7 +201,7 @@ export function QuickJourneyPlanner() {
             type="button"
             onClick={() => handlePresetSelect('Berhampur', 'Puri')}
             aria-label="Route preset: Berhampur to Puri"
-            className="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-3.5 py-1.5 min-h-[36px] flex items-center text-slate-800 font-semibold transition-colors cursor-pointer"
+            className="text-xs sm:text-sm bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-4 py-2 min-h-[44px] flex items-center text-slate-800 font-semibold transition-colors cursor-pointer"
           >
             Berhampur → Puri
           </button>
@@ -209,7 +209,7 @@ export function QuickJourneyPlanner() {
             type="button"
             onClick={() => handlePresetSelect('Berhampur', 'Gopalpur-on-Sea')}
             aria-label="Route preset: Berhampur to Gopalpur Beach"
-            className="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-3.5 py-1.5 min-h-[36px] flex items-center text-slate-800 font-semibold transition-colors cursor-pointer"
+            className="text-xs sm:text-sm bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-4 py-2 min-h-[44px] flex items-center text-slate-800 font-semibold transition-colors cursor-pointer"
           >
             Berhampur → Gopalpur Beach
           </button>
@@ -217,7 +217,7 @@ export function QuickJourneyPlanner() {
             type="button"
             onClick={() => handlePresetSelect('Berhampur', 'Tara Tarini')}
             aria-label="Route preset: Berhampur to Tara Tarini"
-            className="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-3.5 py-1.5 min-h-[36px] flex items-center text-slate-800 font-semibold transition-colors cursor-pointer"
+            className="text-xs sm:text-sm bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-4 py-2 min-h-[44px] flex items-center text-slate-800 font-semibold transition-colors cursor-pointer"
           >
             Berhampur → Tara Tarini
           </button>
@@ -225,7 +225,7 @@ export function QuickJourneyPlanner() {
             type="button"
             onClick={() => handlePresetSelect('Berhampur', 'Tampara Lake')}
             aria-label="Route preset: Berhampur to Tampara Lake"
-            className="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-3.5 py-1.5 min-h-[36px] flex items-center text-slate-800 font-semibold transition-colors cursor-pointer"
+            className="text-xs sm:text-sm bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-4 py-2 min-h-[44px] flex items-center text-slate-800 font-semibold transition-colors cursor-pointer"
           >
             Berhampur → Tampara Lake
           </button>
@@ -233,7 +233,7 @@ export function QuickJourneyPlanner() {
             type="button"
             onClick={() => handlePresetSelect('Berhampur', 'Daringbadi')}
             aria-label="Route preset: Berhampur to Daringbadi"
-            className="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-3.5 py-1.5 min-h-[36px] flex items-center text-slate-800 font-semibold transition-colors cursor-pointer"
+            className="text-xs sm:text-sm bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-4 py-2 min-h-[44px] flex items-center text-slate-800 font-semibold transition-colors cursor-pointer"
           >
             Berhampur → Daringbadi
           </button>
@@ -241,7 +241,7 @@ export function QuickJourneyPlanner() {
             type="button"
             onClick={() => handlePresetSelect('Berhampur Railway Station (BAM)', 'MKCG Medical College')}
             aria-label="Route preset: BAM Railway Station to MKCG Medical College"
-            className="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-3.5 py-1.5 min-h-[36px] flex items-center text-slate-800 font-semibold transition-colors cursor-pointer"
+            className="text-xs sm:text-sm bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-4 py-2 min-h-[44px] flex items-center text-slate-800 font-semibold transition-colors cursor-pointer"
           >
             BAM Station → MKCG Hospital
           </button>
