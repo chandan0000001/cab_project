@@ -1,0 +1,54 @@
+import { lazy, Suspense } from 'react';
+import { Outlet } from 'react-router-dom';
+import { Header } from '@/layouts/Header';
+import { Footer } from '@/layouts/Footer';
+import { useScrollToTop } from '@/hooks/useScrollToTop';
+import { BookingProvider } from '@/context/BookingContext';
+import { BookingLoadingSkeleton } from '@/components/booking/BookingLoadingSkeleton';
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
+import { WinterOfferPopup } from '@/components/promotions/WinterOfferPopup';
+
+// Lazy load the full interactive booking modal and route search workflow
+const LazyBookingModal = lazy(() =>
+  import('@/components/booking/BookingModal').then((module) => ({ default: module.BookingModal }))
+);
+
+export function RootLayout() {
+  // Ensure top scroll on every route change
+  useScrollToTop();
+
+  return (
+    <BookingProvider>
+      <div className="min-h-screen flex flex-col bg-white text-slate-900 selection:bg-blue-600 selection:text-white">
+        {/* Skip to Main Content Link for Keyboard Accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md focus:shadow-lg focus:outline-none"
+        >
+          Skip to main content
+        </a>
+
+        {/* Main Header with Book a Cab entry point */}
+        <Header />
+
+        {/* Page Content Outlet with Suspense Fallback */}
+        <main id="main-content" className="flex-1 focus:outline-none">
+          <Suspense fallback={<LoadingSpinner label="Loading page..." className="min-h-[50vh]" />}>
+            <Outlet />
+          </Suspense>
+        </main>
+
+        {/* Lazy Loaded On-Demand Booking Modal */}
+        <Suspense fallback={<BookingLoadingSkeleton />}>
+          <LazyBookingModal />
+        </Suspense>
+
+        {/* Interactive Winter & Festival Offer Pop-up */}
+        <WinterOfferPopup />
+
+        {/* Main Footer */}
+        <Footer />
+      </div>
+    </BookingProvider>
+  );
+}
