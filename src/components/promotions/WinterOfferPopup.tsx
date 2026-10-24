@@ -38,10 +38,12 @@ export function WinterOfferPopup() {
     // Check if user has already dismissed in this session
     const dismissed = sessionStorage.getItem('st_winter_offer_dismissed');
     if (!dismissed) {
-      // Show popup after 1.5s delay to capture incoming visitor attention
+      // Delay auto-popup to preserve optimal mobile First Contentful Paint and prevent layout interruptions
+      const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+      const delayMs = isMobile ? 8000 : 4000;
       const timer = setTimeout(() => {
         setIsOpen(true);
-      }, 1500);
+      }, delayMs);
       return () => clearTimeout(timer);
     }
   }, []);
@@ -83,8 +85,8 @@ export function WinterOfferPopup() {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 left-4 z-40 flex items-center gap-2 bg-slate-950 text-white py-2 px-3.5 rounded-full text-xs font-bold shadow-xl hover:bg-slate-900 transition-all duration-300 cursor-pointer border border-blue-500/50 hover:scale-105 animate-in fade-in"
-        aria-label="Open Winter Offer"
+        className="fixed bottom-4 left-4 z-40 flex items-center gap-2 bg-slate-950 text-white min-h-[44px] py-2.5 px-4 rounded-full text-xs font-bold shadow-xl hover:bg-slate-900 transition-all duration-300 cursor-pointer border border-blue-500/50 hover:scale-105 animate-in fade-in"
+        aria-label="Open Winter Offer: 15% OFF"
       >
         <Gift className="w-4 h-4 text-blue-400" />
         <span>Winter Offer: 15% OFF</span>
@@ -116,10 +118,10 @@ export function WinterOfferPopup() {
             <button
               type="button"
               onClick={handleClose}
-              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/15 hover:bg-white/25 active:bg-white/30 text-white flex items-center justify-center transition-colors cursor-pointer shrink-0"
+              className="w-10 h-10 min-w-[40px] min-h-[40px] rounded-full bg-white/15 hover:bg-white/25 active:bg-white/30 text-white flex items-center justify-center transition-colors cursor-pointer shrink-0"
               aria-label="Close offer popup"
             >
-              <X className="w-4 h-4" />
+              <X className="w-5 h-5" />
             </button>
           </div>
 
@@ -148,7 +150,8 @@ export function WinterOfferPopup() {
             <button
               type="button"
               onClick={handleCopyCode}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-300 text-slate-800 text-xs font-bold hover:bg-slate-100 transition-colors shadow-xs cursor-pointer"
+              aria-label="Copy promotional code WINTER15"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 min-h-[40px] rounded-lg bg-white border border-slate-300 text-slate-800 text-xs font-bold hover:bg-slate-100 transition-colors shadow-xs cursor-pointer"
             >
               {copied ? (
                 <>
@@ -209,7 +212,8 @@ export function WinterOfferPopup() {
               <button
                 type="button"
                 onClick={handleWhatsAppClaim}
-                className="w-full flex items-center justify-center gap-2 bg-[#1F6F3F] hover:bg-[#155A30] active:bg-[#0F4222] text-white py-2.5 px-4 rounded-full text-xs font-bold shadow-sm transition-colors cursor-pointer"
+                aria-label="Claim 15 percent discount via WhatsApp"
+                className="w-full flex items-center justify-center gap-2 bg-[#1F6F3F] hover:bg-[#155A30] active:bg-[#0F4222] text-white py-3 px-4 min-h-[44px] rounded-full text-xs font-bold shadow-sm transition-colors cursor-pointer"
               >
                 <MessageSquare className="w-4 h-4" />
                 <span>Claim 15% via WhatsApp (1-Tap Fast)</span>

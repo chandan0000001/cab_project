@@ -7,10 +7,17 @@
     <meta name="description" content="Subham Travelers - Premium cab booking, intercity transportation, and Odisha tourism services. Reliable one-way, round-trip, airport, and local travel across Odisha." />
     <meta name="theme-color" content="#0F172A" />
     
-    <!-- Preconnect to Google Fonts -->
+    <!-- Preconnect & Asynchronous Google Fonts (Non-Render Blocking) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+    </noscript>
+
+    <!-- Preload Hero Image for instant LCP on Mobile -->
+    <link rel="preload" as="image" href="/images/fleet/dzire.webp" type="image/webp" />
     
     <title>Subham Travelers | Reliable Cab Booking & Odisha Tours</title>
   </head>

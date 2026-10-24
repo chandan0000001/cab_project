@@ -110,11 +110,12 @@ export function FaqSection() {
                 key={tab.id}
                 type="button"
                 onClick={() => setSelectedCategory(tab.id)}
-                className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                className={`px-4 py-2 min-h-[38px] rounded-full text-xs font-bold transition-all cursor-pointer ${
                   isSelected
                     ? 'bg-navy-950 text-white shadow-sm'
                     : 'bg-white text-navy-700 hover:bg-amber-50 hover:text-brand-600 border border-navy-200/80'
                 }`}
+                aria-pressed={isSelected}
               >
                 {tab.label}
               </button>
@@ -136,7 +137,7 @@ export function FaqSection() {
                 <button
                   type="button"
                   onClick={() => toggleFaq(faq.id)}
-                  className="w-full flex items-start justify-between gap-4 text-left cursor-pointer focus-visible:outline-none"
+                  className="w-full flex items-start justify-between gap-4 text-left cursor-pointer focus-visible:outline-none min-h-[44px]"
                   aria-expanded={isOpen}
                 >
                   <div className="flex items-start gap-3">

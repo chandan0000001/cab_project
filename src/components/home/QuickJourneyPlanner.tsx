@@ -120,44 +120,50 @@ export function QuickJourneyPlanner() {
       <form onSubmit={handleLaunchBooking} className="space-y-3.5">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div className="space-y-1">
-            <label className="text-xs font-bold text-slate-700 flex items-center gap-1">
+            <label htmlFor="planner-pickup-input" className="text-xs font-bold text-slate-700 flex items-center gap-1">
               <MapPin className="w-3.5 h-3.5 text-blue-600" /> Pickup Location
             </label>
             <input
+              id="planner-pickup-input"
               type="text"
               required
               value={pickupText}
               onChange={(e) => setPickupText(e.target.value)}
               placeholder="e.g. Berhampur / BAM Stn / MKCG"
+              aria-label="Pickup Location in Berhampur"
               className="w-full bg-slate-50 text-slate-900 font-medium border border-slate-300 rounded-xl py-2.5 px-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
             />
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-bold text-slate-700 flex items-center gap-1">
+            <label htmlFor="planner-dest-input" className="text-xs font-bold text-slate-700 flex items-center gap-1">
               <MapPin className="w-3.5 h-3.5 text-slate-700" />
               {tripType === 'local-rental' ? 'City / Area' : 'Destination'}
             </label>
             <input
+              id="planner-dest-input"
               type="text"
               required={tripType !== 'local-rental'}
               value={destinationText}
               onChange={(e) => setDestinationText(e.target.value)}
               placeholder={tripType === 'local-rental' ? 'e.g. Berhampur City / MKCG Hospital' : 'e.g. Bhubaneswar Airport / Puri'}
+              aria-label={tripType === 'local-rental' ? 'City or Area for Rental' : 'Drop Destination'}
               className="w-full bg-slate-50 text-slate-900 font-medium border border-slate-300 rounded-xl py-2.5 px-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
             />
           </div>
         </div>
 
         <div className="space-y-1">
-          <label className="text-xs font-bold text-slate-700 flex items-center gap-1">
+          <label htmlFor="planner-date-input" className="text-xs font-bold text-slate-700 flex items-center gap-1">
             <Calendar className="w-3.5 h-3.5 text-blue-600" /> Travel Date
           </label>
           <input
+            id="planner-date-input"
             type="date"
             min={todayStr}
             value={travelDate}
             onChange={(e) => setTravelDate(e.target.value)}
+            aria-label="Travel Date"
             className="w-full bg-slate-50 text-slate-900 font-medium border border-slate-300 rounded-xl py-2.5 px-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
           />
         </div>
@@ -168,7 +174,7 @@ export function QuickJourneyPlanner() {
             type="submit"
             variant="primary"
             size="lg"
-            className="w-full font-bold text-sm sm:text-base py-3 shadow-sm"
+            className="w-full font-bold text-sm sm:text-base py-3 min-h-[48px] shadow-sm"
             rightIcon={<ArrowRight className="w-4 h-4" />}
           >
             Check Availability & Get Quote
@@ -182,53 +188,60 @@ export function QuickJourneyPlanner() {
           <Compass className="w-3.5 h-3.5 text-blue-600" />
           <span>Popular Routes from Berhampur:</span>
         </div>
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-2">
           <button
             type="button"
             onClick={() => handlePresetSelect('Berhampur', 'Bhubaneswar Airport')}
-            className="text-[11px] bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-3 py-1 text-slate-700 font-semibold transition-colors cursor-pointer"
+            aria-label="Route preset: Berhampur to Bhubaneswar Airport"
+            className="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-3.5 py-1.5 min-h-[36px] flex items-center text-slate-800 font-semibold transition-colors cursor-pointer"
           >
             Berhampur → Bhubaneswar Airport
           </button>
           <button
             type="button"
             onClick={() => handlePresetSelect('Berhampur', 'Puri')}
-            className="text-[11px] bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-3 py-1 text-slate-700 font-semibold transition-colors cursor-pointer"
+            aria-label="Route preset: Berhampur to Puri"
+            className="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-3.5 py-1.5 min-h-[36px] flex items-center text-slate-800 font-semibold transition-colors cursor-pointer"
           >
             Berhampur → Puri
           </button>
           <button
             type="button"
             onClick={() => handlePresetSelect('Berhampur', 'Gopalpur-on-Sea')}
-            className="text-[11px] bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-3 py-1 text-slate-700 font-semibold transition-colors cursor-pointer"
+            aria-label="Route preset: Berhampur to Gopalpur Beach"
+            className="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-3.5 py-1.5 min-h-[36px] flex items-center text-slate-800 font-semibold transition-colors cursor-pointer"
           >
             Berhampur → Gopalpur Beach
           </button>
           <button
             type="button"
             onClick={() => handlePresetSelect('Berhampur', 'Tara Tarini')}
-            className="text-[11px] bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-3 py-1 text-slate-700 font-semibold transition-colors cursor-pointer"
+            aria-label="Route preset: Berhampur to Tara Tarini"
+            className="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-3.5 py-1.5 min-h-[36px] flex items-center text-slate-800 font-semibold transition-colors cursor-pointer"
           >
             Berhampur → Tara Tarini
           </button>
           <button
             type="button"
             onClick={() => handlePresetSelect('Berhampur', 'Tampara Lake')}
-            className="text-[11px] bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-3 py-1 text-slate-700 font-semibold transition-colors cursor-pointer"
+            aria-label="Route preset: Berhampur to Tampara Lake"
+            className="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-3.5 py-1.5 min-h-[36px] flex items-center text-slate-800 font-semibold transition-colors cursor-pointer"
           >
             Berhampur → Tampara Lake
           </button>
           <button
             type="button"
             onClick={() => handlePresetSelect('Berhampur', 'Daringbadi')}
-            className="text-[11px] bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-3 py-1 text-slate-700 font-semibold transition-colors cursor-pointer"
+            aria-label="Route preset: Berhampur to Daringbadi"
+            className="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-3.5 py-1.5 min-h-[36px] flex items-center text-slate-800 font-semibold transition-colors cursor-pointer"
           >
             Berhampur → Daringbadi
           </button>
           <button
             type="button"
             onClick={() => handlePresetSelect('Berhampur Railway Station (BAM)', 'MKCG Medical College')}
-            className="text-[11px] bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-3 py-1 text-slate-700 font-semibold transition-colors cursor-pointer"
+            aria-label="Route preset: BAM Railway Station to MKCG Medical College"
+            className="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border border-slate-200 rounded-full px-3.5 py-1.5 min-h-[36px] flex items-center text-slate-800 font-semibold transition-colors cursor-pointer"
           >
             BAM Station → MKCG Hospital
           </button>

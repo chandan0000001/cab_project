@@ -56,7 +56,8 @@ export function Footer() {
           {phoneReady && (
             <a
               href={getPhoneUrl()}
-              className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs font-bold hover:bg-slate-800 active:bg-slate-800 transition-colors"
+              aria-label={`Call Subham Travelers at ${brandConfig.contact.phoneDisplay}`}
+              className="flex items-center justify-center gap-1.5 py-2.5 px-3 min-h-[44px] rounded-xl bg-slate-900 border border-slate-700 text-white text-xs font-bold hover:bg-slate-800 active:bg-slate-800 transition-colors"
             >
               <Phone className="w-3.5 h-3.5 text-blue-400" />
               <span>Call Desk</span>
@@ -68,7 +69,8 @@ export function Footer() {
               href={getWhatsAppUrl('Hello Subham Travelers, I have a cab enquiry.')}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-[#1F6F3F] text-white text-xs font-bold hover:bg-[#155A30] active:bg-[#0F4222] transition-colors"
+              aria-label="Enquire on WhatsApp"
+              className="flex items-center justify-center gap-1.5 py-2.5 px-3 min-h-[44px] rounded-xl bg-[#1F6F3F] text-white text-xs font-bold hover:bg-[#155A30] active:bg-[#0F4222] transition-colors"
             >
               <MessageSquare className="w-3.5 h-3.5" />
               <span>WhatsApp</span>
@@ -77,24 +79,24 @@ export function Footer() {
         </div>
 
         {/* Compact Horizontal Quick Links */}
-        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-xs text-slate-400 pt-1">
-          <Link to="/fleet" className="hover:text-white transition-colors">Our Fleet</Link>
-          <span className="text-slate-700">•</span>
-          <Link to="/routes" className="hover:text-white transition-colors">All Routes</Link>
-          <span className="text-slate-700">•</span>
-          <Link to="/destinations" className="hover:text-white transition-colors">Destinations</Link>
-          <span className="text-slate-700">•</span>
-          <Link to="/about" className="hover:text-white transition-colors">About</Link>
-          <span className="text-slate-700">•</span>
-          <Link to="/contact" className="hover:text-white transition-colors">Contact</Link>
-          <span className="text-slate-700">•</span>
-          <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
+        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-slate-300 pt-1">
+          <Link to="/fleet" className="py-1 px-1 hover:text-white transition-colors">Our Fleet</Link>
+          <span className="text-slate-600">•</span>
+          <Link to="/routes" className="py-1 px-1 hover:text-white transition-colors">All Routes</Link>
+          <span className="text-slate-600">•</span>
+          <Link to="/destinations" className="py-1 px-1 hover:text-white transition-colors">Destinations</Link>
+          <span className="text-slate-600">•</span>
+          <Link to="/about" className="py-1 px-1 hover:text-white transition-colors">About</Link>
+          <span className="text-slate-600">•</span>
+          <Link to="/contact" className="py-1 px-1 hover:text-white transition-colors">Contact</Link>
+          <span className="text-slate-600">•</span>
+          <Link to="/terms" className="py-1 px-1 hover:text-white transition-colors">Terms</Link>
         </div>
 
         {/* Station Road Address & Copyright in 2 Lines */}
-        <div className="pt-2 border-t border-slate-900 text-[11px] text-slate-500 space-y-1">
+        <div className="pt-2 border-t border-slate-900 text-xs text-slate-400 space-y-1">
           <p className="flex items-center justify-center gap-1">
-            <MapPin className="w-3 h-3 text-blue-400 shrink-0" />
+            <MapPin className="w-3.5 h-3.5 text-blue-400 shrink-0" />
             <span>Station Road, Berhampur (BAM), Odisha</span>
           </p>
           <p>© {currentYear} {brandConfig.brandName}. All rights reserved.</p>
@@ -276,11 +278,15 @@ export function Footer() {
         </div>
 
         {/* Clean Coordinates & Email Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500 pt-6">
+        <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-slate-400 pt-6">
           <p>© {currentYear} {brandConfig.brandName}. All rights reserved.</p>
 
           <div className="flex items-center gap-4 text-slate-400">
-            <a href={`mailto:${brandConfig.contact.email}`} className="hover:text-white transition-colors flex items-center gap-1">
+            <a
+              href={`mailto:${brandConfig.contact.email}`}
+              aria-label={`Send email to ${brandConfig.contact.email}`}
+              className="hover:text-white transition-colors flex items-center gap-1"
+            >
               <Mail className="w-3.5 h-3.5 text-blue-400" />
               <span>{brandConfig.contact.email}</span>
             </a>

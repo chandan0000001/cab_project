@@ -177,7 +177,9 @@ export function HeroDispatchShowcase() {
                 key={v.id}
                 type="button"
                 onClick={() => setSelectedVehicle(v)}
-                className={`py-1.5 sm:py-2 px-1.5 sm:px-2.5 rounded-xl text-center transition-all cursor-pointer border min-w-0 ${
+                aria-pressed={isSelected}
+                aria-label={`Select vehicle category: ${v.name}`}
+                className={`py-2 px-1.5 sm:px-2.5 rounded-xl text-center transition-all cursor-pointer border min-w-0 min-h-[48px] flex flex-col justify-center ${
                   isSelected
                     ? 'bg-white border-blue-600 shadow-sm text-slate-900 ring-2 ring-blue-500/20'
                     : 'bg-white/70 border-slate-200 text-slate-600 hover:bg-white hover:text-slate-900'
@@ -255,7 +257,9 @@ export function HeroDispatchShowcase() {
                   key={route.id}
                   type="button"
                   onClick={() => setSelectedRoute(route)}
-                  className={`p-2 rounded-xl text-left transition-all cursor-pointer border min-w-0 ${
+                  aria-pressed={isSelected}
+                  aria-label={`Select route: ${route.name}`}
+                  className={`p-2 rounded-xl text-left transition-all cursor-pointer border min-w-0 min-h-[48px] flex flex-col justify-center ${
                     isSelected
                       ? 'bg-blue-50/80 border-blue-600 shadow-xs ring-1 ring-blue-500'
                       : 'bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50'
@@ -299,7 +303,7 @@ export function HeroDispatchShowcase() {
             variant="book-cab"
             size="lg"
             onClick={handleBookSelected}
-            className="w-full justify-center text-sm font-bold shadow-md"
+            className="w-full justify-center text-sm font-bold shadow-md min-h-[48px]"
             rightIcon={<ArrowRight className="w-4 h-4" />}
           >
             <span>Book {selectedVehicle.name.replace('Maruti Suzuki ', '').replace('Toyota ', '')} & Get Quote</span>
@@ -309,7 +313,8 @@ export function HeroDispatchShowcase() {
             <button
               type="button"
               onClick={handleWhatsAppSelected}
-              className="w-full flex items-center justify-center gap-2 bg-[#1F6F3F] hover:bg-[#155A30] active:bg-[#0F4222] text-white py-2.5 px-4 rounded-full text-xs font-bold shadow-sm transition-colors cursor-pointer"
+              aria-label="Contact WhatsApp Dispatch Desk"
+              className="w-full flex items-center justify-center gap-2 bg-[#1F6F3F] hover:bg-[#155A30] active:bg-[#0F4222] text-white py-3 px-4 min-h-[44px] rounded-full text-xs font-bold shadow-sm transition-colors cursor-pointer"
             >
               <MessageSquare className="w-4 h-4" />
               <span>WhatsApp Dispatch Desk (Fast Reply in 5 Mins)</span>

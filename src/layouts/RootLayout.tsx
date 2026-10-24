@@ -4,6 +4,7 @@ import { Header } from '@/layouts/Header';
 import { Footer } from '@/layouts/Footer';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
 import { BookingProvider } from '@/context/BookingContext';
+import { useBookingFlow } from '@/hooks/useBookingFlow';
 import { BookingLoadingSkeleton } from '@/components/booking/BookingLoadingSkeleton';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { WinterOfferPopup } from '@/components/promotions/WinterOfferPopup';
@@ -12,6 +13,17 @@ import { WinterOfferPopup } from '@/components/promotions/WinterOfferPopup';
 const LazyBookingModal = lazy(() =>
   import('@/components/booking/BookingModal').then((module) => ({ default: module.BookingModal }))
 );
+
+// Only evaluate and download BookingModal bundle when user actually opens booking
+function OnDemandBookingModal() {
+  const { isBookingOpen } = useBookingFlow();
+  if (!isBookingOpen) return null;
+  return (
+    <Suspense fallback={<BookingLoadingSkeleton />}>
+      <LazyBookingModal />
+    </Suspense>
+  );
+}
 
 export function RootLayout() {
   // Ensure top scroll on every route change
@@ -38,10 +50,8 @@ export function RootLayout() {
           </Suspense>
         </main>
 
-        {/* Lazy Loaded On-Demand Booking Modal */}
-        <Suspense fallback={<BookingLoadingSkeleton />}>
-          <LazyBookingModal />
-        </Suspense>
+        {/* On-Demand Booking Modal (Zero Initial Bundle Cost) */}
+        <OnDemandBookingModal />
 
         {/* Interactive Winter & Festival Offer Pop-up */}
         <WinterOfferPopup />

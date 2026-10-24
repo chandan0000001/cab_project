@@ -116,7 +116,7 @@ export function VehicleCard({ vehicle, onEnquire }: VehicleCardProps) {
             variant="primary"
             size="sm"
             onClick={handleEnquiry}
-            className="flex-1 text-xs font-bold shadow-saffron py-2.5"
+            className="flex-1 text-xs font-bold shadow-saffron py-2.5 min-h-[42px]"
             rightIcon={<ArrowRight className="w-3.5 h-3.5" />}
           >
             Book This Cab
@@ -126,9 +126,9 @@ export function VehicleCard({ vehicle, onEnquire }: VehicleCardProps) {
             <button
               type="button"
               onClick={handleWhatsAppEnquiry}
-              className="w-9 h-9 rounded-full bg-[#1F6F3F] hover:bg-[#155A30] text-white flex items-center justify-center shrink-0 shadow-whatsapp transition-all hover:scale-105 cursor-pointer"
+              className="w-10 h-10 min-w-[40px] min-h-[40px] rounded-full bg-[#1F6F3F] hover:bg-[#155A30] text-white flex items-center justify-center shrink-0 shadow-whatsapp transition-all hover:scale-105 cursor-pointer"
               title="Enquire on WhatsApp"
-              aria-label={`Enquire ${vehicle.name} on WhatsApp`}
+              aria-label={`Enquire about ${vehicle.name} on WhatsApp`}
             >
               <MessageSquare className="w-4 h-4" />
             </button>

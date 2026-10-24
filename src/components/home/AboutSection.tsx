@@ -95,13 +95,13 @@ export function AboutSection() {
                   </p>
                 </div>
 
-                <p className="text-[11px] text-navy-500 mt-2">
+                <p className="text-xs text-navy-700 mt-2">
                   {ceoProfile.bioPlaceholder}
                 </p>
               </div>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-navy-200/60 flex items-center justify-between text-[11px] text-navy-400">
+            <div className="mt-4 pt-3 border-t border-navy-200/60 flex items-center justify-between text-[11px] text-navy-600">
               <span className="flex items-center gap-1">
                 <Compass className="w-3 h-3 text-brand-600" />
                 Service Philosophy: Transparent, Courteous, On-Time

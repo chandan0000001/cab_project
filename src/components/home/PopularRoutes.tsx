@@ -44,7 +44,9 @@ export function PopularRoutes() {
           <button
             type="button"
             onClick={() => setSelectedRegion('all')}
-            className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer ${
+            aria-pressed={selectedRegion === 'all'}
+            aria-label="Filter all routes"
+            className={`px-3.5 py-2 min-h-[38px] rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer ${
               selectedRegion === 'all'
                 ? 'bg-slate-900 text-white shadow-xs'
                 : 'bg-white text-slate-700 hover:bg-slate-100 hover:text-slate-950 border border-slate-200'
@@ -55,7 +57,9 @@ export function PopularRoutes() {
           <button
             type="button"
             onClick={() => setSelectedRegion('coastal-heritage')}
-            className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer ${
+            aria-pressed={selectedRegion === 'coastal-heritage'}
+            aria-label="Filter coastal and heritage routes"
+            className={`px-3.5 py-2 min-h-[38px] rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer ${
               selectedRegion === 'coastal-heritage'
                 ? 'bg-slate-900 text-white shadow-xs'
                 : 'bg-white text-slate-700 hover:bg-slate-100 hover:text-slate-950 border border-slate-200'
@@ -66,7 +70,9 @@ export function PopularRoutes() {
           <button
             type="button"
             onClick={() => setSelectedRegion('southern-hills')}
-            className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer ${
+            aria-pressed={selectedRegion === 'southern-hills'}
+            aria-label="Filter southern and hill routes"
+            className={`px-3.5 py-2 min-h-[38px] rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer ${
               selectedRegion === 'southern-hills'
                 ? 'bg-slate-900 text-white shadow-xs'
                 : 'bg-white text-slate-700 hover:bg-slate-100 hover:text-slate-950 border border-slate-200'
@@ -77,7 +83,9 @@ export function PopularRoutes() {
           <button
             type="button"
             onClick={() => setSelectedRegion('western-odisha')}
-            className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer ${
+            aria-pressed={selectedRegion === 'western-odisha'}
+            aria-label="Filter western Odisha routes"
+            className={`px-3.5 py-2 min-h-[38px] rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer ${
               selectedRegion === 'western-odisha'
                 ? 'bg-slate-900 text-white shadow-xs'
                 : 'bg-white text-slate-700 hover:bg-slate-100 hover:text-slate-950 border border-slate-200'

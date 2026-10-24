@@ -44,7 +44,7 @@ export function FleetPreview() {
       </div>
 
       <ScrollReveal direction="up" delay={250}>
-        <div className="mt-6 flex items-center justify-center gap-2 text-xs text-navy-500 font-medium">
+        <div className="mt-6 flex items-center justify-center gap-2 text-xs text-navy-700 font-medium">
           <ShieldCheck className="w-4 h-4 text-emerald-600" />
           <span>All vehicles hold commercial passenger permits, AC, GPS tracking & comprehensive passenger insurance</span>
         </div>

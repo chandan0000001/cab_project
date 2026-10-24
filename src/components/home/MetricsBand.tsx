@@ -123,7 +123,8 @@ export function MetricsBand() {
                   <button
                     type="button"
                     onClick={() => handleBookDeal(deal.destination)}
-                    className="flex-1 flex items-center justify-center gap-1.5 bg-amber-400 hover:bg-amber-300 active:bg-amber-500 text-slate-950 text-xs font-bold py-2.5 px-3 rounded-xl transition-all cursor-pointer shadow-sm active:scale-[0.98]"
+                    aria-label={`Book ${deal.route} with ${deal.discount}`}
+                    className="flex-1 flex items-center justify-center gap-1.5 bg-amber-400 hover:bg-amber-300 active:bg-amber-500 text-slate-950 text-xs font-bold py-2.5 px-3 min-h-[44px] rounded-xl transition-all cursor-pointer shadow-sm active:scale-[0.98]"
                   >
                     <span>Book with {deal.discount}</span>
                     <ArrowRight className="w-3.5 h-3.5 text-slate-950" />
@@ -132,9 +133,9 @@ export function MetricsBand() {
                   <button
                     type="button"
                     onClick={() => handleWhatsAppDeal(deal.route, deal.discount)}
-                    className="w-9 h-9 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white flex items-center justify-center shrink-0 transition-all cursor-pointer shadow-sm active:scale-95"
+                    className="w-10 h-10 min-w-[40px] min-h-[40px] rounded-xl bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white flex items-center justify-center shrink-0 transition-all cursor-pointer shadow-sm active:scale-95"
                     title="Claim on WhatsApp"
-                    aria-label="Claim deal on WhatsApp"
+                    aria-label={`Claim ${deal.discount} deal for ${deal.route} on WhatsApp`}
                   >
                     <MessageSquare className="w-4 h-4" />
                   </button>
