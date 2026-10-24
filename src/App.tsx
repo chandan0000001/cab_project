@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { RootLayout } from '@/layouts/RootLayout';
 import { Home } from '@/pages/Home';
 
@@ -64,7 +65,12 @@ const router = createBrowserRouter([
 ]);
 
 export function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <SpeedInsights />
+    </>
+  );
 }
 
 export default App;
