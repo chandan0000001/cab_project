@@ -40,6 +40,7 @@ export function VehicleCard({ vehicle, onEnquire }: VehicleCardProps) {
           src={vehicle.imageUrl}
           alt={vehicle.name}
           loading="lazy"
+          decoding="async"
           className="w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-105"
         />
 

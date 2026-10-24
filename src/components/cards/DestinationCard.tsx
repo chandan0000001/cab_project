@@ -75,6 +75,7 @@ export function DestinationCard({ destination, onEnquire }: DestinationCardProps
                   src={item.url}
                   alt={item.title}
                   loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover object-center transition-transform duration-500 group-hover/tile:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/20 to-transparent" />
@@ -110,6 +111,7 @@ export function DestinationCard({ destination, onEnquire }: DestinationCardProps
             src={destination.imageUrl}
             alt={destination.name}
             loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-navy-950/85 via-navy-950/30 to-transparent" />

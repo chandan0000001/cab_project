@@ -47,7 +47,7 @@ const SHOWCASE_VEHICLES: VehicleShowcase[] = [
     id: 'dzire',
     name: 'Maruti Suzuki Dzire',
     category: 'Comfort Sedan',
-    image: '/images/fleet/dzire.jpg',
+    image: '/images/fleet/dzire.webp',
     seats: '4+1 Seats',
     luggage: '3 Large Bags',
     ac: 'Chilled AC',
@@ -57,7 +57,7 @@ const SHOWCASE_VEHICLES: VehicleShowcase[] = [
     id: 'ertiga',
     name: 'Maruti Suzuki Ertiga',
     category: 'Spacious MPV',
-    image: '/images/fleet/ertiga.jpg',
+    image: '/images/fleet/ertiga.webp',
     seats: '6+1 Seats',
     luggage: '4 Bags + Carrier',
     ac: 'Dual AC Vents',
@@ -67,7 +67,7 @@ const SHOWCASE_VEHICLES: VehicleShowcase[] = [
     id: 'innova',
     name: 'Toyota Innova Crysta',
     category: 'Premium Executive',
-    image: '/images/fleet/innova_crysta.jpg',
+    image: '/images/fleet/innova_crysta.webp',
     seats: '7+1 Seats',
     luggage: '5 Large Bags',
     ac: 'Multi-Zone Climate',
@@ -202,6 +202,7 @@ export function HeroDispatchShowcase() {
             alt={selectedVehicle.name}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="eager"
+            decoding="async"
           />
 
           {/* Top Overlays - Responsive Single Row (Never Collides) */}
