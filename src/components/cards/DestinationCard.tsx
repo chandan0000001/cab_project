@@ -13,6 +13,20 @@ export interface DestinationCardProps {
   onEnquire?: (destination: Destination) => void;
 }
 
+// Helper to get clean, natural destination short name for CTA button
+const getDestinationShortName = (name: string): string => {
+  const cleaned = name.replace(/^Maa\s+/i, '').trim();
+  if (cleaned.startsWith('Tara Tarini')) return 'Tara Tarini';
+  if (cleaned.startsWith('Gopalpur')) return 'Gopalpur';
+  if (cleaned.startsWith('Tampara')) return 'Tampara';
+  if (cleaned.startsWith('Daringbadi')) return 'Daringbadi';
+  if (cleaned.startsWith('Taptapani')) return 'Taptapani';
+  if (cleaned.startsWith('Chilika')) return 'Chilika';
+  if (cleaned.startsWith('Puri')) return 'Puri';
+  if (cleaned.startsWith('Bhubaneswar')) return 'Bhubaneswar';
+  return cleaned.split(' (')[0].split(' &')[0].split(' ')[0] || 'Tour';
+};
+
 export function DestinationCard({ destination, onEnquire }: DestinationCardProps) {
   const { openBooking } = useBookingFlow();
   const whatsappReady = isWhatsAppConfigured();
@@ -167,7 +181,7 @@ export function DestinationCard({ destination, onEnquire }: DestinationCardProps
             className="flex-1 font-bold shadow-saffron text-xs"
             rightIcon={<ArrowRight className="w-3.5 h-3.5" />}
           >
-            Enquire Cab for {destination.name.split(' ')[0]}
+            Enquire Cab for {getDestinationShortName(destination.name)}
           </Button>
 
           {whatsappReady && (

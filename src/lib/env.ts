@@ -17,35 +17,35 @@ export const env = {
   osrmApiUrl: import.meta.env.VITE_OSRM_API_URL || 'https://router.project-osrm.org',
 
   /**
-   * Official WhatsApp Support Number (e.g., 919876543210)
+   * Official WhatsApp Support Number (+91 63712 58522)
    */
-  whatsappNumber: import.meta.env.VITE_WHATSAPP_NUMBER || '910000000000',
+  whatsappNumber: import.meta.env.VITE_WHATSAPP_NUMBER || '916371258522',
 
   /**
    * Direct Phone Support Number
    */
-  supportPhone: import.meta.env.VITE_SUPPORT_PHONE || '+91 00000 00000',
+  supportPhone: import.meta.env.VITE_SUPPORT_PHONE || '+91 63712 58522',
 
   /**
    * Primary Contact Email Address
    */
-  supportEmail: import.meta.env.VITE_SUPPORT_EMAIL || 'contact@subhamtravelers.com',
+  supportEmail: import.meta.env.VITE_SUPPORT_EMAIL || 'kumardalaichandan803@gmail.com',
 
   /**
    * FormSubmit recipient email for customer feedback forwarding
    */
-  formSubmitEmail: import.meta.env.VITE_FORMSUBMIT_EMAIL || '',
+  formSubmitEmail: import.meta.env.VITE_FORMSUBMIT_EMAIL || 'kumardalaichandan803@gmail.com',
 
   /**
-   * Base Site URL
+   * Base Site URL (Vercel Project: berhampur_cab)
    */
-  siteUrl: import.meta.env.VITE_SITE_URL || 'http://localhost:5173',
+  siteUrl: import.meta.env.VITE_SITE_URL || 'https://berhampur-cab.vercel.app',
 };
 
 /**
  * Checks whether FormSubmit has been configured with an active recipient email
  */
 export function isFormSubmitConfigured(): boolean {
-  const targetEmail = env.formSubmitEmail || (env.supportEmail !== 'contact@subhamtravelers.com' ? env.supportEmail : '');
+  const targetEmail = env.formSubmitEmail || env.supportEmail;
   return Boolean(targetEmail && targetEmail.includes('@') && !targetEmail.includes('placeholder'));
 }
