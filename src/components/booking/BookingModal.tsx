@@ -157,6 +157,7 @@ export function BookingModal() {
   const handleProceedToReview = (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) {
+      sound.playError();
       return;
     }
     sound.playSuccess();
@@ -621,7 +622,10 @@ export function BookingModal() {
                   type="button"
                   variant="outline"
                   size="sm"
-                  onClick={() => setStep('form')}
+                  onClick={() => {
+                    sound.playPop();
+                    setStep('form');
+                  }}
                   className="w-full text-xs"
                 >
                   Modify Travel Details

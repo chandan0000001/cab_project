@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { MessageSquare, Phone, X } from 'lucide-react';
 import { brandConfig } from '@/data/brandConfig';
 import { isPhoneConfigured, isWhatsAppConfigured, getPhoneUrl, getWhatsAppUrl } from '@/lib/contactUtils';
+import { sound } from '@/lib/sound';
 
 export function FloatingContactWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,11 +10,21 @@ export function FloatingContactWidget() {
   const whatsappReady = isWhatsAppConfigured();
 
   const handleWhatsAppClick = () => {
+    sound.playWhatsApp();
     window.open(
       getWhatsAppUrl('Hello Subham Travelers, I would like to enquire about booking a cab.'),
       '_blank',
       'noopener,noreferrer'
     );
+  };
+
+  const handleToggle = () => {
+    if (isOpen) {
+      sound.playClose();
+    } else {
+      sound.playNotification();
+    }
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -30,7 +41,10 @@ export function FloatingContactWidget() {
             </div>
             <button
               type="button"
-              onClick={() => setIsOpen(false)}
+              onClick={() => {
+                sound.playClose();
+                setIsOpen(false);
+              }}
               className="w-6 h-6 rounded-full hover:bg-sand-100 flex items-center justify-center text-navy-400 hover:text-navy-900 transition-colors"
               aria-label="Close contact drawer"
             >
@@ -61,6 +75,7 @@ export function FloatingContactWidget() {
             {phoneReady ? (
               <a
                 href={getPhoneUrl()}
+                onClick={() => sound.playCall()}
                 className="w-full flex items-center justify-center gap-2 bg-navy-950 hover:bg-black text-white py-2.5 px-4 rounded-full text-xs font-bold shadow-sm transition-transform hover:-translate-y-0.5"
               >
                 <Phone className="w-3.5 h-3.5 text-brand-400" />
@@ -78,7 +93,7 @@ export function FloatingContactWidget() {
       {/* Floating Action Trigger Button */}
       <button
         type="button"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleToggle}
         className="group relative flex items-center gap-2.5 bg-[#1F6F3F] hover:bg-[#155A30] text-white py-3 px-5 rounded-full shadow-elevated border-2 border-white/80 transition-all hover:scale-105 active:scale-95 cursor-pointer focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-500/30"
         aria-label="Direct booking contact options"
         aria-expanded={isOpen}

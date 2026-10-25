@@ -1,3 +1,5 @@
+import { haptics } from './haptics';
+
 // Web Audio API micro-sound engine with distinct tactile synthesized UI cues
 
 class SoundSystem {
@@ -97,6 +99,13 @@ class SoundSystem {
         return;
       }
 
+      // 9. Primary Booking / Reservation CTA
+      if (text.includes('book') || text.includes('reserve') || className.includes('book-cab')) {
+        this.playTap();
+        haptics.impactHeavy();
+        return;
+      }
+
       // Default tactile tap
       this.playTap();
     };
@@ -162,6 +171,7 @@ class SoundSystem {
 
   // 1. Crisp tactile micro-tap for general buttons
   public playTap() {
+    haptics.tap();
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
@@ -188,6 +198,7 @@ class SoundSystem {
 
   // 2. Buoyant bubble pop for opening modals and drawers
   public playPop() {
+    haptics.pop();
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
@@ -214,6 +225,7 @@ class SoundSystem {
 
   // 3. Gentle downward swoosh for modal close and dismiss
   public playClose() {
+    haptics.close();
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
@@ -240,6 +252,7 @@ class SoundSystem {
 
   // 4. Harmonic triad chime for successful booking and actions
   public playSuccess() {
+    haptics.success();
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
@@ -270,6 +283,7 @@ class SoundSystem {
 
   // 5. Snappy mechanical toggle tick for segmented controls
   public playSwitch() {
+    haptics.switch();
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
@@ -296,6 +310,7 @@ class SoundSystem {
 
   // 6. Dynamic dual-frequency acceleration whoosh for car model selection
   public playCarSelect() {
+    haptics.carSelect();
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
@@ -322,6 +337,7 @@ class SoundSystem {
 
   // 7. Precise highway compass sonar ping for route selection
   public playRouteSelect() {
+    haptics.routeSelect();
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
@@ -348,6 +364,7 @@ class SoundSystem {
 
   // 8. Metallic slide tick for tab navigation
   public playTab() {
+    haptics.tab();
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
@@ -374,6 +391,7 @@ class SoundSystem {
 
   // 9. Warm organic double droplet for WhatsApp desk interactions
   public playWhatsApp() {
+    haptics.whatsapp();
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
@@ -404,6 +422,7 @@ class SoundSystem {
 
   // 10. Crisp telephonic double-chirp tone for phone call actions
   public playCall() {
+    haptics.call();
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
@@ -433,6 +452,7 @@ class SoundSystem {
 
   // 11. Mechanical double-click for copying promo codes
   public playCopy() {
+    haptics.copy();
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
@@ -461,6 +481,7 @@ class SoundSystem {
 
   // 12. Soft mechanical slide for region and corridor filters
   public playFilter() {
+    haptics.filter();
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
@@ -487,6 +508,7 @@ class SoundSystem {
 
   // 13. Warm hollow wooden toggle click for FAQ accordion
   public playAccordion() {
+    haptics.accordion();
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
@@ -513,6 +535,7 @@ class SoundSystem {
 
   // 14. Delicate micro-blip when focusing input fields
   public playInputFocus() {
+    haptics.inputFocus();
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
@@ -537,6 +560,7 @@ class SoundSystem {
 
   // 15. Subtle low double-thud for validation alert
   public playError() {
+    haptics.error();
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
@@ -566,6 +590,7 @@ class SoundSystem {
 
   // 16. Gentle brush-away sound for clearing search queries
   public playClear() {
+    haptics.clear();
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
@@ -592,6 +617,7 @@ class SoundSystem {
 
   // 17. Ultra-soft whisper tick for card hover
   public playHover() {
+    haptics.hover();
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
@@ -616,6 +642,7 @@ class SoundSystem {
 
   // 18. Crystal shimmer chime for discount badges and seasonal offers
   public playBadge() {
+    haptics.badge();
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
@@ -645,6 +672,7 @@ class SoundSystem {
 
   // 19. Ascending two-note chime for quotation calculations
   public playQuote() {
+    haptics.quote();
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
@@ -674,6 +702,7 @@ class SoundSystem {
 
   // 20. Gentle bell chime for floating contact widget and notifications
   public playNotification() {
+    haptics.notification();
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
@@ -699,3 +728,4 @@ class SoundSystem {
 }
 
 export const sound = new SoundSystem();
+export { haptics } from './haptics';

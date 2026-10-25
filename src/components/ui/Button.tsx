@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import { cn } from '@/lib/utils';
 import { Loader2 } from 'lucide-react';
 import { sound } from '@/lib/sound';
+import { haptics } from '@/lib/haptics';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'whatsapp' | 'danger' | 'book-cab';
@@ -32,7 +33,18 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
       if (!silent) {
-        sound.playTap();
+        if (variant === 'whatsapp') {
+          sound.playWhatsApp();
+        } else if (variant === 'book-cab' || (variant === 'primary' && size === 'lg')) {
+          sound.playTap();
+          haptics.impactHeavy();
+        } else if (variant === 'danger') {
+          sound.playTap();
+          haptics.error();
+        } else {
+          sound.playTap();
+          haptics.impactMedium();
+        }
       }
       onClick?.(e);
     };

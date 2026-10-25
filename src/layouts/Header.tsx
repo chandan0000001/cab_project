@@ -5,6 +5,7 @@ import { brandConfig } from '@/data/brandConfig';
 import { Button } from '@/components/ui/Button';
 import { useBookingFlow } from '@/hooks/useBookingFlow';
 import { isPhoneConfigured, isWhatsAppConfigured, getPhoneUrl, getWhatsAppUrl } from '@/lib/contactUtils';
+import { sound } from '@/lib/sound';
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -142,7 +143,14 @@ export function Header() {
               {/* Mobile Hamburger Button */}
               <button
                 type="button"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                onClick={() => {
+                  if (isMobileMenuOpen) {
+                    sound.playClose();
+                  } else {
+                    sound.playPop();
+                  }
+                  setIsMobileMenuOpen(!isMobileMenuOpen);
+                }}
                 aria-expanded={isMobileMenuOpen}
                 aria-controls="mobile-nav-menu"
                 aria-label={isMobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
@@ -183,7 +191,10 @@ export function Header() {
           </div>
           <button
             type="button"
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={() => {
+              sound.playClose();
+              setIsMobileMenuOpen(false);
+            }}
             aria-label="Close menu"
             className="w-10 h-10 min-w-[40px] min-h-[40px] flex items-center justify-center rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 cursor-pointer"
           >
