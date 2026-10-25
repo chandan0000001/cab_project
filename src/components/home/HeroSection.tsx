@@ -234,14 +234,12 @@ export function HeroSection() {
                     className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                     loading="eager"
                   />
-                  <div className="absolute top-2 left-2">
-                    <span className="inline-flex items-center gap-1 bg-white/95 backdrop-blur-md text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200 shadow-2xs">
+                  <div className="absolute top-2 inset-x-2 flex items-center justify-between gap-1.5 pointer-events-none">
+                    <span className="inline-flex items-center gap-1 bg-white/95 backdrop-blur-md text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200 shadow-2xs truncate">
                       <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                      <span>Verified Fleet</span>
+                      <span className="truncate">Verified Fleet</span>
                     </span>
-                  </div>
-                  <div className="absolute top-2 right-2">
-                    <span className="bg-slate-900 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-2xs">
+                    <span className="bg-slate-900 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-2xs shrink-0">
                       {activeVehicle.badge}
                     </span>
                   </div>

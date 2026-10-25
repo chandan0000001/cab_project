@@ -87,15 +87,13 @@ export function DestinationCard({ destination, onEnquire }: DestinationCardProps
             ))}
           </div>
 
-          <div className="absolute top-3 left-3 z-10">
-            <span className="bg-slate-950/90 text-white backdrop-blur-md border border-white/20 text-xs font-semibold px-2.5 py-0.5 rounded-full flex items-center">
-              <MapPin className="w-3 h-3 text-blue-400 mr-1" />
-              {destination.location}
+          <div className="absolute top-3 inset-x-3 z-10 flex items-center justify-between gap-2 pointer-events-none">
+            <span className="bg-slate-950/90 text-white backdrop-blur-md border border-white/20 text-xs font-semibold px-2.5 py-0.5 rounded-full flex items-center min-w-0 shadow-xs max-w-[62%] sm:max-w-[70%]">
+              <MapPin className="w-3 h-3 text-blue-400 mr-1 shrink-0" />
+              <span className="truncate">{destination.location}</span>
             </span>
-          </div>
 
-          <div className="absolute top-3 right-3 z-10">
-            <span className="bg-blue-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-xs uppercase tracking-wider">
+            <span className="bg-blue-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-xs uppercase tracking-wider shrink-0">
               Curated Circuit
             </span>
           </div>
@@ -111,15 +109,13 @@ export function DestinationCard({ destination, onEnquire }: DestinationCardProps
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
           
-          <div className="absolute top-3 left-3">
-            <span className="bg-slate-950/90 text-white backdrop-blur-md border border-white/20 text-xs font-semibold px-2.5 py-0.5 rounded-full flex items-center">
-              <MapPin className="w-3 h-3 text-blue-400 mr-1" />
-              {destination.location}
+          <div className="absolute top-3 inset-x-3 z-10 flex items-center justify-between gap-2 pointer-events-none">
+            <span className="bg-slate-950/90 text-white backdrop-blur-md border border-white/20 text-xs font-semibold px-2.5 py-0.5 rounded-full flex items-center min-w-0 shadow-xs max-w-[62%] sm:max-w-[70%]">
+              <MapPin className="w-3 h-3 text-blue-400 mr-1 shrink-0" />
+              <span className="truncate">{destination.location}</span>
             </span>
-          </div>
 
-          <div className="absolute top-3 right-3">
-            <span className="bg-slate-900/90 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-white/10 uppercase tracking-wider">
+            <span className="bg-slate-900/90 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-white/10 uppercase tracking-wider shrink-0 shadow-xs">
               {destination.circuit === 'coastal-pilgrimage' ? 'Temple Circuit' : 'Outstation Tour'}
             </span>
           </div>
