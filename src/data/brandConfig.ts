@@ -22,9 +22,9 @@ export const brandConfig: BrandConfig = {
     pinCode: '760001',
   },
   ceoProfile: {
-    namePlaceholder: 'Chandan Kumar Dalai',
+    namePlaceholder: 'Subham Ratha',
     titlePlaceholder: 'Founder & Managing Director',
-    bioPlaceholder: 'Subham Travelers was founded in Berhampur by Chandan Kumar Dalai with a dedication to punctual regional highway mobility, verified commercial AC vehicles, and honest pricing. Headquartered near Berhampur Railway Station, the service connects Silk City to Bhubaneswar Airport, Puri, and all 30 districts of Odisha with professional chauffeurs.',
+    bioPlaceholder: 'Subham Travelers was founded in Berhampur by Subham Ratha with a dedication to punctual regional highway mobility, verified commercial AC vehicles, and honest pricing. Headquartered near Berhampur Railway Station, the service connects Silk City to Bhubaneswar Airport, Puri, and all 30 districts of Odisha with professional chauffeurs.',
     messagePlaceholder: '"Our commitment is clear: provide every family, patient, pilgrim, and business traveler originating from Berhampur with courteous, sanitized, and dependable highway cab travel with transparent pricing and zero hidden surcharges."',
     isVerified: true,
     image: '/images/team/owner_square.webp',
