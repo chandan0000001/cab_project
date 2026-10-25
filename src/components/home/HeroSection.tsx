@@ -167,7 +167,7 @@ export function HeroSection() {
                   <p className="text-[10px] font-bold text-slate-800 uppercase tracking-wider mt-0.5">
                     Commercial AC
                   </p>
-                  <p className="text-[10px] text-slate-500">Yellow-plate fleet</p>
+                  <p className="text-[10px] text-slate-500">Chauffeur fleet</p>
                 </div>
 
                 <div className="p-3 bg-white rounded-2xl border border-slate-200/90 shadow-2xs text-left">
@@ -237,7 +237,7 @@ export function HeroSection() {
                   <div className="absolute top-2 left-2">
                     <span className="inline-flex items-center gap-1 bg-white/95 backdrop-blur-md text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200 shadow-2xs">
                       <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                      <span>OD Yellow Plate</span>
+                      <span>Verified Fleet</span>
                     </span>
                   </div>
                   <div className="absolute top-2 right-2">
@@ -336,7 +336,7 @@ export function HeroSection() {
                   <div className="flex items-center justify-between text-[11px] text-slate-500 pt-2 px-1 border-t border-slate-100">
                     <span className="flex items-center gap-1">
                       <ShieldCheck className="w-3 h-3 text-emerald-600 shrink-0" />
-                      <span>Commercial yellow-plate</span>
+                      <span>Verified Tourist Cab</span>
                     </span>
                     <span className="text-blue-700 font-semibold">
                       Berhampur Doorstep Pickup
@@ -429,7 +429,7 @@ export function HeroSection() {
                     <p className="text-[10px] font-bold text-slate-700 uppercase tracking-wider mt-0.5">
                       Commercial AC
                     </p>
-                    <p className="text-[10px] text-slate-500">Yellow-plate fleet</p>
+                    <p className="text-[10px] text-slate-500">Chauffeur fleet</p>
                   </div>
 
                   <div className="p-3 bg-white rounded-xl border border-slate-200 shadow-2xs">

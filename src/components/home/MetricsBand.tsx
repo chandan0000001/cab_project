@@ -170,7 +170,7 @@ export function MetricsBand() {
             </h3>
 
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Dedicated commercial yellow-plate cabs departing from Berhampur. Select your vehicle class below for instant transparent quotes:
+              Dedicated chauffeur-driven AC cabs departing from Berhampur. Select your vehicle class below for instant transparent quotes:
             </p>
 
             <div className="flex flex-wrap items-center gap-2.5 pt-1">
@@ -338,7 +338,7 @@ export function MetricsBand() {
         <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500 pt-3 border-t border-slate-200">
           <span className="flex items-center gap-1.5">
             <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-            <span>Commercial yellow-plate fleet • Valid passenger permits & comprehensive insurance</span>
+            <span>Verified commercial fleet • Valid passenger permits & comprehensive insurance</span>
           </span>
           <span className="font-semibold text-blue-700">
             Silk City Direct Dispatch

@@ -52,7 +52,7 @@ export function About() {
             </h1>
 
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
-              Connecting Berhampur families, corporate travelers, tourists, and pilgrimage devotees with punctual, commercial yellow-plate cabs and verified local chauffeurs who prioritize your safety and comfort.
+              Connecting Berhampur families, corporate travelers, tourists, and pilgrimage devotees with punctual, sanitized AC cabs and verified local chauffeurs who prioritize your safety and comfort.
             </p>
 
             <div className="pt-4 border-t border-slate-100 flex items-center gap-4 sm:gap-6 flex-wrap text-xs text-slate-600">
@@ -62,7 +62,7 @@ export function About() {
               </span>
               <span className="flex items-center gap-1.5 font-medium">
                 <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
-                <span>100% Commercial Yellow-Plate Cabs</span>
+                <span>100% Authorized Tourist Cabs</span>
               </span>
               <span className="flex items-center gap-1.5 font-medium">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
@@ -90,7 +90,7 @@ export function About() {
                 Travel across Odisha is unique and deeply personal. From early morning darshan runs to Shree Jagannath Temple in Puri and scenic coastal drives to Gopalpur-on-Sea, to emergency patient transit between Berhampur and AIIMS Bhubaneswar, every trip demands uncompromising punctuality and peace of mind.
               </p>
               <p>
-                <strong>{brandConfig.brandName}</strong> was founded in Berhampur to fix what travelers dread most: last-minute cancellations, unlicensed private cars posing as taxis, unhygienic cabins, and surprise rate surges. We manage dedicated commercial yellow-plate sedans and MPVs driven by courteous, verified local chauffeurs who respect your family's time.
+                <strong>{brandConfig.brandName}</strong> was founded in Berhampur to fix what travelers dread most: last-minute cancellations, unlicensed private cars posing as taxis, unhygienic cabins, and surprise rate surges. We manage dedicated executive sedans and MPVs driven by courteous, verified local chauffeurs who respect your family's time.
               </p>
 
               <div className="pt-2 space-y-2.5">
@@ -173,7 +173,7 @@ export function About() {
               </div>
               <h4 className="font-bold text-slate-900 text-base mb-1.5">Safety & Permits</h4>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Every vehicle holds yellow-plate commercial permits, state fitness checks, and passenger insurance. Speed limits are strictly respected.
+                Every vehicle holds authorized commercial permits, state fitness checks, and passenger insurance. Speed limits are strictly respected.
               </p>
             </Card>
 

@@ -250,7 +250,7 @@ export function QuickJourneyPlanner() {
 
       <div className="flex items-center gap-2 pt-1 text-[11px] text-slate-500 font-medium">
         <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-        <span>Direct reservation desk • Commercial yellow-plate cabs • Fast confirmation</span>
+        <span>Direct reservation desk • Verified chauffeur cabs • Fast confirmation</span>
       </div>
     </div>
   );

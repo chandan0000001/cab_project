@@ -14,7 +14,7 @@ export function FleetPreview() {
           <SectionHeading
             eyebrow="COMMERCIAL FLEET • SILK CITY"
             title="Our Fleet for Every Odisha Journey"
-            subtitle="From executive sedans for Bhubaneswar Airport transfers to spacious 7-seater Innova Crystas and Tempo Travellers for family temple circuits — all verified commercial yellow-plate vehicles."
+            subtitle="From executive sedans for Bhubaneswar Airport transfers to spacious 7-seater Innova Crystas and Tempo Travellers for family temple circuits — all verified chauffeur-driven vehicles."
             className="mb-0"
           />
 

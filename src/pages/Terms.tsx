@@ -69,7 +69,7 @@ export function Terms() {
               Vehicle models and categories displayed on the website (e.g. Sedan, SUV, Tempo Traveller) serve as indicative commercial categories. Subham Travelers reserves the right to provide an equivalent or upgraded vehicle category in the event of unforeseen mechanical maintenance or vehicle unavailability.
             </p>
             <p>
-              All vehicles assigned for outstation and intercity travel carry authorized yellow-plate commercial permits, state fitness certificates, and active third-party passenger insurance in accordance with the Motor Vehicles Act, 1988.
+              All vehicles assigned for outstation and intercity travel carry authorized commercial tourist permits, state fitness certificates, and active third-party passenger insurance in accordance with the Motor Vehicles Act, 1988.
             </p>
           </section>
 

@@ -370,9 +370,9 @@ export function Contact() {
                 </div>
                 <div className="flex items-center justify-between py-1.5 border-b border-slate-50">
                   <span className="font-semibold flex items-center gap-2">
-                    <ShieldCheck className="w-4 h-4 text-blue-600" /> Commercial Plates
+                    <ShieldCheck className="w-4 h-4 text-blue-600" /> Fleet Quality
                   </span>
-                  <span className="font-bold text-slate-900">100% Yellow Plate</span>
+                  <span className="font-bold text-slate-900">100% Sanitized AC</span>
                 </div>
                 <div className="flex items-center justify-between py-1.5">
                   <span className="font-semibold flex items-center gap-2">

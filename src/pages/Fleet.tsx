@@ -25,7 +25,7 @@ import {
 export function Fleet() {
   useDocumentTitle(
     'Our Commercial Fleet | Subham Travelers Berhampur',
-    'Explore our verified commercial yellow-plate sedans, family SUVs, and tempo travellers across Odisha with Subham Travelers.'
+    'Explore our verified chauffeur-driven sedans, family SUVs, and tempo travellers across Odisha with Subham Travelers.'
   );
 
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -79,7 +79,7 @@ export function Fleet() {
             </div>
 
             <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-950 leading-[1.15]">
-              Odisha Yellow-Plate Fleet for <span className="text-blue-600">Every Journey</span>.
+              Odisha Chauffeur Fleet for <span className="text-blue-600">Every Journey</span>.
             </h1>
 
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
@@ -156,7 +156,7 @@ export function Fleet() {
             </div>
             <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 self-start sm:self-auto flex items-center gap-1.5">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-              Commercial OD Plate
+              Verified Tourist Fleet
             </span>
           </div>
 
@@ -341,7 +341,7 @@ export function Fleet() {
                 <span>Commercial Permits</span>
               </div>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Yellow-plate commercial cabs with authorized state fitness certificates and active passenger insurance.
+                Authorized commercial cabs with valid state fitness certificates and active passenger insurance.
               </p>
             </div>
 

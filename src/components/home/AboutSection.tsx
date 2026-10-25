@@ -33,7 +33,7 @@ export function AboutSection() {
                   <Shield className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-navy-900">Commercial yellow-plate compliance</h4>
+                  <h4 className="text-xs font-bold text-navy-900">Commercial tourist compliance</h4>
                   <p className="text-[11px] text-navy-500">Full vehicle insurance, fitness certificates & GPS tracking</p>
                 </div>
               </div>

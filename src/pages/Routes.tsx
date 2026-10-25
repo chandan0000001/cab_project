@@ -78,7 +78,7 @@ export function Routes() {
               </span>
               <span className="flex items-center gap-1.5 font-medium">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>Commercial Yellow-Plate Fleet</span>
+                <span>Verified Chauffeur Fleet</span>
               </span>
               <span className="flex items-center gap-1.5 font-medium">
                 <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
@@ -188,7 +188,7 @@ export function Routes() {
           <div className="flex-1">
             <span className="font-bold text-slate-900">Indicative Highway Distances & Transparent Coordination: </span>
             <span className="text-slate-600">
-              Distances and durations listed are standard driving estimates for commercial yellow-plate vehicles departing Berhampur. Fuel and state toll taxes are pre-calculated.
+              Distances and durations listed are standard driving estimates for outstation vehicles departing Berhampur. Fuel and state toll taxes are pre-calculated.
             </span>
           </div>
         </div>

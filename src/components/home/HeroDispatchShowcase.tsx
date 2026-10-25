@@ -213,7 +213,7 @@ export function HeroDispatchShowcase() {
           <div className="absolute top-2.5 inset-x-2.5 flex items-center justify-between gap-1.5 pointer-events-none">
             <span className="inline-flex items-center gap-1 bg-white/90 backdrop-blur-md text-emerald-700 text-xs font-bold px-2.5 py-1 rounded-full border border-emerald-200 shadow-2xs">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-              <span className="truncate">OD Yellow Commercial Plate</span>
+              <span className="truncate">Verified Tourist Fleet</span>
             </span>
 
             <span className="bg-slate-900 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-2xs shrink-0">

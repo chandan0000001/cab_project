@@ -38,7 +38,7 @@ const faqs: FaqItem[] = [
     category: 'fleet',
     question: 'What permits and commercial insurance cover your vehicles?',
     answer:
-      'Every vehicle in our network is an authorized commercial yellow-plate cab with a valid State Tourist Vehicle Permit, annual fitness inspection certificate, and comprehensive passenger insurance under the Motor Vehicles Act. Chauffeurs are vetted, verified, and known personally to dispatch.',
+      'Every vehicle in our network is an authorized commercial tourist vehicle with a valid State Tourist Vehicle Permit, annual fitness inspection certificate, and comprehensive passenger insurance under the Motor Vehicles Act. Chauffeurs are vetted, verified, and known personally to dispatch.',
   },
   {
     id: 'f5',
