@@ -29,12 +29,12 @@ export const env = {
   /**
    * Primary Contact Email Address
    */
-  supportEmail: import.meta.env.VITE_SUPPORT_EMAIL || 'kumardalaichandan803@gmail.com',
+  supportEmail: import.meta.env.VITE_SUPPORT_EMAIL || 'subhamratha@gmail.com',
 
   /**
    * FormSubmit recipient email for customer feedback forwarding
    */
-  formSubmitEmail: import.meta.env.VITE_FORMSUBMIT_EMAIL || 'kumardalaichandan803@gmail.com',
+  formSubmitEmail: import.meta.env.VITE_FORMSUBMIT_EMAIL || 'subhamratha@gmail.com',
 
   /**
    * Base Site URL (Vercel Project: berhampur_cab)
