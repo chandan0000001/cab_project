@@ -122,6 +122,21 @@ class SoundSystem {
 
     window.addEventListener('click', handleGlobalClick, { capture: true, passive: true });
     window.addEventListener('focusin', handleFocusIn, { capture: true, passive: true });
+
+    // Touch pointerdown listener for instantaneous haptic feedback on mobile devices
+    const handleTouchPointerDown = (e: PointerEvent) => {
+      if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+        const target = e.target as HTMLElement | null;
+        if (!target) return;
+        const clickable = target.closest(
+          'button, a, [role="button"], [role="tab"], input[type="submit"], input[type="button"], [data-clickable]'
+        );
+        if (clickable) {
+          haptics.impactLight();
+        }
+      }
+    };
+    window.addEventListener('pointerdown', handleTouchPointerDown, { capture: true, passive: true });
   }
 
   public resume() {

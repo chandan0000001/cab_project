@@ -1,5 +1,5 @@
 // Premium mobile haptic feedback engine using Web Vibration API
-// Features crisp micro-pulse timings for tactile feedback on mobile devices
+// Features calibrated millisecond pulse timings for physical tactile vibration on mobile hardware
 
 export type HapticType =
   | 'tap'
@@ -26,48 +26,73 @@ export type HapticType =
   | 'impactMedium'
   | 'impactHeavy';
 
-// Tactile millisecond patterns tuned for responsive, premium haptic feedback
+interface NavigatorWithVibrate extends Navigator {
+  webkitVibrate?: (pattern: number | number[]) => boolean;
+  mozVibrate?: (pattern: number | number[]) => boolean;
+  msVibrate?: (pattern: number | number[]) => boolean;
+}
+
+// Tactile millisecond patterns tuned to overcome motor inertia on mobile smartphones (30ms - 75ms)
 const HAPTIC_PATTERNS: Record<HapticType, number | number[]> = {
-  tap: 10,
-  pop: 14,
-  close: 8,
-  success: [12, 35, 18],
-  switch: 10,
-  carSelect: 15,
-  routeSelect: 12,
-  tab: 9,
-  whatsapp: [14, 40, 16],
-  call: [18, 50, 18],
-  copy: [12, 30, 14],
-  filter: 10,
-  accordion: 12,
-  inputFocus: 6,
-  error: [18, 50, 18, 50, 22],
-  clear: [8, 25, 8],
-  hover: 5,
-  badge: 10,
-  quote: [16, 45, 20],
-  notification: [15, 35, 15],
-  impactLight: 8,
-  impactMedium: 16,
-  impactHeavy: 24,
+  tap: 35,
+  pop: 45,
+  close: 30,
+  success: [45, 50, 50],
+  switch: 30,
+  carSelect: 50,
+  routeSelect: 45,
+  tab: 30,
+  whatsapp: [45, 50, 45],
+  call: [55, 65, 55],
+  copy: [40, 50, 40],
+  filter: 35,
+  accordion: 40,
+  inputFocus: 25,
+  error: [65, 80, 65, 80, 70],
+  clear: [35, 45, 35],
+  hover: 20,
+  badge: 40,
+  quote: [45, 50, 50],
+  notification: [50, 60, 50],
+  impactLight: 35,
+  impactMedium: 50,
+  impactHeavy: 75,
 };
 
 class HapticSystem {
   private lastTriggerTime = 0;
-  private readonly THROTTLE_MS = 20;
+  private readonly THROTTLE_MS = 40;
 
-  // Check if Web Vibration API is supported and accessible
+  // Check if Web Vibration API is supported (including webkit/moz vendor prefixes)
   public isSupported(): boolean {
-    return (
-      typeof window !== 'undefined' &&
-      'navigator' in window &&
-      typeof navigator.vibrate === 'function'
+    if (typeof window === 'undefined') return false;
+    const nav = window.navigator as NavigatorWithVibrate;
+    return !!(
+      nav &&
+      (typeof nav.vibrate === 'function' ||
+        typeof nav.webkitVibrate === 'function' ||
+        typeof nav.mozVibrate === 'function' ||
+        typeof nav.msVibrate === 'function')
     );
   }
 
   // Trigger a specific haptic pulse pattern
   public trigger(type: HapticType = 'tap', force = false): boolean {
+    const pattern = HAPTIC_PATTERNS[type] ?? 35;
+
+    // Log in browser console with visual badge for clear verification during testing
+    if (typeof window !== 'undefined') {
+      try {
+        console.log(
+          `%c📳 [HAPTIC VIBRATION]%c ${type} (${Array.isArray(pattern) ? pattern.join(', ') : pattern}ms)`,
+          'background: #2563eb; color: #ffffff; font-weight: bold; border-radius: 4px; padding: 2px 6px; font-size: 11px;',
+          'color: #0f172a; font-weight: 600; font-size: 11px;'
+        );
+      } catch {
+        // Suppress console error if logging is restricted
+      }
+    }
+
     if (!this.isSupported()) return false;
 
     const now = Date.now();
@@ -77,8 +102,15 @@ class HapticSystem {
     this.lastTriggerTime = now;
 
     try {
-      const pattern = HAPTIC_PATTERNS[type] ?? 10;
-      return navigator.vibrate(pattern);
+      const nav = window.navigator as NavigatorWithVibrate;
+      const vibrateFn = (nav.vibrate ||
+        nav.webkitVibrate ||
+        nav.mozVibrate ||
+        nav.msVibrate) as ((p: number | number[]) => boolean) | undefined;
+      if (typeof vibrateFn === 'function') {
+        return vibrateFn.call(nav, pattern);
+      }
+      return false;
     } catch {
       return false;
     }
@@ -111,3 +143,10 @@ class HapticSystem {
 }
 
 export const haptics = new HapticSystem();
+
+// Expose on window for easy developer verification in console
+if (typeof window !== 'undefined') {
+  const win = window as unknown as Record<string, unknown>;
+  win.__haptics = haptics;
+  win.__testVibrate = (_ms = 60) => haptics.trigger('impactHeavy', true);
+}

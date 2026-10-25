@@ -31,19 +31,26 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
+    const handlePointerDown = (e: React.PointerEvent<HTMLButtonElement>) => {
+      if (!silent && (e.pointerType === 'touch' || e.pointerType === 'pen')) {
+        haptics.impactLight(true);
+      }
+      props.onPointerDown?.(e);
+    };
+
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
       if (!silent) {
         if (variant === 'whatsapp') {
           sound.playWhatsApp();
         } else if (variant === 'book-cab' || (variant === 'primary' && size === 'lg')) {
+          haptics.impactHeavy(true);
           sound.playTap();
-          haptics.impactHeavy();
         } else if (variant === 'danger') {
+          haptics.error(true);
           sound.playTap();
-          haptics.error();
         } else {
+          haptics.impactMedium(true);
           sound.playTap();
-          haptics.impactMedium();
         }
       }
       onClick?.(e);
@@ -80,6 +87,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         type={type}
         disabled={disabled || isLoading}
         onClick={handleClick}
+        onPointerDown={handlePointerDown}
         className={cn(baseStyles, variants[variant], sizes[size], className)}
         {...props}
       >
