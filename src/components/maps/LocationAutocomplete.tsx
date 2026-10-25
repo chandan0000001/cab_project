@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useId, useCallback } from 'react';
-import { MapPin, Search, X, Loader2, AlertCircle, Compass } from 'lucide-react';
+import { MapPin, Search, X, Loader2, AlertCircle } from 'lucide-react';
 import { SelectedPlace } from '@/types';
 import { GeocodingService } from '@/services/geocodingService';
 import { IpLocationService, UserIpLocation } from '@/services/ipLocationService';
@@ -272,17 +272,6 @@ export function LocationAutocomplete({
           role="listbox"
           className="absolute top-full left-0 right-0 z-50 mt-1.5 bg-white rounded-xl shadow-elevated border border-navy-100 max-h-64 overflow-y-auto divide-y divide-navy-50 animate-in fade-in-50 duration-150"
         >
-          {/* Header indicator about IP proximity sorting */}
-          <div className="px-3.5 py-1.5 bg-sand-50/90 text-[10px] font-semibold text-navy-600 tracking-wider flex items-center justify-between border-b border-navy-100/70">
-            <span className="flex items-center gap-1.5 text-brand-800 font-bold">
-              <Compass className="w-3.5 h-3.5 text-brand-600 shrink-0" />
-              <span>Nearest to Farthest {userLocation?.city ? `(${userLocation.city} area)` : ''}</span>
-            </span>
-            <span className="text-[10px] text-navy-400 font-normal">
-              Network IP approx.
-            </span>
-          </div>
-
           {predictions.length > 0 ? (
             predictions.map((item, index) => {
               const isSelected = activeIndex === index;
