@@ -299,18 +299,11 @@ export function LocationAutocomplete({
                       </p>
                     )}
                   </div>
-                  <div className="flex items-center gap-1.5 shrink-0 self-center">
-                    {item.distanceText && (
-                      <span className="text-[10px] font-bold text-brand-700 bg-brand-50 border border-brand-200/80 px-2 py-0.5 rounded-full whitespace-nowrap">
-                        {item.distanceText}
-                      </span>
-                    )}
-                    {item.isPopularPreset && (
-                      <span className="text-[10px] bg-sand-100 text-navy-600 px-1.5 py-0.5 rounded font-medium shrink-0">
-                        Odisha Hub
-                      </span>
-                    )}
-                  </div>
+                  {item.isPopularPreset && (
+                    <span className="text-[10px] bg-sand-100 text-navy-600 px-1.5 py-0.5 rounded font-medium self-center shrink-0">
+                      Odisha Hub
+                    </span>
+                  )}
                 </div>
               );
             })
