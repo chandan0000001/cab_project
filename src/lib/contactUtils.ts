@@ -82,6 +82,27 @@ export function getWhatsAppUrl(message: string): string {
 }
 
 /**
+ * Sanitizes user input text by stripping control characters (\r, \n, \t),
+ * collapsing multiple whitespace, and capping max length to prevent message/URL injection.
+ */
+export function sanitizeUserText(text: string, maxLength: number = 100): string {
+  if (!text) return '';
+  return text
+    .replace(/[\r\n\t]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, maxLength);
+}
+
+/**
+ * Validates international and Indian phone formats (7 to 20 chars, optional + prefix, digits, spaces, hyphens).
+ */
+export function isValidPhone(phone: string): boolean {
+  const phoneRegex = /^\+?[0-9\s\-()]{7,20}$/;
+  return phoneRegex.test(phone.trim());
+}
+
+/**
  * Returns telephone dialer URL
  */
 export function getPhoneUrl(): string {

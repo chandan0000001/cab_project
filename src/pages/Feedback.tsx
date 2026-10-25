@@ -7,8 +7,8 @@ import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 import { brandConfig } from '@/data/brandConfig';
-import { env, isFormSubmitConfigured } from '@/lib/env';
-import { isWhatsAppConfigured, getWhatsAppUrl } from '@/lib/contactUtils';
+import { isFormSubmitConfigured, getFormSubmitTarget } from '@/lib/env';
+import { isWhatsAppConfigured, getWhatsAppUrl, sanitizeUserText } from '@/lib/contactUtils';
 import {
   Star,
   Send,
@@ -39,12 +39,14 @@ export function Feedback() {
     consent: false,
   });
 
+  // Honeypot state for bot prevention (SEC-03)
+  const [honeypot, setHoneypot] = useState('');
+
   const [validationError, setValidationError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [deliveryStatus, setDeliveryStatus] = useState<number | null>(null);
-  const [deliveredEmail, setDeliveredEmail] = useState<string>('');
 
   const ratingLabels: Record<number, string> = {
     5: '★★★★★ 5 - Exceptional & Highly Recommended',
@@ -61,6 +63,18 @@ export function Feedback() {
     setValidationError(null);
     setSubmitError(null);
 
+    // SEC-03: Client-side cooldown (60s) check to prevent flooding/inbox bomb
+    const COOLDOWN_SECONDS = 60;
+    const lastSubmitStr = typeof window !== 'undefined' ? localStorage.getItem('st_last_feedback_submit') : null;
+    const lastSubmit = lastSubmitStr ? parseInt(lastSubmitStr, 10) : 0;
+    const elapsedSeconds = Math.floor((Date.now() - lastSubmit) / 1000);
+
+    if (elapsedSeconds < COOLDOWN_SECONDS) {
+      const remaining = COOLDOWN_SECONDS - elapsedSeconds;
+      setValidationError(`Submission limit: Please wait ${remaining} seconds before submitting another review.`);
+      return;
+    }
+
     // Validation
     if (!formData.comments.trim() || formData.comments.trim().length < 10) {
       setValidationError('Please share at least 10 characters describing your travel experience.');
@@ -72,32 +86,54 @@ export function Feedback() {
       return;
     }
 
+    // SEC-03: Honeypot check - if filled, silently discard without making a network request
+    if (honeypot.trim().length > 0) {
+      setIsSubmitting(true);
+      setTimeout(() => {
+        setIsSubmitting(false);
+        setDeliveryStatus(200);
+        setSubmitted(true);
+      }, 600);
+      return;
+    }
+
     setIsSubmitting(true);
 
+    // Sanitize user inputs
+    const cleanName = sanitizeUserText(formData.name, 80);
+    const cleanContact = sanitizeUserText(formData.contact, 100);
+    const cleanRoute = sanitizeUserText(formData.travelRoute, 120);
+    const cleanComments = sanitizeUserText(formData.comments, 2000);
+
     if (formSubmitReady) {
-      // Real submission to FormSubmit endpoint configured in environment
-      const targetEmail = env.formSubmitEmail || env.supportEmail;
-      setDeliveredEmail(targetEmail);
+      // SEC-01: Uses hashed target token when available to prevent raw email exposure
+      const formTarget = getFormSubmitTarget();
       try {
-        const response = await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
+        const response = await fetch(`https://formsubmit.co/ajax/${formTarget}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             Accept: 'application/json',
           },
           body: JSON.stringify({
-            _subject: `New Feedback from ${formData.name || 'Anonymous Customer'} (${rating} Stars) - ${brandConfig.brandName}`,
-            customerName: formData.name || 'Anonymous',
-            contactInfo: formData.contact || 'Not provided',
-            travelRoute: formData.travelRoute || 'Not specified',
+            _honey: honeypot, // SEC-03: honeypot field for FormSubmit server-side rejection
+            _captcha: 'false',
+            _subject: `New Feedback from ${cleanName || 'Anonymous Customer'} (${rating} Stars) - ${brandConfig.brandName}`,
+            customerName: cleanName || 'Anonymous',
+            contactInfo: cleanContact || 'Not provided',
+            travelRoute: cleanRoute || 'Not specified',
             rating: `${rating} / 5 Stars`,
-            feedback: formData.comments,
+            feedback: cleanComments,
             submittedAt: new Date().toISOString(),
           }),
         });
 
         if (!response.ok) {
           throw new Error(`Form delivery service returned HTTP ${response.status}. Please try again.`);
+        }
+
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('st_last_feedback_submit', String(Date.now()));
         }
 
         setDeliveryStatus(response.status || 200);
@@ -112,7 +148,10 @@ export function Feedback() {
         setIsSubmitting(false);
       }
     } else {
-      // Local fallback if no email configured
+      // Local fallback if no FormSubmit target configured
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('st_last_feedback_submit', String(Date.now()));
+      }
       setTimeout(() => {
         setIsSubmitting(false);
         setDeliveryStatus(200);
@@ -122,12 +161,16 @@ export function Feedback() {
   };
 
   const handleWhatsAppFeedback = () => {
+    const cleanName = sanitizeUserText(formData.name, 80);
+    const cleanRoute = sanitizeUserText(formData.travelRoute, 120);
+    const cleanComments = sanitizeUserText(formData.comments, 1000);
+
     const text = [
       `Hello ${brandConfig.brandName}, sharing travel feedback:`,
       `• Rating: ${rating}/5 Stars`,
-      formData.travelRoute ? `• Route: ${formData.travelRoute}` : null,
-      formData.name ? `• Passenger: ${formData.name}` : null,
-      `• Feedback: ${formData.comments || 'Great service!'}`,
+      cleanRoute ? `• Route: ${cleanRoute}` : null,
+      cleanName ? `• Passenger: ${cleanName}` : null,
+      `• Feedback: ${cleanComments || 'Great service!'}`,
     ]
       .filter(Boolean)
       .join('\n');
@@ -163,9 +206,7 @@ export function Feedback() {
 
               <h3 className="text-2xl font-bold text-navy-950">Feedback Was Delivered!</h3>
               <p className="text-sm text-navy-600 max-w-md mx-auto leading-relaxed">
-                Your review has been delivered to{' '}
-                <strong className="text-navy-900 font-semibold">{deliveredEmail || env.formSubmitEmail || env.supportEmail}</strong>{' '}
-                via FormSubmit (Status 200 OK). Thank you for helping Subham Travelers maintain the highest standards of safety, vehicle cleanliness, and chauffeur courtesy across Odisha.
+                Your review has been securely routed to our operational supervision desk via FormSubmit (Status 200 OK). Thank you for helping Subham Travelers maintain the highest standards of safety, vehicle cleanliness, and chauffeur courtesy across Odisha.
               </p>
 
               <div className="pt-4 flex items-center justify-center gap-3 flex-wrap">
@@ -195,6 +236,20 @@ export function Feedback() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
+              {/* SEC-03: Honeypot field for bot/crawler flood protection (hidden from humans) */}
+              <div className="hidden" aria-hidden="true" style={{ display: 'none' }}>
+                <label htmlFor="_feedback_honey">Please leave this field blank</label>
+                <input
+                  id="_feedback_honey"
+                  type="text"
+                  name="_honey"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                />
+              </div>
+
               {/* Star Rating Section */}
               <div className="space-y-2 text-center pb-4 border-b border-navy-100">
                 <label className="block text-sm font-bold text-navy-900">

@@ -14,6 +14,7 @@ import {
   isWhatsAppConfigured,
   getPhoneUrl,
   getWhatsAppUrl,
+  sanitizeUserText,
 } from '@/lib/contactUtils';
 import {
   Phone,
@@ -51,17 +52,25 @@ export function Contact() {
     message: '',
   });
 
+  const cleanName = sanitizeUserText(formData.name, 80);
+  const cleanPhone = sanitizeUserText(formData.phone, 25);
+  const cleanEmail = sanitizeUserText(formData.email, 80);
+  const cleanPickup = sanitizeUserText(formData.pickup, 120);
+  const cleanDrop = sanitizeUserText(formData.drop, 120);
+  const cleanDate = sanitizeUserText(formData.travelDate, 30);
+  const cleanNotes = sanitizeUserText(formData.message, 500);
+
   const generatedEnquiryText = [
     `Hello ${brandConfig.brandName}, I would like to submit a travel enquiry:`,
     '',
-    `• Name: ${formData.name || 'Not provided'}`,
-    `• Phone: ${formData.phone || 'Not provided'}`,
-    formData.email ? `• Email: ${formData.email}` : null,
+    `• Name: ${cleanName || 'Not provided'}`,
+    `• Phone: ${cleanPhone || 'Not provided'}`,
+    cleanEmail ? `• Email: ${cleanEmail}` : null,
     `• Trip Type: ${formData.tripType.toUpperCase()}`,
-    `• Pickup Location: ${formData.pickup}`,
-    `• Destination: ${formData.drop}`,
-    formData.travelDate ? `• Travel Date: ${formData.travelDate}` : null,
-    formData.message ? `• Additional Notes: ${formData.message}` : null,
+    `• Pickup Location: ${cleanPickup}`,
+    `• Destination: ${cleanDrop}`,
+    cleanDate ? `• Travel Date: ${cleanDate}` : null,
+    cleanNotes ? `• Additional Notes: ${cleanNotes}` : null,
     '',
     'Please confirm vehicle availability and quotation.',
     'Thank you.',

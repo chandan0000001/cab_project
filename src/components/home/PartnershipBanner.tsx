@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Building2, Utensils, Hotel, ArrowRight, MessageSquare, X, CheckCircle2 } from 'lucide-react';
+import { Building2, Utensils, Hotel, ArrowRight, MessageSquare, X, CheckCircle2, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { brandConfig } from '@/data/brandConfig';
+import { sanitizeUserText, isValidPhone } from '@/lib/contactUtils';
 
 export function PartnershipBanner() {
   const [showPartnerModal, setShowPartnerModal] = useState(false);
@@ -9,15 +10,40 @@ export function PartnershipBanner() {
   const [businessType, setBusinessType] = useState('Hotel / Resort');
   const [contactPerson, setContactPerson] = useState('');
   const [contactPhone, setContactPhone] = useState('');
+  const [validationError, setValidationError] = useState<string | null>(null);
 
   const handlePartnerSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setValidationError(null);
+
+    // SEC-04: Validate phone number and clean free-text inputs
+    if (!businessName.trim()) {
+      setValidationError('Please enter your establishment or business name.');
+      return;
+    }
+
+    if (!contactPerson.trim()) {
+      setValidationError('Please enter the name of the contact person.');
+      return;
+    }
+
+    if (!isValidPhone(contactPhone)) {
+      setValidationError('Please enter a valid phone number (7 to 20 digits, optional + code).');
+      return;
+    }
+
+    // Strip control characters (\r\n\t) and limit lengths to prevent message injection
+    const cleanBusiness = sanitizeUserText(businessName, 100);
+    const cleanType = sanitizeUserText(businessType, 50);
+    const cleanPerson = sanitizeUserText(contactPerson, 80);
+    const cleanPhone = sanitizeUserText(contactPhone, 25);
+
     const message = [
       `Hello ${brandConfig.brandName}, I would like to explore a business partnership:`,
-      `• Business Name: ${businessName}`,
-      `• Category: ${businessType}`,
-      `• Contact Person: ${contactPerson}`,
-      `• Phone: ${contactPhone}`,
+      `• Business Name: ${cleanBusiness}`,
+      `• Category: ${cleanType}`,
+      `• Contact Person: ${cleanPerson}`,
+      `• Phone: ${cleanPhone}`,
       `\nPlease connect with us regarding mutual travel coordination.`,
     ].join('\n');
 
@@ -27,6 +53,9 @@ export function PartnershipBanner() {
       'noopener,noreferrer'
     );
     setShowPartnerModal(false);
+    setBusinessName('');
+    setContactPerson('');
+    setContactPhone('');
   };
 
   return (
@@ -96,7 +125,10 @@ export function PartnershipBanner() {
           <div className="bg-white rounded-2xl max-w-md w-full p-6 sm:p-7 shadow-2xl border border-navy-100 relative">
             <button
               type="button"
-              onClick={() => setShowPartnerModal(false)}
+              onClick={() => {
+                setShowPartnerModal(false);
+                setValidationError(null);
+              }}
               className="absolute top-4 right-4 text-navy-400 hover:text-navy-900 p-1.5 rounded-lg hover:bg-navy-100"
               aria-label="Close dialog"
             >
@@ -116,6 +148,13 @@ export function PartnershipBanner() {
                 </p>
               </div>
             </div>
+
+            {validationError && (
+              <div className="mb-3 p-3 rounded-lg bg-red-50 border border-red-200 text-xs text-red-700 flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0" />
+                <span>{validationError}</span>
+              </div>
+            )}
 
             <form onSubmit={handlePartnerSubmit} className="space-y-3.5">
               <div>

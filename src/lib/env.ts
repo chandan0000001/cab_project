@@ -27,25 +27,38 @@ export const env = {
   supportPhone: import.meta.env.VITE_SUPPORT_PHONE || '+91 63712 58522',
 
   /**
-   * Primary Contact Email Address
+   * Primary Contact Email Address (set via Vercel environment variables)
    */
-  supportEmail: import.meta.env.VITE_SUPPORT_EMAIL || 'subhammratha@gmail.com',
+  supportEmail: import.meta.env.VITE_SUPPORT_EMAIL || '',
 
   /**
    * FormSubmit recipient email for customer feedback forwarding
    */
-  formSubmitEmail: import.meta.env.VITE_FORMSUBMIT_EMAIL || 'subhammratha@gmail.com',
+  formSubmitEmail: import.meta.env.VITE_FORMSUBMIT_EMAIL || '',
+
+  /**
+   * FormSubmit hashed endpoint token (obfuscates raw email address in Network tab)
+   * FormSubmit provides this hash in the activation email.
+   */
+  formSubmitHash: import.meta.env.VITE_FORMSUBMIT_HASH || import.meta.env.VITE_FORMSUBMIT_TOKEN || '',
 
   /**
    * Base Site URL (Vercel Project: berhampur_cab)
    */
-  siteUrl: import.meta.env.VITE_SITE_URL || 'https://berhampur-cab.vercel.app',
+  siteUrl: import.meta.env.VITE_SITE_URL || 'https://berhampurcab.vercel.app',
 };
 
 /**
- * Checks whether FormSubmit has been configured with an active recipient email
+ * Checks whether FormSubmit has been configured with an active recipient email or hashed token
  */
 export function isFormSubmitConfigured(): boolean {
-  const targetEmail = env.formSubmitEmail || env.supportEmail;
-  return Boolean(targetEmail && targetEmail.includes('@') && !targetEmail.includes('placeholder'));
+  const target = env.formSubmitHash || env.formSubmitEmail || env.supportEmail;
+  return Boolean(target && (target.includes('@') || target.length >= 8) && !target.includes('placeholder'));
+}
+
+/**
+ * Returns the active FormSubmit endpoint target (prefers hashed token to prevent raw email exposure)
+ */
+export function getFormSubmitTarget(): string {
+  return env.formSubmitHash || env.formSubmitEmail || env.supportEmail;
 }
