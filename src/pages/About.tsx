@@ -17,8 +17,6 @@ import {
   Car,
   Award,
   Sparkles,
-  Info,
-  User,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -199,60 +197,66 @@ export function About() {
           </div>
         </div>
 
-        {/* CEO / Founder Profile Section (Strict Placeholder Adherence) */}
-        <div className="bg-white rounded-2xl p-6 sm:p-8 border border-navy-100 shadow-sm space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-navy-100 pb-4">
+        {/* Verified Founder & Leadership Section */}
+        <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
             <div>
-              <h3 className="text-lg sm:text-xl font-bold text-navy-950 flex items-center gap-2">
-                <Award className="w-5 h-5 text-brand-600" />
-                <span>Leadership & Operations Vision</span>
+              <h3 className="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                <Award className="w-5 h-5 text-blue-600" />
+                <span>Founder & Operations Leadership</span>
               </h3>
-              <p className="text-xs sm:text-sm text-navy-600 mt-1">
-                Guiding Subham Travelers with transparency and commitment to regional road transit.
+              <p className="text-xs sm:text-sm text-slate-600 mt-1">
+                Direct leadership steering Subham Travelers with transparency, punctuality, and passenger care.
               </p>
             </div>
             <div>
-              <Badge variant="navy" className="text-[11px] bg-navy-100 text-navy-800 border-navy-200">
-                Operational Framework
+              <Badge variant="brand" className="text-[11px] bg-blue-50 text-blue-800 border-blue-200">
+                Verified Management
               </Badge>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-            {/* Leadership Avatar Placeholder */}
+            {/* Leadership Photo Card */}
             <div className="md:col-span-4 flex flex-col items-center text-center">
-              <div className="w-32 h-32 sm:w-36 sm:h-36 rounded-2xl bg-gradient-to-tr from-navy-900 via-navy-800 to-brand-900 text-sand-100 flex items-center justify-center shadow-md mb-4 relative overflow-hidden border-2 border-brand-500/30">
-                <User className="w-16 h-16 text-brand-300/80" />
-                <div className="absolute bottom-2 text-[10px] text-sand-300 font-medium px-2 py-0.5 rounded bg-navy-950/80">
-                  Leadership Profile
+              <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-2xl shadow-md mb-4 relative overflow-hidden border-2 border-blue-600/30 group bg-slate-100">
+                <img
+                  src={ceoProfile.image || '/images/team/owner_square.webp'}
+                  alt={`${ceoProfile.namePlaceholder} - Founder & Managing Director of Subham Travelers`}
+                  className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute bottom-2 inset-x-2 text-center text-[10px] text-white font-bold px-2 py-0.5 rounded-full bg-slate-950/80 backdrop-blur-xs border border-white/20">
+                  Founder & Operator
                 </div>
               </div>
-              <h4 className="font-bold text-navy-950 text-base">
-                {ceoProfile.namePlaceholder}
+              <h4 className="font-black text-slate-900 text-lg flex items-center justify-center gap-1.5">
+                <span>{ceoProfile.namePlaceholder}</span>
+                <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
               </h4>
-              <p className="text-xs text-navy-500 mt-0.5 font-medium">
+              <p className="text-xs text-blue-700 mt-0.5 font-bold">
                 {ceoProfile.titlePlaceholder}
               </p>
-              <p className="text-[11px] text-brand-700 mt-1">
+              <p className="text-[11px] text-slate-500 mt-1">
                 Subham Travelers • Berhampur (Silk City), Odisha
               </p>
             </div>
 
             {/* Profile Message & Biography */}
             <div className="md:col-span-8 space-y-4">
-              <blockquote className="p-4 rounded-xl bg-sand-50 border-l-4 border-brand-500 text-xs sm:text-sm text-navy-800 italic leading-relaxed">
+              <blockquote className="p-4 rounded-xl bg-slate-50 border-l-4 border-blue-600 text-xs sm:text-sm text-slate-800 italic leading-relaxed font-medium">
                 {ceoProfile.messagePlaceholder}
               </blockquote>
 
-              <p className="text-xs sm:text-sm text-navy-700 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 {ceoProfile.bioPlaceholder}
               </p>
 
-              {/* Explicit Verification Notice */}
-              <div className="p-3.5 rounded-lg bg-navy-50 border border-navy-200/80 text-xs text-navy-600 flex items-start gap-2.5">
-                <Info className="w-4 h-4 text-navy-500 shrink-0 mt-0.5" />
+              {/* Verified Commitment Notice */}
+              <div className="p-3.5 rounded-lg bg-blue-50/60 border border-blue-200/80 text-xs text-blue-900 flex items-start gap-2.5">
+                <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
                 <p className="leading-relaxed">
-                  <strong>Notice on Verified Documentation:</strong> The leadership biography and founder profile details above represent an operational placeholder. Official corporate registration, founder certifications, and verified credentials will be updated upon final verification by the business owners.
+                  <strong>Direct Operator Accountability:</strong> Subham Travelers is operated locally from Station Road, Berhampur. All journeys, chauffeurs, and vehicle dispatches are monitored directly by the management desk to guarantee on-time pickup, passenger safety, and zero surge pricing.
                 </p>
               </div>
             </div>

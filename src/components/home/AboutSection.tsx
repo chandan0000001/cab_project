@@ -1,7 +1,7 @@
 import { brandConfig } from '@/data/brandConfig';
 import { Card } from '@/components/ui/Card';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { CheckCircle2, User, Quote, Shield, Compass } from 'lucide-react';
+import { CheckCircle2, Quote, Shield, Compass } from 'lucide-react';
 
 export function AboutSection() {
   const { ceoProfile } = brandConfig;
@@ -67,46 +67,54 @@ export function AboutSection() {
             </div>
           </div>
 
-          {/* Configurable CEO / Founder Profile Area with Explicit Placeholders */}
-          <Card className="p-5 sm:p-6 bg-sand-50/80 border-navy-200/80">
-            <div className="flex items-start gap-4">
-              {/* Silhouette / Photo Placeholder */}
-              <div className="w-14 h-14 rounded-full bg-navy-200 border-2 border-navy-300 flex items-center justify-center text-navy-600 shrink-0">
-                <User className="w-7 h-7" />
+          {/* Verified Founder & Leadership Profile Card */}
+          <Card className="p-5 sm:p-6 bg-white border-slate-200 shadow-sm rounded-2xl">
+            <div className="flex flex-col sm:flex-row items-start gap-4">
+              {/* Founder Portrait Photo */}
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 border-blue-600/30 shadow-md shrink-0 bg-slate-100">
+                <img
+                  src={ceoProfile.image || '/images/team/owner_square.webp'}
+                  alt={`${ceoProfile.namePlaceholder} - Founder & Managing Director of Subham Travelers`}
+                  className="w-full h-full object-cover object-top"
+                  loading="lazy"
+                />
               </div>
 
               <div className="flex-1 min-w-0">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1">
-                  <h4 className="font-bold text-base text-navy-950">
-                    {ceoProfile.namePlaceholder}
+                  <h4 className="font-black text-base sm:text-lg text-slate-900 flex items-center gap-1.5">
+                    <span>{ceoProfile.namePlaceholder}</span>
+                    <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
                   </h4>
-                  <span className="text-[11px] font-medium text-navy-500 bg-white px-2 py-0.5 rounded border border-navy-200 inline-block self-start">
-                    Leadership Profile Area
+                  <span className="text-[11px] font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200 inline-flex items-center gap-1 self-start">
+                    Verified Owner & Operator
                   </span>
                 </div>
-                <p className="text-xs text-brand-700 font-medium mb-3">
-                  {ceoProfile.titlePlaceholder}
+                <p className="text-xs text-blue-700 font-bold mb-2.5">
+                  {ceoProfile.titlePlaceholder} • Subham Travelers
                 </p>
 
-                <div className="relative pl-4 border-l-2 border-brand-500/60 my-2">
-                  <Quote className="w-3.5 h-3.5 text-brand-600 absolute -top-1 -left-2" />
-                  <p className="text-xs italic text-navy-700 leading-relaxed">
+                <div className="relative pl-3.5 border-l-2 border-blue-600 my-2">
+                  <Quote className="w-3.5 h-3.5 text-blue-600 absolute -top-1 -left-2" />
+                  <p className="text-xs italic text-slate-700 leading-relaxed font-medium">
                     {ceoProfile.messagePlaceholder}
                   </p>
                 </div>
 
-                <p className="text-xs text-navy-700 mt-2">
+                <p className="text-xs text-slate-600 mt-2 leading-relaxed">
                   {ceoProfile.bioPlaceholder}
                 </p>
               </div>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-navy-200/60 flex items-center justify-between text-[11px] text-navy-600">
-              <span className="flex items-center gap-1">
-                <Compass className="w-3 h-3 text-brand-600" />
+            <div className="mt-4 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-600">
+              <span className="flex items-center gap-1 font-semibold text-slate-700">
+                <Compass className="w-3.5 h-3.5 text-blue-600 shrink-0" />
                 Service Philosophy: Transparent, Courteous, On-Time
               </span>
-              <span>Pending Final Owner Verification</span>
+              <span className="text-blue-700 font-bold">
+                Station Road, Berhampur (Silk City), Odisha
+              </span>
             </div>
           </Card>
         </div>

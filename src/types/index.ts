@@ -175,5 +175,6 @@ export interface BrandConfig {
     bioPlaceholder: string;
     messagePlaceholder: string;
     isVerified: boolean;
+    image?: string;
   };
 }
