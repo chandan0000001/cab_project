@@ -1,4 +1,3 @@
-/** @type {import('tailwindcss').Config} */
 export default {
   content: [
     "./index.html",
@@ -7,35 +6,32 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Primary Royal Sapphire Blue (Canonical modern, executive transport & cab operator palette)
         brand: {
-          50: '#EFF6FF',   // subtle icy tint
+          50: '#EFF6FF',
           100: '#DBEAFE',
           200: '#BFDBFE',
           300: '#93C5FD',
-          400: '#60A5FA',  // bright accent
-          500: '#2563EB',  // PRIMARY canonical Royal Blue
-          600: '#1D4ED8',  // deep royal blue (WCAG AAA compliant text on white)
+          400: '#60A5FA',
+          500: '#2563EB',
+          600: '#1D4ED8',
           700: '#1E40AF',
           800: '#1E3A8A',
           900: '#0F172A',
           950: '#0A0F1D',
         },
-        // Warm Ink (Near-black, never cold sterile blue)
         ink: {
           50: '#FBF9F6',
           100: '#F5F2EB',
           200: '#E8E2D6',
           300: '#D4CCBC',
           400: '#9E9688',
-          500: '#6A6460',  // ink mute
-          600: '#4A4640',  // ink soft
+          500: '#6A6460',
+          600: '#4A4640',
           700: '#2E2A25',
-          800: '#1A1815',  // ink primary
+          800: '#1A1815',
           900: '#12100E',
-          950: '#0F0E0C',  // ink deep
+          950: '#0F0E0C',
         },
-        // Navy alias mapped to warm dark ink so existing components immediately look warm & rich
         navy: {
           50: '#FAF8F5',
           100: '#F2EFE9',
@@ -49,7 +45,6 @@ export default {
           900: '#13110E',
           950: '#0C0A08',
         },
-        // Warm Cream & Surface backgrounds (70% dominant)
         sand: {
           50: '#FFFDF9',
           100: '#FFFBF5',
@@ -57,23 +52,38 @@ export default {
           300: '#F5F0E6',
           400: '#EBE4D5',
         },
-        // WhatsApp Forest Green
         whatsapp: {
           DEFAULT: '#1F6F3F',
           hover: '#155A30',
           light: '#E1F0E5',
           bright: '#25D366',
         },
+        gold: {
+          50: '#FDFBF7',
+          100: '#FAF5EA',
+          200: '#F3E7CA',
+          300: '#EBD6A5',
+          400: '#DEC07B',
+          500: '#C5A059',
+          600: '#B08843',
+          700: '#8E682E',
+          800: '#6E4E21',
+          900: '#4D3416',
+        },
       },
       fontFamily: {
+        serif: [
+          '"Playfair Display"',
+          'Georgia',
+          'serif',
+        ],
         sans: [
+          '"Plus Jakarta Sans"',
           'Inter',
           '-apple-system',
           'BlinkMacSystemFont',
           '"Segoe UI"',
           'Roboto',
-          '"Helvetica Neue"',
-          'Arial',
           'sans-serif',
         ],
       },

@@ -113,7 +113,7 @@ export function FaqSection() {
                 className={`px-4 py-2 min-h-[38px] rounded-full text-xs font-bold transition-all cursor-pointer ${
                   isSelected
                     ? 'bg-navy-950 text-white shadow-sm'
-                    : 'bg-white text-navy-700 hover:bg-amber-50 hover:text-brand-600 border border-navy-200/80'
+                    : 'bg-white text-slate-700 hover:bg-blue-50 hover:text-blue-600 border border-slate-200'
                 }`}
                 aria-pressed={isSelected}
               >
@@ -132,7 +132,7 @@ export function FaqSection() {
             return (
               <div
                 key={faq.id}
-                className="bg-white rounded-2xl border border-navy-200/80 p-5 shadow-subtle transition-all duration-200 hover:border-brand-400"
+                className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs transition-all duration-200 hover:border-blue-400"
               >
                 <button
                   type="button"
@@ -141,18 +141,18 @@ export function FaqSection() {
                   aria-expanded={isOpen}
                 >
                   <div className="flex items-start gap-3">
-                    <span className="font-mono text-xs font-black text-brand-600 pt-0.5">
+                    <span className="font-mono text-xs font-black text-blue-600 pt-0.5">
                       {numeral}
                     </span>
-                    <span className="text-sm sm:text-base font-extrabold text-navy-950 leading-snug">
+                    <span className="text-sm sm:text-base font-extrabold text-slate-900 leading-snug">
                       {faq.question}
                     </span>
                   </div>
                   <div
                     className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-colors ${
                       isOpen
-                        ? 'bg-brand-500 text-white'
-                        : 'bg-sand-100 text-navy-500 border border-navy-200'
+                        ? 'bg-blue-600 text-white'
+                        : 'bg-slate-100 text-slate-500 border border-slate-200'
                     }`}
                   >
                     {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
@@ -160,7 +160,7 @@ export function FaqSection() {
                 </button>
 
                 {isOpen && (
-                  <div className="mt-3.5 pt-3 border-t border-navy-100 pl-7 text-xs sm:text-sm text-navy-600 leading-relaxed animate-in fade-in duration-150">
+                  <div className="mt-3.5 pt-3 border-t border-slate-100 pl-7 text-xs sm:text-sm text-slate-600 leading-relaxed animate-in fade-in duration-150">
                     {faq.answer}
                   </div>
                 )}
@@ -171,14 +171,14 @@ export function FaqSection() {
 
         {/* WhatsApp Help Callout */}
         <div className="text-center pt-4">
-          <p className="text-xs text-navy-600 inline-flex items-center gap-2">
+          <p className="text-xs text-slate-600 inline-flex items-center gap-2">
             Have a unique question not listed above?{' '}
             {whatsappReady && (
               <a
                 href={getWhatsAppUrl('Hello Subham Travelers, I have a question about your cab services.')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-bold text-brand-600 hover:text-brand-700 underline inline-flex items-center gap-1"
+                className="font-bold text-blue-600 hover:text-blue-700 underline inline-flex items-center gap-1"
               >
                 <MessageSquare className="w-3.5 h-3.5" />
                 Ask Dispatch on WhatsApp

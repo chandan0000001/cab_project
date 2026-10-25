@@ -139,7 +139,7 @@ export function WinterOfferPopup() {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 left-4 z-40 flex items-center gap-2 bg-slate-950 text-white min-h-[48px] py-2.5 px-4 rounded-full text-xs font-bold shadow-xl hover:bg-slate-900 transition-all duration-300 cursor-pointer border border-blue-500/50 hover:scale-105 animate-in fade-in"
+        className="hidden md:flex fixed bottom-5 left-5 z-40 items-center gap-2 bg-slate-900 text-white min-h-[44px] py-2 px-4 rounded-full text-xs font-semibold shadow-2xl hover:bg-slate-800 transition-all duration-300 cursor-pointer border border-slate-700 hover:scale-105 animate-in fade-in"
         aria-label="Open Winter Offer: 15% OFF"
       >
         <Gift className="w-4 h-4 text-blue-400" />

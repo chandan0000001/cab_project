@@ -27,11 +27,11 @@ export function SectionHeading({
   return (
     <div className={cn('flex flex-col max-w-3xl mb-6 md:mb-8', alignClasses[align], className)}>
       {eyebrow && (
-        <span className="text-xs font-extrabold uppercase tracking-wider text-blue-600 mb-1.5">
+        <span className="text-xs font-bold uppercase tracking-[0.16em] text-blue-600 font-sans mb-1.5">
           {eyebrow}
         </span>
       )}
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-slate-900 leading-tight">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 leading-[1.18]">
         {title}
       </h2>
       {subtitle && (

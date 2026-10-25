@@ -12,16 +12,21 @@ export function FleetPreview() {
       <ScrollReveal direction="up" delay={50}>
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
           <SectionHeading
-            eyebrow="Commercial Fleet Network"
-            title="Every Vehicle Class, Every Group Size"
-            subtitle="From a comfortable four-seat sedan for a Bhubaneswar airport drop to a 17-seater Tempo Traveller for a family temple tour — all commercial yellow-plate cabs with verified drivers."
+            eyebrow="COMMERCIAL FLEET • SILK CITY"
+            title="Our Fleet for Every Odisha Journey"
+            subtitle="From executive sedans for Bhubaneswar Airport transfers to spacious 7-seater Innova Crystas and Tempo Travellers for family temple circuits — all verified commercial yellow-plate vehicles."
             className="mb-0"
           />
 
           <div className="flex items-center gap-3 shrink-0">
             <Link to="/fleet">
-              <Button variant="outline" size="sm" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                View All Categories
+              <Button
+                variant="outline"
+                size="sm"
+                className="rounded-full border-slate-300 font-semibold text-xs px-4 py-2 hover:bg-white"
+                rightIcon={<ArrowRight className="w-4 h-4" />}
+              >
+                Explore Full Fleet
               </Button>
             </Link>
           </div>

@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { RouteRegion } from '@/types';
 import { ArrowRight, Compass } from 'lucide-react';
+import { sound } from '@/lib/sound';
 
 export function PopularRoutes() {
   const [selectedRegion, setSelectedRegion] = useState<RouteRegion>('all');
@@ -21,29 +22,36 @@ export function PopularRoutes() {
       <ScrollReveal direction="up" delay={50}>
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-6">
           <SectionHeading
-            eyebrow="Highway Corridors"
-            title="Popular Intercity Routes from Berhampur"
+            eyebrow="HIGHWAY CORRIDORS • DIRECT SILK CITY FLEET"
+            title="Popular Highway Corridors from Berhampur"
             subtitle="Fixed transparent route options starting from Berhampur to Bhubaneswar Airport, Puri, Gopalpur Beach, Tara Tarini, Daringbadi, and beyond."
             className="mb-0"
           />
 
           <Link to="/routes" className="shrink-0">
-            <Button variant="outline" size="sm" rightIcon={<ArrowRight className="w-4 h-4" />}>
-              View All {sampleRoutes.length} Routes
+            <Button
+              variant="outline"
+              size="sm"
+              className="rounded-full border-slate-300 font-semibold text-xs px-4 py-2 hover:bg-white"
+              rightIcon={<ArrowRight className="w-4 h-4" />}
+            >
+              View All {sampleRoutes.length} Corridors
             </Button>
           </Link>
         </div>
       </ScrollReveal>
 
-      {/* Regional Corridor Filter Tabs */}
       <ScrollReveal direction="up" delay={100}>
-        <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-1">
+        <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-1.5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider shrink-0 flex items-center gap-1 mr-1">
             <Compass className="w-3.5 h-3.5 text-blue-600" /> Corridors:
           </span>
           <button
             type="button"
-            onClick={() => setSelectedRegion('all')}
+            onClick={() => {
+              sound.playTap();
+              setSelectedRegion('all');
+            }}
             aria-pressed={selectedRegion === 'all'}
             aria-label="Filter all routes"
             className={`px-3.5 py-2 min-h-[38px] rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer ${
@@ -56,7 +64,10 @@ export function PopularRoutes() {
           </button>
           <button
             type="button"
-            onClick={() => setSelectedRegion('coastal-heritage')}
+            onClick={() => {
+              sound.playTap();
+              setSelectedRegion('coastal-heritage');
+            }}
             aria-pressed={selectedRegion === 'coastal-heritage'}
             aria-label="Filter coastal and heritage routes"
             className={`px-3.5 py-2 min-h-[38px] rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer ${
@@ -69,7 +80,10 @@ export function PopularRoutes() {
           </button>
           <button
             type="button"
-            onClick={() => setSelectedRegion('southern-hills')}
+            onClick={() => {
+              sound.playTap();
+              setSelectedRegion('southern-hills');
+            }}
             aria-pressed={selectedRegion === 'southern-hills'}
             aria-label="Filter southern and hill routes"
             className={`px-3.5 py-2 min-h-[38px] rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer ${
@@ -82,7 +96,10 @@ export function PopularRoutes() {
           </button>
           <button
             type="button"
-            onClick={() => setSelectedRegion('western-odisha')}
+            onClick={() => {
+              sound.playTap();
+              setSelectedRegion('western-odisha');
+            }}
             aria-pressed={selectedRegion === 'western-odisha'}
             aria-label="Filter western Odisha routes"
             className={`px-3.5 py-2 min-h-[38px] rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer ${
@@ -96,7 +113,6 @@ export function PopularRoutes() {
         </div>
       </ScrollReveal>
 
-      {/* Grid of filtered routes: top 3 on mobile for fast scrolling, 6 on desktop */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {filteredRoutes.slice(0, 6).map((route, idx) => (
           <ScrollReveal

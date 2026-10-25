@@ -32,6 +32,7 @@ import {
   getWhatsAppUrl, 
   getPhoneUrl 
 } from '@/lib/contactUtils';
+import { sound } from '@/lib/sound';
 
 // Lazy-load RouteMap so Leaflet and OpenStreetMap tiles are only downloaded when explicitly requested
 const LazyRouteMap = lazy(() =>
@@ -79,10 +80,12 @@ export function BookingModal() {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isBookingOpen) {
+        sound.playClose();
         closeBooking();
       }
     };
     if (isBookingOpen) {
+      sound.playPop();
       document.body.style.overflow = 'hidden';
       window.addEventListener('keydown', handleKeyDown);
     } else {
@@ -100,6 +103,7 @@ export function BookingModal() {
   }
 
   const handleTripTypeChange = (newType: TripType) => {
+    sound.playTap();
     updateBookingData({
       tripType: newType,
       returnDate:
@@ -155,6 +159,7 @@ export function BookingModal() {
     if (!validate()) {
       return;
     }
+    sound.playSuccess();
     setStep('review');
   };
 
@@ -196,7 +201,10 @@ export function BookingModal() {
           </div>
           <button
             type="button"
-            onClick={closeBooking}
+            onClick={() => {
+              sound.playClose();
+              closeBooking();
+            }}
             aria-label="Close dialog"
             className="p-2 rounded-lg text-navy-400 hover:text-navy-900 hover:bg-navy-100 transition-colors"
           >
@@ -272,7 +280,7 @@ export function BookingModal() {
                       if (errors.drop) setErrors({ ...errors, drop: undefined });
                     }}
                     error={errors.drop}
-                    iconColor="text-amber-600"
+                    iconColor="text-blue-600"
                     excludePlaceId={pickupPlace?.placeId}
                   />
                 ) : (
@@ -407,7 +415,7 @@ export function BookingModal() {
                       if (errors.returnDate) setErrors({ ...errors, returnDate: undefined });
                     }}
                     error={errors.returnDate}
-                    leftIcon={<Calendar className="w-4 h-4 text-amber-600" />}
+                    leftIcon={<Calendar className="w-4 h-4 text-blue-600" />}
                   />
                 ) : (
                   <Select
@@ -473,7 +481,10 @@ export function BookingModal() {
                   type="button"
                   variant="outline"
                   size="md"
-                  onClick={closeBooking}
+                  onClick={() => {
+              sound.playClose();
+              closeBooking();
+            }}
                 >
                   Cancel
                 </Button>

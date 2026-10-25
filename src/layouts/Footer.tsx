@@ -40,14 +40,14 @@ export function Footer() {
       <div className="sm:hidden px-4 py-6 space-y-4 text-center">
         {/* Brand Identity */}
         <div className="flex items-center justify-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white shrink-0">
-            <Car className="w-4 h-4 text-white" />
+          <div className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-blue-400 shrink-0">
+            <Car className="w-4 h-4 text-blue-400" />
           </div>
           <span className="text-base font-black text-white">
-            Subham <span className="text-blue-500">Travelers</span>
+            Subham <span className="text-blue-500 text-xs tracking-wider uppercase font-bold">Travelers</span>
           </span>
           <span className="text-[10px] text-slate-400 border-l border-slate-700 pl-2">
-            Berhampur Hub
+            Berhampur Cabs
           </span>
         </div>
 
@@ -136,15 +136,15 @@ export function Footer() {
           {/* Column 1: Brand & Contact Info */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-sm shrink-0">
-                <Car className="w-5 h-5 text-white" />
+              <div className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-blue-400 shadow-sm shrink-0">
+                <Car className="w-5 h-5 text-blue-400" />
               </div>
               <div>
-                <span className="text-lg font-black tracking-tight text-white block">
-                  Subham <span className="text-blue-500">Travelers</span>
+                <span className="text-xl font-black tracking-tight text-white block">
+                  Subham <span className="text-blue-500 text-xs tracking-widest uppercase font-bold">Travelers</span>
                 </span>
-                <p className="text-[11px] text-slate-400 uppercase tracking-wider font-semibold">
-                  Berhampur Cab Operator
+                <p className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold mt-0.5">
+                  ODISHA INTERCITY CABS
                 </p>
               </div>
             </div>

@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import { cn } from '@/lib/utils';
 import { Loader2 } from 'lucide-react';
+import { sound } from '@/lib/sound';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'whatsapp' | 'danger' | 'book-cab';
@@ -8,6 +9,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   isLoading?: boolean;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
+  silent?: boolean;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -22,10 +24,18 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       disabled,
       type = 'button',
+      onClick,
+      silent = false,
       ...props
     },
     ref
   ) => {
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+      if (!silent) {
+        sound.playTap();
+      }
+      onClick?.(e);
+    };
     const baseStyles =
       'inline-flex items-center justify-center font-semibold rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed select-none active:scale-[0.98] cursor-pointer whitespace-nowrap';
 
@@ -33,13 +43,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       primary:
         'bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white shadow-sm hover:-translate-y-0.5 focus-visible:ring-blue-500 font-bold',
       secondary:
-        'bg-navy-950 text-white hover:bg-black active:bg-navy-900 shadow-sm hover:-translate-y-0.5 focus-visible:ring-navy-900',
+        'bg-slate-900 text-white hover:bg-black active:bg-slate-800 shadow-sm hover:-translate-y-0.5 focus-visible:ring-slate-900 font-semibold',
       outline:
-        'border-1.5 border-navy-800/80 bg-white text-navy-950 hover:bg-navy-950 hover:text-white shadow-subtle hover:-translate-y-0.5 focus-visible:ring-navy-500',
+        'border border-slate-300 bg-white text-slate-800 hover:bg-slate-50 hover:text-slate-950 shadow-xs hover:-translate-y-0.5 focus-visible:ring-slate-400 font-semibold',
       ghost:
-        'text-navy-700 hover:bg-sand-100 hover:text-brand-600 focus-visible:ring-brand-500',
+        'text-slate-700 hover:bg-slate-100 hover:text-blue-600 focus-visible:ring-blue-500',
       whatsapp:
-        'bg-[#1F6F3F] hover:bg-[#155A30] active:bg-[#0F4222] text-white shadow-whatsapp hover:-translate-y-0.5 focus-visible:ring-emerald-600 font-semibold',
+        'bg-[#1F6F3F] hover:bg-[#155A30] active:bg-[#0F4222] text-white shadow-sm hover:-translate-y-0.5 focus-visible:ring-emerald-600 font-semibold',
       danger:
         'bg-red-600 text-white hover:bg-red-700 active:bg-red-800 focus-visible:ring-red-600 shadow-sm',
       'book-cab':
@@ -57,6 +67,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         type={type}
         disabled={disabled || isLoading}
+        onClick={handleClick}
         className={cn(baseStyles, variants[variant], sizes[size], className)}
         {...props}
       >

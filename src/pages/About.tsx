@@ -1,28 +1,27 @@
-import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Card } from '@/components/ui/Card';
 import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { Button } from '@/components/ui/Button';
-import { Badge } from '@/components/ui/Badge';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 import { brandConfig } from '@/data/brandConfig';
 import { useBookingFlow } from '@/hooks/useBookingFlow';
 import { isPhoneConfigured, isWhatsAppConfigured, getPhoneUrl, getWhatsAppUrl } from '@/lib/contactUtils';
+import { sound } from '@/lib/sound';
 import {
   ShieldCheck,
   HeartHandshake,
   Compass,
   CheckCircle2,
-  Phone,
   MessageSquare,
-  Car,
   Award,
   Sparkles,
+  MapPin,
+  Calendar
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export function About() {
   useDocumentTitle(
-    'About Us',
+    'About Us | Subham Travelers Berhampur',
     'Learn about Subham Travelers - Our mission to provide dependable, transparent, and courteous cab services across Odisha.'
   );
 
@@ -31,273 +30,275 @@ export function About() {
   const whatsappReady = isWhatsAppConfigured();
   const { ceoProfile } = brandConfig;
 
+  const handlePlanJourney = () => {
+    sound.playPop();
+    openBooking({ tripType: 'one-way', pickupLocation: 'Berhampur' });
+  };
+
   return (
-    <div className="bg-sand-50/40 min-h-screen py-8 sm:py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        {/* Breadcrumbs */}
+    <div className="bg-slate-50 min-h-screen py-6 sm:py-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
         <Breadcrumb items={[{ label: 'About Us' }]} />
 
-        {/* Hero Section */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-navy-200/80">
-          <SectionHeading
-            eyebrow="Our Story & Philosophy"
-            title="Dependable Highway Travel Rooted in Odisha"
-            subtitle="Bridging travelers, local families, and pilgrimage visitors with safe, sanitized vehicles and knowledgeable local chauffeurs."
-            className="mb-0"
-          />
-          <div className="flex items-center gap-3 shrink-0 flex-wrap">
-            <Button
-              variant="primary"
-              size="md"
-              onClick={() => openBooking({ tripType: 'one-way' })}
-              leftIcon={<Car className="w-4 h-4 text-brand-400" />}
-            >
-              Plan Your Journey
-            </Button>
-            <Link to="/contact">
-              <Button variant="outline" size="md">
-                Contact Desk
-              </Button>
-            </Link>
-          </div>
-        </div>
+        <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm p-6 sm:p-10 relative overflow-hidden">
+          <div className="max-w-3xl space-y-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-bold uppercase tracking-wider">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Founded in Silk City, Berhampur • Odisha Highway Mobility</span>
+            </div>
 
-        {/* Overview & Travel Imagery Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-7 space-y-5 text-sm sm:text-base text-navy-700 leading-relaxed">
-            <h3 className="text-xl sm:text-2xl font-bold text-navy-950">
-              Welcome to <span className="text-brand-600">{brandConfig.brandName}</span>
-            </h3>
-            <p>
-              Travel across Odisha is unique and deeply personal. From morning rituals at Shree Jagannath Temple in Puri and sunset walks along Gopalpur Beach, to critical business travel between Bhubaneswar and industrial Sambalpur, every journey requires reliability and peace of mind.
-            </p>
-            <p>
-              {brandConfig.brandName} was established to solve common highway travel concerns: unexpected cancellations, unhygienic cabs, and unpredictable pricing. We coordinate dedicated, yellow-plate commercial cabs driven by verified chauffeurs who understand local highway conditions, temple darshan timings, and ghat sections.
+            <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-950 leading-[1.15]">
+              Your Trusted Direct Fleet Partner <span className="text-blue-600">Across Odisha</span>.
+            </h1>
+
+            <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+              Connecting Berhampur families, corporate travelers, tourists, and pilgrimage devotees with punctual, commercial yellow-plate cabs and verified local chauffeurs who prioritize your safety and comfort.
             </p>
 
-            <div className="pt-2 space-y-3">
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-brand-600 shrink-0 mt-0.5" />
-                <span className="text-sm text-navy-800">
-                  <strong>Transparent Coordination:</strong> Direct quotes and clear travel itineraries confirmed before vehicle dispatch.
-                </span>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-brand-600 shrink-0 mt-0.5" />
-                <span className="text-sm text-navy-800">
-                  <strong>Punctual Station & Airport Transfers:</strong> Dedicated pickup at Biju Patnaik International Airport and major railway hubs.
-                </span>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-brand-600 shrink-0 mt-0.5" />
-                <span className="text-sm text-navy-800">
-                  <strong>Odisha-Wide Geographic Network:</strong> Active transit support across all 30 districts, heritage circuits, and eco-tourism corridors.
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="lg:col-span-5 space-y-4">
-            <div className="relative rounded-2xl overflow-hidden shadow-lg border border-navy-100 h-72 sm:h-80">
-              <img
-                src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1000&auto=format&fit=crop&q=80"
-                alt="Scenic highway travel across Odisha"
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-black/20" />
-              <div className="absolute bottom-4 left-4 right-4 text-white">
-                <span className="text-xs font-semibold uppercase tracking-wider text-brand-300">
-                  Odisha State Highways
-                </span>
-                <p className="text-sm font-bold text-white mt-0.5">
-                  Safe, scenic, and punctual cab transit across all 30 districts
-                </p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              <div className="rounded-xl overflow-hidden border border-navy-100 h-36">
-                <img
-                  src="https://images.unsplash.com/photo-1609766857041-ed402ea8069a?w=600&auto=format&fit=crop&q=80"
-                  alt="Puri Jagannath Temple heritage"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-              <div className="rounded-xl overflow-hidden border border-navy-100 h-36">
-                <img
-                  src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&auto=format&fit=crop&q=80"
-                  alt="Odisha coastline and Chilika lagoon"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Company Core Values */}
-        <div className="space-y-6">
-          <SectionHeading
-            eyebrow="Our Core Principles"
-            title="The Values That Guide Our Service"
-            subtitle="We maintain an uncompromising dedication to commercial safety, passenger dignity, and honest communication."
-            className="mb-0"
-          />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="p-6 bg-white border-navy-100/90 flex flex-col justify-between">
-              <div>
-                <div className="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-4">
-                  <ShieldCheck className="w-5 h-5" />
-                </div>
-                <h4 className="font-bold text-navy-900 text-base mb-2">Safety & Compliance</h4>
-                <p className="text-xs text-navy-600 leading-relaxed">
-                  Every vehicle holds yellow-plate commercial permits, state fitness checks, and passenger insurance. Speed limits are strictly respected.
-                </p>
-              </div>
-            </Card>
-
-            <Card className="p-6 bg-white border-navy-100/90 flex flex-col justify-between">
-              <div>
-                <div className="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-4">
-                  <HeartHandshake className="w-5 h-5" />
-                </div>
-                <h4 className="font-bold text-navy-900 text-base mb-2">Courteous Chauffeurs</h4>
-                <p className="text-xs text-navy-600 leading-relaxed">
-                  Our chauffeurs are verified professionals who treat families, senior citizens, and tourists with utmost politeness and care.
-                </p>
-              </div>
-            </Card>
-
-            <Card className="p-6 bg-white border-navy-100/90 flex flex-col justify-between">
-              <div>
-                <div className="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-4">
-                  <Sparkles className="w-5 h-5" />
-                </div>
-                <h4 className="font-bold text-navy-900 text-base mb-2">Sanitized Fleet</h4>
-                <p className="text-xs text-navy-600 leading-relaxed">
-                  Interiors are cleaned and sanitized before every dispatch. Air conditioning is maintained at peak performance for summer highway comfort.
-                </p>
-              </div>
-            </Card>
-
-            <Card className="p-6 bg-white border-navy-100/90 flex flex-col justify-between">
-              <div>
-                <div className="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-4">
-                  <Compass className="w-5 h-5" />
-                </div>
-                <h4 className="font-bold text-navy-900 text-base mb-2">Local Knowledge</h4>
-                <p className="text-xs text-navy-600 leading-relaxed">
-                  Chauffeurs offer helpful guidance on temple timings, hygienic highway food stops, toll routes, and scenic coastal photo points.
-                </p>
-              </div>
-            </Card>
-          </div>
-        </div>
-
-        {/* Verified Founder & Leadership Section */}
-        <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
-            <div>
-              <h3 className="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
-                <Award className="w-5 h-5 text-blue-600" />
-                <span>Founder & Operations Leadership</span>
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-600 mt-1">
-                Direct leadership steering Subham Travelers with transparency, punctuality, and passenger care.
-              </p>
-            </div>
-            <div>
-              <Badge variant="brand" className="text-[11px] bg-blue-50 text-blue-800 border-blue-200">
-                Verified Management
-              </Badge>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-            {/* Leadership Photo Card */}
-            <div className="md:col-span-4 flex flex-col items-center text-center">
-              <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-2xl shadow-md mb-4 relative overflow-hidden border-2 border-blue-600/30 group bg-slate-100">
-                <img
-                  src={ceoProfile.image || '/images/team/owner_square.webp'}
-                  alt={`${ceoProfile.namePlaceholder} - Founder & Managing Director of Subham Travelers`}
-                  className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
-                  loading="lazy"
-                />
-                <div className="absolute bottom-2 inset-x-2 text-center text-[10px] text-white font-bold px-2 py-0.5 rounded-full bg-slate-950/80 backdrop-blur-xs border border-white/20">
-                  Founder & Operator
-                </div>
-              </div>
-              <h4 className="font-black text-slate-900 text-lg flex items-center justify-center gap-1.5">
-                <span>{ceoProfile.namePlaceholder}</span>
+            <div className="pt-4 border-t border-slate-100 flex items-center gap-4 sm:gap-6 flex-wrap text-xs text-slate-600">
+              <span className="flex items-center gap-1.5 font-medium">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Station & MKCG Transit Desk</span>
+              </span>
+              <span className="flex items-center gap-1.5 font-medium">
                 <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
+                <span>100% Commercial Yellow-Plate Cabs</span>
+              </span>
+              <span className="flex items-center gap-1.5 font-medium">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Verified Local Chauffeurs</span>
+              </span>
+              <span className="flex items-center gap-1.5 font-medium">
+                <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
+                <span>Zero Hidden Return Surcharges</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm p-6 sm:p-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <div className="lg:col-span-7 space-y-4 text-slate-700 text-sm sm:text-base leading-relaxed">
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-600">
+                Our Story & Commitment
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+                Dependable Highway Travel Rooted in Odisha
+              </h2>
+
+              <p>
+                Travel across Odisha is unique and deeply personal. From early morning darshan runs to Shree Jagannath Temple in Puri and scenic coastal drives to Gopalpur-on-Sea, to emergency patient transit between Berhampur and AIIMS Bhubaneswar, every trip demands uncompromising punctuality and peace of mind.
+              </p>
+              <p>
+                <strong>{brandConfig.brandName}</strong> was founded in Berhampur to fix what travelers dread most: last-minute cancellations, unlicensed private cars posing as taxis, unhygienic cabins, and surprise rate surges. We manage dedicated commercial yellow-plate sedans and MPVs driven by courteous, verified local chauffeurs who respect your family's time.
+              </p>
+
+              <div className="pt-2 space-y-2.5">
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+                  <span className="text-xs sm:text-sm text-slate-800">
+                    <strong>Transparent Fixed Pricing:</strong> Clear, upfront quotations shared before vehicle dispatch with zero hidden fees.
+                  </span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+                  <span className="text-xs sm:text-sm text-slate-800">
+                    <strong>Punctual Doorstep Dispatch:</strong> Guaranteed timely arrival at Berhampur Railway Station, MKCG Medical College, and local residences.
+                  </span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+                  <span className="text-xs sm:text-sm text-slate-800">
+                    <strong>Odisha-Wide Geographic Reach:</strong> Active transit support across all 30 districts, coastal pilgrimage corridors, and hill station passes.
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5 space-y-3">
+              <div className="relative rounded-2xl overflow-hidden shadow-xs border border-slate-200 h-64 sm:h-72">
+                <img
+                  src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1000&auto=format&fit=crop&q=80"
+                  alt="Scenic highway travel across Odisha"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                <div className="absolute bottom-3 left-3 right-3 text-white">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-blue-300">
+                    Odisha State Highways
+                  </span>
+                  <p className="text-xs font-bold text-white mt-0.5">
+                    Safe, scenic, and punctual transit across all 30 districts
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="rounded-xl overflow-hidden border border-slate-200 h-32">
+                  <img
+                    src="https://images.unsplash.com/photo-1609766857041-ed402ea8069a?w=600&auto=format&fit=crop&q=80"
+                    alt="Puri Jagannath Temple heritage"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="rounded-xl overflow-hidden border border-slate-200 h-32">
+                  <img
+                    src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&auto=format&fit=crop&q=80"
+                    alt="Odisha coastline and Chilika lagoon"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-6">
+          <div>
+            <span className="text-xs font-bold uppercase tracking-wider text-blue-600">
+              Our Core Principles
+            </span>
+            <h2 className="text-2xl font-black text-slate-900 tracking-tight">
+              The Standards That Guide Every Trip
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <Card className="p-6 bg-white border border-slate-200/90 rounded-2xl shadow-xs">
+              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <h4 className="font-bold text-slate-900 text-base mb-1.5">Safety & Permits</h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Every vehicle holds yellow-plate commercial permits, state fitness checks, and passenger insurance. Speed limits are strictly respected.
+              </p>
+            </Card>
+
+            <Card className="p-6 bg-white border border-slate-200/90 rounded-2xl shadow-xs">
+              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4">
+                <HeartHandshake className="w-5 h-5" />
+              </div>
+              <h4 className="font-bold text-slate-900 text-base mb-1.5">Courteous Chauffeurs</h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Our chauffeurs are verified professionals who treat families, senior citizens, and tourists with utmost politeness and care.
+              </p>
+            </Card>
+
+            <Card className="p-6 bg-white border border-slate-200/90 rounded-2xl shadow-xs">
+              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4">
+                <Sparkles className="w-5 h-5" />
+              </div>
+              <h4 className="font-bold text-slate-900 text-base mb-1.5">Sanitized AC Cabins</h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Interiors are cleaned and sanitized before every dispatch. Dual-zone air conditioning is maintained at peak performance.
+              </p>
+            </Card>
+
+            <Card className="p-6 bg-white border border-slate-200/90 rounded-2xl shadow-xs">
+              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4">
+                <Compass className="w-5 h-5" />
+              </div>
+              <h4 className="font-bold text-slate-900 text-base mb-1.5">Local Highway Mastery</h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Chauffeurs offer helpful guidance on temple timings, hygienic highway food stops, toll routes, and scenic coastal photo points.
+              </p>
+            </Card>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm p-6 sm:p-8 space-y-6">
+          <div className="border-b border-slate-100 pb-3 flex items-center justify-between">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-600">
+                Operations Management
+              </span>
+              <h3 className="text-xl font-bold text-slate-900">
+                Founder & Operations Leadership
+              </h3>
+            </div>
+            <span className="text-[11px] font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200 flex items-center gap-1">
+              <Award className="w-3.5 h-3.5 text-blue-600" />
+              Verified Fleet Operator
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+            <div className="md:col-span-4 flex flex-col items-center text-center p-5 bg-slate-50 rounded-2xl border border-slate-200">
+              <img
+                src={ceoProfile.image}
+                alt={ceoProfile.namePlaceholder}
+                className="w-24 h-24 rounded-2xl object-cover shadow-xs border-2 border-white mb-3"
+              />
+              <h4 className="font-bold text-slate-900 text-base">
+                {ceoProfile.namePlaceholder}
               </h4>
-              <p className="text-xs text-blue-700 mt-0.5 font-bold">
+              <p className="text-xs text-blue-600 font-bold uppercase tracking-wider">
                 {ceoProfile.titlePlaceholder}
               </p>
-              <p className="text-[11px] text-slate-500 mt-1">
-                Subham Travelers • Berhampur (Silk City), Odisha
+              <p className="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
+                <MapPin className="w-3 h-3 text-slate-400" />
+                Berhampur (Silk City), Odisha
               </p>
             </div>
 
-            {/* Profile Message & Biography */}
-            <div className="md:col-span-8 space-y-4">
-              <blockquote className="p-4 rounded-xl bg-slate-50 border-l-4 border-blue-600 text-xs sm:text-sm text-slate-800 italic leading-relaxed font-medium">
+            <div className="md:col-span-8 space-y-3">
+              <blockquote className="p-4 rounded-xl bg-blue-50/70 border-l-4 border-blue-600 text-xs sm:text-sm text-slate-800 italic leading-relaxed">
                 {ceoProfile.messagePlaceholder}
               </blockquote>
-
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 {ceoProfile.bioPlaceholder}
               </p>
-
-              {/* Verified Commitment Notice */}
-              <div className="p-3.5 rounded-lg bg-blue-50/60 border border-blue-200/80 text-xs text-blue-900 flex items-start gap-2.5">
-                <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
-                <p className="leading-relaxed">
-                  <strong>Direct Operator Accountability:</strong> Subham Travelers is operated locally from Station Road, Berhampur. All journeys, chauffeurs, and vehicle dispatches are monitored directly by the management desk to guarantee on-time pickup, passenger safety, and zero surge pricing.
-                </p>
+              <div className="flex items-center gap-3 pt-2">
+                <Link to="/contact">
+                  <Button variant="outline" size="sm" className="rounded-full text-xs font-bold border-slate-200">
+                    Contact Management Desk
+                  </Button>
+                </Link>
+                {phoneReady && (
+                  <a href={getPhoneUrl()}>
+                    <span className="text-xs text-blue-600 font-bold hover:underline">
+                      Call {brandConfig.contact.phoneDisplay}
+                    </span>
+                  </a>
+                )}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Contact CTA Banner */}
-        <div className="rounded-2xl bg-gradient-to-r from-navy-950 via-navy-900 to-navy-950 p-6 sm:p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="rounded-3xl bg-slate-950 p-6 sm:p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-md">
           <div className="space-y-2 text-center md:text-left">
-            <h3 className="text-xl sm:text-2xl font-bold tracking-tight">
-              Have Questions or Special Travel Arrangements?
+            <h3 className="text-xl sm:text-2xl font-black tracking-tight">
+              Ready to Travel Across Odisha With Peace of Mind?
             </h3>
-            <p className="text-xs sm:text-sm text-navy-300 max-w-xl">
-              Our reservation team in Berhampur is available 24/7 to coordinate outstation trips, airport transfers to Bhubaneswar, hospital transit, and family pilgrimage packages.
+            <p className="text-xs sm:text-sm text-slate-300 max-w-xl">
+              Book online or chat with our Berhampur reservation team for immediate cab allotment and upfront quotation.
             </p>
           </div>
           <div className="flex items-center gap-3 shrink-0 flex-wrap justify-center">
-            {whatsappReady ? (
+            {whatsappReady && (
               <a
-                href={getWhatsAppUrl('Hello Subham Travelers, I would like to enquire about your services.')}
+                href={getWhatsAppUrl('Hello Subham Travelers, I want to book a cab with your team.')}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button variant="whatsapp" size="md" leftIcon={<MessageSquare className="w-4 h-4" />}>
-                  Chat on WhatsApp
+                <Button variant="whatsapp" size="md" className="rounded-full font-bold px-5" leftIcon={<MessageSquare className="w-4 h-4" />}>
+                  WhatsApp Concierge
                 </Button>
               </a>
-            ) : null}
-            {phoneReady ? (
-              <a href={getPhoneUrl()}>
-                <Button variant="secondary" size="md" leftIcon={<Phone className="w-4 h-4" />}>
-                  Call {brandConfig.contact.phoneDisplay}
-                </Button>
-              </a>
-            ) : (
-              <Link to="/contact">
-                <Button variant="secondary" size="md">
-                  View Contact Desk
-                </Button>
-              </Link>
             )}
+            <Button
+              variant="primary"
+              size="md"
+              onClick={handlePlanJourney}
+              className="rounded-full bg-blue-600 hover:bg-blue-700 text-white font-bold px-5"
+              leftIcon={<Calendar className="w-4 h-4" />}
+            >
+              Book Cab Now
+            </Button>
           </div>
         </div>
       </div>
