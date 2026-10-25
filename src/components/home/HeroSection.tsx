@@ -82,7 +82,7 @@ export function HeroSection() {
   const activeVehicle = MOBILE_VEHICLES.find((v) => v.id === selectedMobileVehicle) || MOBILE_VEHICLES[0];
 
   const handleChipClick = (chip: QuickChip) => {
-    sound.playTap();
+    sound.playRouteSelect();
     setSelectedChip(chip.id);
   };
 
@@ -97,7 +97,7 @@ export function HeroSection() {
   };
 
   const handleWhatsAppDesk = () => {
-    sound.playTap();
+    sound.playWhatsApp();
     if (whatsappReady) {
       window.open(
         getWhatsAppUrl(`Hello Subham Travelers, I want to book a ${activeVehicle.fullName} from Berhampur to ${activeChip.destination}. Please share quotation.`),
@@ -209,7 +209,7 @@ export function HeroSection() {
                         key={v.id}
                         type="button"
                         onClick={() => {
-                          sound.playTap();
+                          sound.playCarSelect();
                           setSelectedMobileVehicle(v.id);
                         }}
                         className={`py-2 px-1 rounded-xl text-center transition-all cursor-pointer border flex flex-col items-center justify-center min-h-[46px] ${

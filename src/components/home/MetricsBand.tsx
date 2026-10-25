@@ -119,14 +119,14 @@ export function MetricsBand() {
   const whatsappReady = isWhatsAppConfigured();
 
   const handleCopyPromo = () => {
-    sound.playTap();
+    sound.playCopy();
     navigator.clipboard.writeText('WINTER15');
     setCopied(true);
     setTimeout(() => setCopied(false), 2200);
   };
 
   const handleBookDeal = (deal: SeasonalDeal) => {
-    sound.playPop();
+    sound.playQuote();
     const vehicleId = selectedVehicles[deal.id] || 'dzire';
     const vehicleObj = VEHICLE_OPTIONS.find((v) => v.id === vehicleId);
     openBooking({
@@ -138,7 +138,7 @@ export function MetricsBand() {
   };
 
   const handleWhatsAppDeal = (deal: SeasonalDeal) => {
-    sound.playTap();
+    sound.playWhatsApp();
     const vehicleId = selectedVehicles[deal.id] || 'dzire';
     const vehicleObj = VEHICLE_OPTIONS.find((v) => v.id === vehicleId);
     const vehicleName = vehicleObj ? vehicleObj.name : 'Cab';
@@ -283,7 +283,7 @@ export function MetricsBand() {
                             key={v.id}
                             type="button"
                             onClick={() => {
-                              sound.playTap();
+                              sound.playSwitch();
                               setSelectedVehicles((prev) => ({ ...prev, [deal.id]: v.id }));
                             }}
                             className={`py-1.5 px-2 min-h-[36px] rounded-lg text-xs font-bold transition-all cursor-pointer text-center ${

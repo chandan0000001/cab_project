@@ -17,7 +17,6 @@ import {
 import { sound } from '@/lib/sound';
 import {
   Phone,
-  Mail,
   MapPin,
   Clock,
   MessageSquare,
@@ -43,7 +42,6 @@ export function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    email: '',
     tripType: 'one-way',
     pickup: '',
     drop: '',
@@ -53,7 +51,6 @@ export function Contact() {
 
   const cleanName = sanitizeUserText(formData.name, 80);
   const cleanPhone = sanitizeUserText(formData.phone, 25);
-  const cleanEmail = sanitizeUserText(formData.email, 80);
   const cleanPickup = sanitizeUserText(formData.pickup, 120);
   const cleanDrop = sanitizeUserText(formData.drop, 120);
   const cleanDate = sanitizeUserText(formData.travelDate, 30);
@@ -64,7 +61,6 @@ export function Contact() {
     '',
     `• Name: ${cleanName || 'Not provided'}`,
     `• Phone: ${cleanPhone || 'Not provided'}`,
-    cleanEmail ? `• Email: ${cleanEmail}` : null,
     `• Trip Type: ${formData.tripType.toUpperCase()}`,
     `• Pickup Location: ${cleanPickup}`,
     `• Destination: ${cleanDrop}`,
@@ -275,13 +271,6 @@ export function Contact() {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Input
-                  label="Email Address (Optional)"
-                  type="email"
-                  placeholder="you@example.com"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                />
                 <Select
                   label="Trip Format"
                   value={formData.tripType}
@@ -292,6 +281,12 @@ export function Contact() {
                     { value: 'airport-transfer', label: 'Bhubaneswar Airport Transfer' },
                     { value: 'local-rental', label: 'Local Berhampur / Gopalpur Rental' },
                   ]}
+                />
+                <Input
+                  label="Intended Travel Date"
+                  type="date"
+                  value={formData.travelDate}
+                  onChange={(e) => setFormData({ ...formData, travelDate: e.target.value })}
                 />
               </div>
 
@@ -311,13 +306,6 @@ export function Contact() {
                   onChange={(e) => setFormData({ ...formData, drop: e.target.value })}
                 />
               </div>
-
-              <Input
-                label="Intended Travel Date"
-                type="date"
-                value={formData.travelDate}
-                onChange={(e) => setFormData({ ...formData, travelDate: e.target.value })}
-              />
 
               <Textarea
                 label="Special Requests / Passenger Count / Luggage Note"
@@ -388,11 +376,9 @@ export function Contact() {
                 </div>
                 <div className="flex items-center justify-between py-1.5">
                   <span className="font-semibold flex items-center gap-2">
-                    <Mail className="w-4 h-4 text-blue-600" /> Email Enquiries
+                    <MapPin className="w-4 h-4 text-blue-600" /> Doorstep Pickup
                   </span>
-                  <span className="text-slate-600 truncate max-w-[180px]">
-                    {brandConfig.contact.email}
-                  </span>
+                  <span className="font-bold text-slate-900">All Silk City & Ganjam</span>
                 </div>
               </div>
             </div>

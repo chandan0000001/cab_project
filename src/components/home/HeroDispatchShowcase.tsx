@@ -178,7 +178,7 @@ export function HeroDispatchShowcase() {
                 key={v.id}
                 type="button"
                 onClick={() => {
-                  sound.playTap();
+                  sound.playCarSelect();
                   setSelectedVehicle(v);
                 }}
                 aria-pressed={isSelected}
@@ -257,7 +257,7 @@ export function HeroDispatchShowcase() {
                   key={route.id}
                   type="button"
                   onClick={() => {
-                    sound.playTap();
+                    sound.playRouteSelect();
                     setSelectedRoute(route);
                   }}
                   aria-pressed={isSelected}

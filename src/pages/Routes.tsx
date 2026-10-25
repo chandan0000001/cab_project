@@ -111,7 +111,10 @@ export function Routes() {
               {searchQuery && (
                 <button
                   type="button"
-                  onClick={() => setSearchQuery('')}
+                  onClick={() => {
+                    sound.playClear();
+                    setSearchQuery('');
+                  }}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-0.5"
                 >
                   <X className="w-4 h-4" />
@@ -123,7 +126,10 @@ export function Routes() {
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             <button
               type="button"
-              onClick={() => setSelectedRegion('all')}
+              onClick={() => {
+                sound.playFilter();
+                setSelectedRegion('all');
+              }}
               className={`px-3.5 py-2 rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer ${
                 selectedRegion === 'all'
                   ? 'bg-blue-600 text-white shadow-xs'
@@ -134,7 +140,10 @@ export function Routes() {
             </button>
             <button
               type="button"
-              onClick={() => setSelectedRegion('coastal-heritage')}
+              onClick={() => {
+                sound.playFilter();
+                setSelectedRegion('coastal-heritage');
+              }}
               className={`px-3.5 py-2 rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer ${
                 selectedRegion === 'coastal-heritage'
                   ? 'bg-blue-600 text-white shadow-xs'
@@ -145,7 +154,10 @@ export function Routes() {
             </button>
             <button
               type="button"
-              onClick={() => setSelectedRegion('southern-hills')}
+              onClick={() => {
+                sound.playFilter();
+                setSelectedRegion('southern-hills');
+              }}
               className={`px-3.5 py-2 rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer ${
                 selectedRegion === 'southern-hills'
                   ? 'bg-blue-600 text-white shadow-xs'
@@ -156,7 +168,10 @@ export function Routes() {
             </button>
             <button
               type="button"
-              onClick={() => setSelectedRegion('western-odisha')}
+              onClick={() => {
+                sound.playFilter();
+                setSelectedRegion('western-odisha');
+              }}
               className={`px-3.5 py-2 rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer ${
                 selectedRegion === 'western-odisha'
                   ? 'bg-blue-600 text-white shadow-xs'

@@ -1,14 +1,9 @@
-/**
- * Pure Web Audio API Sound System
- * Inspired by Kobra Design System (https://kobra.systems/components/sound)
- * Synthesizes crisp, tactile micro-UI audio cues with zero external audio assets.
- * Guaranteed to trigger on every user click across desktop and mobile.
- */
+// Web Audio API micro-sound engine with distinct tactile synthesized UI cues
 
 class SoundSystem {
   private audioCtx: AudioContext | null = null;
   private isMuted: boolean = false;
-  private volume: number = 0.28; // Crisp, clearly audible tactile level
+  private volume: number = 0.28;
   private listeners: Set<(muted: boolean) => void> = new Set();
 
   constructor() {
@@ -17,16 +12,16 @@ class SoundSystem {
       try {
         localStorage.removeItem('st_sound_muted');
       } catch {
-        // Ignore
+        // LocalStorage fallback
       }
       this.attachGlobalInteractions();
     }
   }
 
+  // Bind interaction listeners to unlock AudioContext and trigger contextual sound cues
   private attachGlobalInteractions() {
     if (typeof window === 'undefined') return;
 
-    // Unlock / resume AudioContext on first user interaction anywhere
     const unlock = () => {
       this.resume();
       window.removeEventListener('pointerdown', unlock);
@@ -38,21 +33,86 @@ class SoundSystem {
     window.addEventListener('touchstart', unlock, { passive: true, capture: true });
     window.addEventListener('keydown', unlock, { passive: true, capture: true });
 
-    // Global click listener: Plays sound on EVERY button, link, or clickable element
+    // Global click listener mapping clickable element types to distinct sound profiles
     const handleGlobalClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
       if (!target) return;
 
       const clickable = target.closest(
-        'button, a, [role="button"], input[type="submit"], input[type="button"], [data-clickable]'
-      );
+        'button, a, [role="button"], [role="tab"], input[type="submit"], input[type="button"], [data-clickable]'
+      ) as HTMLElement | null;
 
-      if (clickable) {
-        this.playTap();
+      if (!clickable) return;
+
+      const href = (clickable.getAttribute('href') || '').toLowerCase();
+      const ariaLabel = (clickable.getAttribute('aria-label') || '').toLowerCase();
+      const text = (clickable.innerText || clickable.textContent || '').toLowerCase();
+      const className = (clickable.className || '').toString().toLowerCase();
+
+      // 1. WhatsApp Action
+      if (href.includes('wa.me') || href.includes('whatsapp') || className.includes('whatsapp') || ariaLabel.includes('whatsapp') || text.includes('whatsapp')) {
+        this.playWhatsApp();
+        return;
+      }
+
+      // 2. Telephone Call Action
+      if (href.startsWith('tel:') || ariaLabel.includes('call') || text.includes('call ')) {
+        this.playCall();
+        return;
+      }
+
+      // 3. Modal Close / Dismiss
+      if (ariaLabel.includes('close') || ariaLabel.includes('dismiss') || className.includes('close')) {
+        this.playClose();
+        return;
+      }
+
+      // 4. Copy Code / Text Action
+      if (ariaLabel.includes('copy') || text.includes('copy') || text.includes('code:')) {
+        this.playCopy();
+        return;
+      }
+
+      // 5. Tabs / Segmented Switcher
+      if (clickable.getAttribute('role') === 'tab' || className.includes('tab') || clickable.hasAttribute('aria-pressed')) {
+        this.playTab();
+        return;
+      }
+
+      // 6. Accordion / FAQ Toggle
+      if (clickable.tagName.toLowerCase() === 'summary' || className.includes('faq') || className.includes('accordion')) {
+        this.playAccordion();
+        return;
+      }
+
+      // 7. Vehicle Selector
+      if (ariaLabel.includes('vehicle') || text.includes('dzire') || text.includes('ertiga') || text.includes('innova')) {
+        this.playCarSelect();
+        return;
+      }
+
+      // 8. Route / Corridor Selector
+      if (ariaLabel.includes('route') || text.includes('airport') || text.includes('puri') || text.includes('daringbadi')) {
+        this.playRouteSelect();
+        return;
+      }
+
+      // Default tactile tap
+      this.playTap();
+    };
+
+    // Form input focus listener for soft micro-blip
+    const handleFocusIn = (e: FocusEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+      const tag = target.tagName.toLowerCase();
+      if (tag === 'input' || tag === 'select' || tag === 'textarea') {
+        this.playInputFocus();
       }
     };
 
     window.addEventListener('click', handleGlobalClick, { capture: true, passive: true });
+    window.addEventListener('focusin', handleFocusIn, { capture: true, passive: true });
   }
 
   public resume() {
@@ -100,121 +160,77 @@ class SoundSystem {
     return () => this.listeners.delete(fn);
   }
 
-  /**
-   * Tactile micro-click (synthesized button tap)
-   * Plays a crisp, satisfying, tactile click tone.
-   */
+  // 1. Crisp tactile micro-tap for general buttons
   public playTap() {
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
-
     try {
-      if (ctx.state === 'suspended') {
-        ctx.resume().catch(() => {});
-      }
-
-      const now = ctx.currentTime;
-
-      // Layer 1: High crisp snap
-      const osc1 = ctx.createOscillator();
-      const gain1 = ctx.createGain();
-
-      osc1.type = 'triangle';
-      osc1.frequency.setValueAtTime(1400, now);
-      osc1.frequency.exponentialRampToValueAtTime(450, now + 0.024);
-
-      gain1.gain.setValueAtTime(this.volume, now);
-      gain1.gain.exponentialRampToValueAtTime(0.0001, now + 0.025);
-
-      osc1.connect(gain1);
-      gain1.connect(ctx.destination);
-
-      osc1.start(now);
-      osc1.stop(now + 0.028);
-
-      // Layer 2: Warm body thud
-      const osc2 = ctx.createOscillator();
-      const gain2 = ctx.createGain();
-
-      osc2.type = 'sine';
-      osc2.frequency.setValueAtTime(380, now);
-      osc2.frequency.exponentialRampToValueAtTime(120, now + 0.035);
-
-      gain2.gain.setValueAtTime(this.volume * 0.8, now);
-      gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.035);
-
-      osc2.connect(gain2);
-      gain2.connect(ctx.destination);
-
-      osc2.start(now);
-      osc2.stop(now + 0.04);
-    } catch {
-      // Audio catch
-    }
-  }
-
-  /**
-   * Pop tone for opening modal, dropdown, or drawer
-   */
-  public playPop() {
-    if (this.isMuted) return;
-    const ctx = this.getContext();
-    if (!ctx) return;
-
-    try {
-      if (ctx.state === 'suspended') {
-        ctx.resume().catch(() => {});
-      }
-
       const now = ctx.currentTime;
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
 
       osc.type = 'triangle';
-      osc.frequency.setValueAtTime(350, now);
-      osc.frequency.exponentialRampToValueAtTime(750, now + 0.06);
+      osc.frequency.setValueAtTime(1400, now);
+      osc.frequency.exponentialRampToValueAtTime(450, now + 0.024);
 
-      gain.gain.setValueAtTime(this.volume * 0.9, now);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.06);
+      gain.gain.setValueAtTime(this.volume, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.025);
 
       osc.connect(gain);
       gain.connect(ctx.destination);
-
       osc.start(now);
-      osc.stop(now + 0.065);
+      osc.stop(now + 0.028);
     } catch {
       // Audio catch
     }
   }
 
-  /**
-   * Soft closing tone
-   */
+  // 2. Buoyant bubble pop for opening modals and drawers
+  public playPop() {
+    if (this.isMuted) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+    try {
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(320, now);
+      osc.frequency.exponentialRampToValueAtTime(820, now + 0.055);
+
+      gain.gain.setValueAtTime(this.volume * 0.9, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.055);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.06);
+    } catch {
+      // Audio catch
+    }
+  }
+
+  // 3. Gentle downward swoosh for modal close and dismiss
   public playClose() {
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
-
     try {
-      if (ctx.state === 'suspended') {
-        ctx.resume().catch(() => {});
-      }
-
       const now = ctx.currentTime;
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
 
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(600, now);
-      osc.frequency.exponentialRampToValueAtTime(240, now + 0.045);
+      osc.frequency.setValueAtTime(650, now);
+      osc.frequency.exponentialRampToValueAtTime(220, now + 0.045);
 
       gain.gain.setValueAtTime(this.volume * 0.7, now);
       gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.045);
 
       osc.connect(gain);
       gain.connect(ctx.destination);
-
       osc.start(now);
       osc.stop(now + 0.05);
     } catch {
@@ -222,72 +238,460 @@ class SoundSystem {
     }
   }
 
-  /**
-   * Harmonic chime for success
-   */
+  // 4. Harmonic triad chime for successful booking and actions
   public playSuccess() {
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
-
     try {
-      if (ctx.state === 'suspended') {
-        ctx.resume().catch(() => {});
-      }
-
       const now = ctx.currentTime;
       const notes = [523.25, 659.25, 783.99]; // C5, E5, G5
-
       notes.forEach((freq, idx) => {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
-        const noteStart = now + idx * 0.06;
+        const noteStart = now + idx * 0.05;
 
         osc.type = 'sine';
         osc.frequency.setValueAtTime(freq, noteStart);
 
         gain.gain.setValueAtTime(0.0001, noteStart);
-        gain.gain.linearRampToValueAtTime(this.volume * 0.8, noteStart + 0.015);
-        gain.gain.exponentialRampToValueAtTime(0.0001, noteStart + 0.28);
+        gain.gain.linearRampToValueAtTime(this.volume * 0.8, noteStart + 0.012);
+        gain.gain.exponentialRampToValueAtTime(0.0001, noteStart + 0.22);
 
         osc.connect(gain);
         gain.connect(ctx.destination);
-
         osc.start(noteStart);
-        osc.stop(noteStart + 0.3);
+        osc.stop(noteStart + 0.25);
       });
     } catch {
       // Audio catch
     }
   }
 
-  /**
-   * Sub-audible soft hover tick
-   */
+  // 5. Snappy mechanical toggle tick for segmented controls
+  public playSwitch() {
+    if (this.isMuted) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+    try {
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(800, now);
+      osc.frequency.exponentialRampToValueAtTime(300, now + 0.018);
+
+      gain.gain.setValueAtTime(this.volume * 0.4, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.018);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.02);
+    } catch {
+      // Audio catch
+    }
+  }
+
+  // 6. Dynamic dual-frequency acceleration whoosh for car model selection
+  public playCarSelect() {
+    if (this.isMuted) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+    try {
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(140, now);
+      osc.frequency.exponentialRampToValueAtTime(320, now + 0.07);
+
+      gain.gain.setValueAtTime(this.volume * 0.35, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.07);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.075);
+    } catch {
+      // Audio catch
+    }
+  }
+
+  // 7. Precise highway compass sonar ping for route selection
+  public playRouteSelect() {
+    if (this.isMuted) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+    try {
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, now);
+      osc.frequency.exponentialRampToValueAtTime(1760, now + 0.04);
+
+      gain.gain.setValueAtTime(this.volume * 0.5, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.07);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.08);
+    } catch {
+      // Audio catch
+    }
+  }
+
+  // 8. Metallic slide tick for tab navigation
+  public playTab() {
+    if (this.isMuted) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+    try {
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(950, now);
+      osc.frequency.exponentialRampToValueAtTime(600, now + 0.02);
+
+      gain.gain.setValueAtTime(this.volume * 0.6, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.022);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.025);
+    } catch {
+      // Audio catch
+    }
+  }
+
+  // 9. Warm organic double droplet for WhatsApp desk interactions
+  public playWhatsApp() {
+    if (this.isMuted) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+    try {
+      const now = ctx.currentTime;
+      [0, 0.05].forEach((offset, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const start = now + offset;
+        const freq = idx === 0 ? 540 : 720;
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, start);
+        osc.frequency.exponentialRampToValueAtTime(freq + 180, start + 0.035);
+
+        gain.gain.setValueAtTime(this.volume * 0.75, start);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.04);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(start);
+        osc.stop(start + 0.045);
+      });
+    } catch {
+      // Audio catch
+    }
+  }
+
+  // 10. Crisp telephonic double-chirp tone for phone call actions
+  public playCall() {
+    if (this.isMuted) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+    try {
+      const now = ctx.currentTime;
+      [0, 0.06].forEach((offset) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const start = now + offset;
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(800, start);
+        osc.frequency.setValueAtTime(1000, start + 0.02);
+
+        gain.gain.setValueAtTime(this.volume * 0.6, start);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.04);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(start);
+        osc.stop(start + 0.045);
+      });
+    } catch {
+      // Audio catch
+    }
+  }
+
+  // 11. Mechanical double-click for copying promo codes
+  public playCopy() {
+    if (this.isMuted) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+    try {
+      const now = ctx.currentTime;
+      [0, 0.04].forEach((offset, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const start = now + offset;
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(idx === 0 ? 1200 : 1600, start);
+
+        gain.gain.setValueAtTime(this.volume * 0.7, start);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.02);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(start);
+        osc.stop(start + 0.025);
+      });
+    } catch {
+      // Audio catch
+    }
+  }
+
+  // 12. Soft mechanical slide for region and corridor filters
+  public playFilter() {
+    if (this.isMuted) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+    try {
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(400, now);
+      osc.frequency.exponentialRampToValueAtTime(650, now + 0.03);
+
+      gain.gain.setValueAtTime(this.volume * 0.5, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.035);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.04);
+    } catch {
+      // Audio catch
+    }
+  }
+
+  // 13. Warm hollow wooden toggle click for FAQ accordion
+  public playAccordion() {
+    if (this.isMuted) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+    try {
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(320, now);
+      osc.frequency.exponentialRampToValueAtTime(160, now + 0.035);
+
+      gain.gain.setValueAtTime(this.volume * 0.8, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.035);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.04);
+    } catch {
+      // Audio catch
+    }
+  }
+
+  // 14. Delicate micro-blip when focusing input fields
+  public playInputFocus() {
+    if (this.isMuted) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+    try {
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(920, now);
+      gain.gain.setValueAtTime(this.volume * 0.25, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.015);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.018);
+    } catch {
+      // Audio catch
+    }
+  }
+
+  // 15. Subtle low double-thud for validation alert
+  public playError() {
+    if (this.isMuted) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+    try {
+      const now = ctx.currentTime;
+      [0, 0.06].forEach((offset) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const start = now + offset;
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(180, start);
+        osc.frequency.exponentialRampToValueAtTime(110, start + 0.035);
+
+        gain.gain.setValueAtTime(this.volume * 0.6, start);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.04);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(start);
+        osc.stop(start + 0.045);
+      });
+    } catch {
+      // Audio catch
+    }
+  }
+
+  // 16. Gentle brush-away sound for clearing search queries
+  public playClear() {
+    if (this.isMuted) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+    try {
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(700, now);
+      osc.frequency.exponentialRampToValueAtTime(300, now + 0.025);
+
+      gain.gain.setValueAtTime(this.volume * 0.4, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.025);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.03);
+    } catch {
+      // Audio catch
+    }
+  }
+
+  // 17. Ultra-soft whisper tick for card hover
   public playHover() {
     if (this.isMuted) return;
     const ctx = this.getContext();
     if (!ctx) return;
-
     try {
-      if (ctx.state === 'suspended') {
-        ctx.resume().catch(() => {});
-      }
-
       const now = ctx.currentTime;
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
 
       osc.type = 'sine';
       osc.frequency.setValueAtTime(1100, now);
-      gain.gain.setValueAtTime(this.volume * 0.3, now);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.012);
+      gain.gain.setValueAtTime(this.volume * 0.2, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.01);
 
       osc.connect(gain);
       gain.connect(ctx.destination);
-
       osc.start(now);
-      osc.stop(now + 0.014);
+      osc.stop(now + 0.012);
+    } catch {
+      // Audio catch
+    }
+  }
+
+  // 18. Crystal shimmer chime for discount badges and seasonal offers
+  public playBadge() {
+    if (this.isMuted) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+    try {
+      const now = ctx.currentTime;
+      const notes = [1046.5, 1318.5]; // C6, E6
+      notes.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const start = now + idx * 0.035;
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, start);
+
+        gain.gain.setValueAtTime(this.volume * 0.4, start);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.06);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(start);
+        osc.stop(start + 0.07);
+      });
+    } catch {
+      // Audio catch
+    }
+  }
+
+  // 19. Ascending two-note chime for quotation calculations
+  public playQuote() {
+    if (this.isMuted) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+    try {
+      const now = ctx.currentTime;
+      const notes = [440, 659.25]; // A4, E5
+      notes.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const start = now + idx * 0.04;
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, start);
+
+        gain.gain.setValueAtTime(this.volume * 0.6, start);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.08);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(start);
+        osc.stop(start + 0.09);
+      });
+    } catch {
+      // Audio catch
+    }
+  }
+
+  // 20. Gentle bell chime for floating contact widget and notifications
+  public playNotification() {
+    if (this.isMuted) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+    try {
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(1046.5, now); // C6
+
+      gain.gain.setValueAtTime(this.volume * 0.5, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.14);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.15);
     } catch {
       // Audio catch
     }

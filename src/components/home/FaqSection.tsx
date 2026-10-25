@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Plus, Minus, MessageSquare } from 'lucide-react';
 import { isWhatsAppConfigured, getWhatsAppUrl } from '@/lib/contactUtils';
+import { sound } from '@/lib/sound';
 
 interface FaqItem {
   id: string;
@@ -75,6 +76,7 @@ export function FaqSection() {
   const whatsappReady = isWhatsAppConfigured();
 
   const toggleFaq = (id: string) => {
+    sound.playAccordion();
     setOpenIds((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
@@ -109,7 +111,10 @@ export function FaqSection() {
               <button
                 key={tab.id}
                 type="button"
-                onClick={() => setSelectedCategory(tab.id)}
+                onClick={() => {
+                  sound.playTab();
+                  setSelectedCategory(tab.id);
+                }}
                 className={`px-4 py-2 min-h-[38px] rounded-full text-xs font-bold transition-all cursor-pointer ${
                   isSelected
                     ? 'bg-navy-950 text-white shadow-sm'

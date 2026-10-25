@@ -67,7 +67,6 @@ export function DestinationCard({ destination, onEnquire }: DestinationCardProps
 
   return (
     <Card hoverEffect className="flex flex-col h-full bg-white group border border-slate-200 rounded-2xl shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-blue-400 overflow-hidden">
-      {/* Image Container: 3-Photo Collage or Single Clean Landscape */}
       {hasCollage ? (
         <div className="relative h-56 w-full overflow-hidden bg-slate-950">
           <div className="grid grid-cols-3 h-full gap-1 p-1 bg-slate-900">
@@ -80,8 +79,8 @@ export function DestinationCard({ destination, onEnquire }: DestinationCardProps
                   decoding="async"
                   className="w-full h-full object-cover object-center transition-transform duration-500 group-hover/tile:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
-                <span className="absolute bottom-1.5 left-1 right-1 text-center text-[9px] font-bold text-white leading-tight px-1 py-0.5 rounded bg-black/70 backdrop-blur-xs">
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                <span className="absolute bottom-1.5 left-1 right-1 text-center text-[9px] font-bold text-white leading-tight px-1 py-0.5 rounded bg-black/75 backdrop-blur-xs truncate block">
                   {item.title}
                 </span>
               </div>
@@ -100,12 +99,6 @@ export function DestinationCard({ destination, onEnquire }: DestinationCardProps
               Curated Circuit
             </span>
           </div>
-
-          <div className="absolute bottom-3 left-3 right-3 text-white pointer-events-none">
-            <h3 className="text-lg font-bold tracking-tight text-white drop-shadow-md">
-              {destination.name}
-            </h3>
-          </div>
         </div>
       ) : (
         <div className="relative h-52 w-full overflow-hidden bg-slate-900">
@@ -116,7 +109,7 @@ export function DestinationCard({ destination, onEnquire }: DestinationCardProps
             decoding="async"
             className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
           
           <div className="absolute top-3 left-3">
             <span className="bg-slate-950/90 text-white backdrop-blur-md border border-white/20 text-xs font-semibold px-2.5 py-0.5 rounded-full flex items-center">
@@ -125,13 +118,10 @@ export function DestinationCard({ destination, onEnquire }: DestinationCardProps
             </span>
           </div>
 
-          <div className="absolute bottom-3 left-3 right-3 text-white">
-            <h3 className="text-xl font-bold tracking-tight text-white drop-shadow-sm leading-snug">
-              {destination.name}
-            </h3>
-            <p className="text-xs text-blue-200 mt-0.5 line-clamp-1 drop-shadow-sm">
-              {destination.tagline}
-            </p>
+          <div className="absolute top-3 right-3">
+            <span className="bg-slate-900/90 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-white/10 uppercase tracking-wider">
+              {destination.circuit === 'coastal-pilgrimage' ? 'Temple Circuit' : 'Outstation Tour'}
+            </span>
           </div>
         </div>
       )}
@@ -139,6 +129,17 @@ export function DestinationCard({ destination, onEnquire }: DestinationCardProps
       {/* Body Details */}
       <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
         <div>
+          <div className="mb-2">
+            <h3 className="text-lg sm:text-xl font-black tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+              {destination.name}
+            </h3>
+            {destination.tagline && (
+              <p className="text-xs text-blue-600 font-semibold mt-0.5 line-clamp-1">
+                {destination.tagline}
+              </p>
+            )}
+          </div>
+
           <p className="text-xs sm:text-sm text-slate-600 line-clamp-3 leading-relaxed mb-3">
             {destination.description}
           </p>
