@@ -1,6 +1,7 @@
-import { SelectedPlace } from '@/types';
+import { SelectedPlace, Coordinates } from '@/types';
 import { env } from '@/lib/env';
 import { ODISHA_PRESET_LOCATIONS } from '@/data/odishaPlaces';
+import { IpLocationService } from '@/services/ipLocationService';
 
 interface PhotonFeature {
   geometry: {
@@ -29,15 +30,17 @@ export class GeocodingService {
 
   /**
    * Searches for location suggestions using Photon API with Odisha geographic bias.
+   * Ranks results nearest-to-farthest from user's approximate IP coordinates.
    * Gracefully falls back to curated Odisha presets if network fails or rate-limited.
    */
   public static async searchLocations(
     query: string,
-    excludePlaceId?: string
+    excludePlaceId?: string,
+    userCoords?: Coordinates | null
   ): Promise<SelectedPlace[]> {
     const trimmed = query.trim();
     if (!trimmed || trimmed.length < 2) {
-      return this.getFallbackPresets('', excludePlaceId);
+      return this.getFallbackPresets('', excludePlaceId, userCoords);
     }
 
     // Cancel any previous in-flight request
@@ -48,8 +51,10 @@ export class GeocodingService {
 
     try {
       const baseUrl = env.photonApiUrl.replace(/\/+$/, '');
-      // Biased toward Odisha (lat 20.2961, lon 85.8245)
-      const url = `${baseUrl}?q=${encodeURIComponent(trimmed)}&lat=20.2961&lon=85.8245&limit=8`;
+      // Center bias around user's IP coordinates or default Odisha hub
+      const biasLat = userCoords?.lat || 20.2961;
+      const biasLon = userCoords?.lng || 85.8245;
+      const url = `${baseUrl}?q=${encodeURIComponent(trimmed)}&lat=${biasLat}&lon=${biasLon}&limit=8`;
 
       const response = await fetch(url, {
         signal: this.activeAbortController.signal,
@@ -60,12 +65,12 @@ export class GeocodingService {
 
       if (!response.ok) {
         // Handle 429 or other HTTP error codes gracefully
-        return this.getFallbackPresets(trimmed, excludePlaceId);
+        return this.getFallbackPresets(trimmed, excludePlaceId, userCoords);
       }
 
       const data: PhotonResponse = await response.json();
       if (!data.features || data.features.length === 0) {
-        return this.getFallbackPresets(trimmed, excludePlaceId);
+        return this.getFallbackPresets(trimmed, excludePlaceId, userCoords);
       }
 
       const places: SelectedPlace[] = data.features
@@ -100,7 +105,7 @@ export class GeocodingService {
 
       // If Photon results are scarce, append relevant local Odisha presets
       if (places.length < 3) {
-        const presets = this.getFallbackPresets(trimmed, excludePlaceId);
+        const presets = this.getFallbackPresets(trimmed, excludePlaceId, userCoords);
         const seenNames = new Set(places.map((p) => p.displayName.toLowerCase()));
         for (const p of presets) {
           if (!seenNames.has(p.displayName.toLowerCase())) {
@@ -109,32 +114,50 @@ export class GeocodingService {
         }
       }
 
-      return places.slice(0, 7);
+      // Sort places nearest to farthest from user's IP location
+      const sorted = userCoords
+        ? IpLocationService.sortPlacesByDistance(places, userCoords)
+        : places;
+
+      return sorted.slice(0, 7);
     } catch (err: unknown) {
       if (err instanceof Error && err.name === 'AbortError') {
         // Request was aborted by user typing newer text
         return [];
       }
       // On network failure or CORS, fall back smoothly
-      return this.getFallbackPresets(trimmed, excludePlaceId);
+      return this.getFallbackPresets(trimmed, excludePlaceId, userCoords);
     } finally {
       this.activeAbortController = null;
     }
   }
 
   /**
-   * Returns preset Odisha landmarks and cities
+   * Returns preset Odisha landmarks and cities sorted nearest to farthest from user's IP location
    */
-  public static getFallbackPresets(query: string, excludePlaceId?: string): SelectedPlace[] {
+  public static getFallbackPresets(
+    query: string,
+    excludePlaceId?: string,
+    userCoords?: Coordinates | null
+  ): SelectedPlace[] {
     const q = query.toLowerCase().trim();
-    if (!q) {
-      return ODISHA_PRESET_LOCATIONS.filter((p) => p.placeId !== excludePlaceId).slice(0, 6);
+    const available = ODISHA_PRESET_LOCATIONS.filter((p) => p.placeId !== excludePlaceId);
+
+    // If query is present, filter by matching text
+    const filtered = !q
+      ? available
+      : available.filter(
+          (p) =>
+            p.displayName.toLowerCase().includes(q) ||
+            (p.formattedAddress && p.formattedAddress.toLowerCase().includes(q))
+        );
+
+    // Sort nearest to farthest using user's approximate IP coordinates
+    if (userCoords) {
+      const sorted = IpLocationService.sortPlacesByDistance(filtered, userCoords);
+      return sorted.slice(0, !q ? 8 : 6);
     }
-    return ODISHA_PRESET_LOCATIONS.filter(
-      (p) =>
-        p.placeId !== excludePlaceId &&
-        (p.displayName.toLowerCase().includes(q) ||
-          (p.formattedAddress && p.formattedAddress.toLowerCase().includes(q)))
-    );
+
+    return filtered.slice(0, 6);
   }
 }

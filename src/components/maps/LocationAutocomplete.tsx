@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, useId, useCallback } from 'react';
-import { MapPin, Search, X, Loader2, Check, AlertCircle } from 'lucide-react';
+import { MapPin, Search, X, Loader2, AlertCircle, Compass } from 'lucide-react';
 import { SelectedPlace } from '@/types';
 import { GeocodingService } from '@/services/geocodingService';
+import { IpLocationService, UserIpLocation } from '@/services/ipLocationService';
 
 export interface LocationAutocompleteProps {
   id?: string;
@@ -38,10 +39,24 @@ export function LocationAutocomplete({
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [activeIndex, setActiveIndex] = useState<number>(-1);
+  const [userLocation, setUserLocation] = useState<UserIpLocation | null>(null);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Extract approximate user location from IP/network headers on mount
+  useEffect(() => {
+    let mounted = true;
+    IpLocationService.getUserIpLocation().then((loc) => {
+      if (mounted) {
+        setUserLocation(loc);
+      }
+    });
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   // Sync internal input value when external selected place changes
   useEffect(() => {
@@ -63,16 +78,20 @@ export function LocationAutocomplete({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Fetch location suggestions with debounce
+  // Fetch location suggestions with debounce, sorted nearest to farthest from user's IP coordinates
   const fetchSuggestions = useCallback(
     (query: string) => {
       if (debounceTimerRef.current) {
         clearTimeout(debounceTimerRef.current);
       }
 
+      const userCoords = userLocation
+        ? { lat: userLocation.latitude, lng: userLocation.longitude }
+        : null;
+
       const trimmed = query.trim();
       if (trimmed.length < 2) {
-        const presets = GeocodingService.getFallbackPresets('', excludePlaceId);
+        const presets = GeocodingService.getFallbackPresets('', excludePlaceId, userCoords);
         setPredictions(presets);
         setIsLoading(false);
         setIsOpen(true);
@@ -82,13 +101,13 @@ export function LocationAutocomplete({
       setIsLoading(true);
 
       debounceTimerRef.current = setTimeout(async () => {
-        const results = await GeocodingService.searchLocations(trimmed, excludePlaceId);
+        const results = await GeocodingService.searchLocations(trimmed, excludePlaceId, userCoords);
         setPredictions(results);
         setIsLoading(false);
         setIsOpen(true);
       }, 300);
     },
-    [excludePlaceId]
+    [excludePlaceId, userLocation]
   );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -104,7 +123,10 @@ export function LocationAutocomplete({
     if (text.trim().length >= 1) {
       fetchSuggestions(text);
     } else {
-      setPredictions(GeocodingService.getFallbackPresets('', excludePlaceId));
+      const userCoords = userLocation
+        ? { lat: userLocation.latitude, lng: userLocation.longitude }
+        : null;
+      setPredictions(GeocodingService.getFallbackPresets('', excludePlaceId, userCoords));
       setIsOpen(true);
     }
   };
@@ -127,8 +149,12 @@ export function LocationAutocomplete({
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!isOpen || predictions.length === 0) {
-      if (e.key === 'ArrowDown') {
-        fetchSuggestions(inputValue || '');
+      if (e.key === 'ArrowDown' || e.key === 'Enter') {
+        const userCoords = userLocation
+          ? { lat: userLocation.latitude, lng: userLocation.longitude }
+          : null;
+        setPredictions(GeocodingService.getFallbackPresets('', excludePlaceId, userCoords));
+        setIsOpen(true);
       }
       return;
     }
@@ -158,25 +184,18 @@ export function LocationAutocomplete({
   };
 
   return (
-    <div ref={containerRef} className="w-full flex flex-col gap-1.5 relative">
+    <div ref={containerRef} className="relative w-full space-y-1.5">
       {/* Field Label */}
-      <div className="flex items-center justify-between">
-        <label
-          htmlFor={inputId}
-          className="text-xs font-semibold text-navy-800 tracking-wide flex items-center gap-1"
-        >
-          <span>{label}</span>
-          {required && <span className="text-red-500 font-bold">*</span>}
-        </label>
-        {value && (
-          <span className="text-[11px] text-brand-700 font-semibold flex items-center gap-1">
-            <Check className="w-3 h-3 text-brand-600" /> Selected
-          </span>
-        )}
-      </div>
+      <label
+        htmlFor={inputId}
+        className="block text-xs font-bold text-navy-800 tracking-wide"
+      >
+        {label} {required && <span className="text-red-500">*</span>}
+      </label>
 
-      {/* Input Field with Left & Right Slots */}
+      {/* Input Field Container */}
       <div className="relative flex items-center">
+        {/* Left Icon */}
         <div className={`absolute left-3.5 pointer-events-none flex items-center ${iconColor}`}>
           <MapPin className="w-4 h-4" />
         </div>
@@ -189,10 +208,13 @@ export function LocationAutocomplete({
           disabled={disabled}
           onChange={handleInputChange}
           onFocus={() => {
+            const userCoords = userLocation
+              ? { lat: userLocation.latitude, lng: userLocation.longitude }
+              : null;
             if (inputValue.trim().length >= 1) {
               fetchSuggestions(inputValue);
             } else {
-              setPredictions(GeocodingService.getFallbackPresets('', excludePlaceId));
+              setPredictions(GeocodingService.getFallbackPresets('', excludePlaceId, userCoords));
               setIsOpen(true);
             }
           }}
@@ -250,11 +272,14 @@ export function LocationAutocomplete({
           role="listbox"
           className="absolute top-full left-0 right-0 z-50 mt-1.5 bg-white rounded-xl shadow-elevated border border-navy-100 max-h-64 overflow-y-auto divide-y divide-navy-50 animate-in fade-in-50 duration-150"
         >
-          {/* Header indicator about provider */}
-          <div className="px-3.5 py-1.5 bg-sand-50/80 text-[10px] font-semibold text-navy-500 uppercase tracking-wider flex items-center justify-between">
-            <span>Location Suggestions</span>
-            <span className="text-brand-700 lowercase font-normal">
-              OpenStreetMap / Photon
+          {/* Header indicator about IP proximity sorting */}
+          <div className="px-3.5 py-1.5 bg-sand-50/90 text-[10px] font-semibold text-navy-600 tracking-wider flex items-center justify-between border-b border-navy-100/70">
+            <span className="flex items-center gap-1.5 text-brand-800 font-bold">
+              <Compass className="w-3.5 h-3.5 text-brand-600 shrink-0" />
+              <span>Nearest to Farthest {userLocation?.city ? `(${userLocation.city} area)` : ''}</span>
+            </span>
+            <span className="text-[10px] text-navy-400 font-normal">
+              Network IP approx.
             </span>
           </div>
 
@@ -285,11 +310,18 @@ export function LocationAutocomplete({
                       </p>
                     )}
                   </div>
-                  {item.isPopularPreset && (
-                    <span className="text-[10px] bg-sand-100 text-navy-600 px-1.5 py-0.5 rounded font-medium self-center shrink-0">
-                      Odisha Hub
-                    </span>
-                  )}
+                  <div className="flex items-center gap-1.5 shrink-0 self-center">
+                    {item.distanceText && (
+                      <span className="text-[10px] font-bold text-brand-700 bg-brand-50 border border-brand-200/80 px-2 py-0.5 rounded-full whitespace-nowrap">
+                        {item.distanceText}
+                      </span>
+                    )}
+                    {item.isPopularPreset && (
+                      <span className="text-[10px] bg-sand-100 text-navy-600 px-1.5 py-0.5 rounded font-medium shrink-0">
+                        Odisha Hub
+                      </span>
+                    )}
+                  </div>
                 </div>
               );
             })

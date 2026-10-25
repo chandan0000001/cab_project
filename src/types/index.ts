@@ -13,6 +13,8 @@ export interface SelectedPlace {
   coordinates: Coordinates;
   formattedAddress?: string;
   isPopularPreset?: boolean;
+  distanceKm?: number;
+  distanceText?: string;
 }
 
 export interface RouteCalculationResult {
