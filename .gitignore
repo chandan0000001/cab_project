@@ -30,3 +30,9 @@ dist-ssr
 
 # TypeScript build info
 *.tsbuildinfo
+
+# Test and scratch scripts
+test-scripts/
+tests-scratch/
+*.test-scratch.*
+scratch/
