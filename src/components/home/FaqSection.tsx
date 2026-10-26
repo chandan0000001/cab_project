@@ -157,7 +157,7 @@ export function FaqSection() {
                     className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-colors ${
                       isOpen
                         ? 'bg-blue-600 text-white'
-                        : 'bg-slate-100 text-slate-500 border border-slate-200'
+                        : 'bg-slate-100 text-slate-600 border border-slate-200'
                     }`}
                   >
                     {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}

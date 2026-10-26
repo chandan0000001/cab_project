@@ -1,11 +1,22 @@
+import { lazy, Suspense } from 'react';
 import { HeroSection } from '@/components/home/HeroSection';
-import { MetricsBand } from '@/components/home/MetricsBand';
-import { FleetPreview } from '@/components/home/FleetPreview';
-import { PopularRoutes } from '@/components/home/PopularRoutes';
-import { DestinationGrid } from '@/components/home/DestinationGrid';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 import { brandConfig } from '@/data/brandConfig';
+
+// Lazy-load below-the-fold sections for instant FCP and reduced TBT
+const MetricsBand = lazy(() => import('@/components/home/MetricsBand').then((m) => ({ default: m.MetricsBand })));
+const FleetPreview = lazy(() => import('@/components/home/FleetPreview').then((m) => ({ default: m.FleetPreview })));
+const PopularRoutes = lazy(() => import('@/components/home/PopularRoutes').then((m) => ({ default: m.PopularRoutes })));
+const DestinationGrid = lazy(() => import('@/components/home/DestinationGrid').then((m) => ({ default: m.DestinationGrid })));
+
+function SectionFallback({ height = '300px' }: { height?: string }) {
+  return (
+    <div style={{ minHeight: height }} className="w-full flex items-center justify-center p-8 bg-slate-50/30">
+      <div className="w-6 h-6 rounded-full border-2 border-blue-600 border-t-transparent animate-spin" />
+    </div>
+  );
+}
 
 export function Home() {
   useDocumentTitle(
@@ -17,21 +28,29 @@ export function Home() {
     <div className="space-y-12 sm:space-y-16 lg:space-y-20 pb-16 bg-slate-50/60 overflow-hidden">
       <HeroSection />
 
-      <ScrollReveal direction="up" delay={80}>
-        <MetricsBand />
-      </ScrollReveal>
+      <Suspense fallback={<SectionFallback height="280px" />}>
+        <ScrollReveal direction="up" delay={50}>
+          <MetricsBand />
+        </ScrollReveal>
+      </Suspense>
 
-      <ScrollReveal direction="up" delay={80}>
-        <FleetPreview />
-      </ScrollReveal>
+      <Suspense fallback={<SectionFallback height="360px" />}>
+        <ScrollReveal direction="up" delay={50}>
+          <FleetPreview />
+        </ScrollReveal>
+      </Suspense>
 
-      <ScrollReveal direction="up" delay={80}>
-        <PopularRoutes />
-      </ScrollReveal>
+      <Suspense fallback={<SectionFallback height="360px" />}>
+        <ScrollReveal direction="up" delay={50}>
+          <PopularRoutes />
+        </ScrollReveal>
+      </Suspense>
 
-      <ScrollReveal direction="up" delay={80}>
-        <DestinationGrid />
-      </ScrollReveal>
+      <Suspense fallback={<SectionFallback height="420px" />}>
+        <ScrollReveal direction="up" delay={50}>
+          <DestinationGrid />
+        </ScrollReveal>
+      </Suspense>
     </div>
   );
 }

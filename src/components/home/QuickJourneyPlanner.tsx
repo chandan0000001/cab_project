@@ -81,7 +81,7 @@ export function QuickJourneyPlanner() {
         <h3 className="text-xl sm:text-2xl font-black text-slate-900 mt-1 tracking-tight">
           Where are you travelling from Berhampur?
         </h3>
-        <p className="text-xs text-slate-500 mt-0.5">
+        <p className="text-xs text-slate-600 mt-0.5">
           Select your journey starting from Berhampur for instant vehicle matching and direct quote.
         </p>
       </div>
@@ -184,7 +184,7 @@ export function QuickJourneyPlanner() {
 
       {/* Popular Corridors Quick-Pill Shortcut Starting from Berhampur */}
       <div className="pt-2 border-t border-slate-200 space-y-2">
-        <div className="flex items-center gap-1 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+        <div className="flex items-center gap-1 text-[11px] font-bold text-slate-600 uppercase tracking-wider">
           <Compass className="w-3.5 h-3.5 text-blue-600" />
           <span>Popular Routes from Berhampur:</span>
         </div>
@@ -248,7 +248,7 @@ export function QuickJourneyPlanner() {
         </div>
       </div>
 
-      <div className="flex items-center gap-2 pt-1 text-[11px] text-slate-500 font-medium">
+      <div className="flex items-center gap-2 pt-1 text-[11px] text-slate-600 font-medium">
         <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
         <span>Direct reservation desk • Verified chauffeur cabs • Fast confirmation</span>
       </div>

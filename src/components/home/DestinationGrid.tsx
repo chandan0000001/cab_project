@@ -247,9 +247,9 @@ export function DestinationGrid() {
 
               <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
                 <div>
-                  <h4 className="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                  <h3 className="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
                     {item.name}
-                  </h4>
+                  </h3>
                   <p className="text-xs text-slate-600 mt-1 line-clamp-2 leading-relaxed">
                     {item.tagline || item.description}
                   </p>

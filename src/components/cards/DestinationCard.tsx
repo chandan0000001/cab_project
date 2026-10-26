@@ -157,7 +157,7 @@ export function DestinationCard({ destination, onEnquire }: DestinationCardProps
 
           {/* Key Sightseeing Highlights */}
           <div className="mb-2">
-            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1.5 font-sans">
+            <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-1.5 font-sans">
               Curated Highlights:
             </p>
             <div className="flex flex-wrap gap-1.5">

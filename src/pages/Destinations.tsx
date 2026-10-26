@@ -218,13 +218,13 @@ export function Destinations() {
                     <span className="text-xs font-bold block text-slate-950 leading-snug">
                       {pkg.title}
                     </span>
-                    <span className="text-[11px] text-slate-500 flex items-center gap-1 mt-1">
+                    <span className="text-[11px] text-slate-600 flex items-center gap-1 mt-1">
                       <Clock className="w-3 h-3 text-blue-600" />
                       {pkg.duration}
                     </span>
                   </div>
                   <span className={`text-[10px] font-bold mt-2 uppercase tracking-wider ${
-                    isSelected ? 'text-blue-700' : 'text-slate-500'
+                    isSelected ? 'text-blue-700' : 'text-slate-600'
                   }`}>
                     {pkg.highlight}
                   </span>
@@ -255,7 +255,7 @@ export function Destinations() {
             </div>
 
             <div className="space-y-2 pt-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
                 Itinerary Route Stops:
               </span>
               <div className="flex items-center gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">

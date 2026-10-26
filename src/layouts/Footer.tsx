@@ -24,7 +24,7 @@ export function Footer() {
           <div className="flex items-center gap-2 text-slate-300">
             <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
             <span className="font-bold text-white">Verified Chauffeur Fleet</span>
-            <span className="text-slate-500 hidden sm:inline">• Verified Highway Drivers & GPS Tracked</span>
+            <span className="text-slate-400 hidden sm:inline">• Verified Highway Drivers & GPS Tracked</span>
           </div>
 
           <div className="flex items-center gap-2 text-xs">

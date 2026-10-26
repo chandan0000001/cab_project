@@ -106,7 +106,7 @@ export function RouteCard({ route, index, onSelectRoute }: RouteCardProps) {
 
         {/* Popular Cabs Available */}
         <div className="mb-5 pt-3 border-t border-slate-100">
-          <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1.5 font-sans">
+          <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1.5 font-sans">
             <Car className="w-3 h-3 text-blue-600" /> Fleet Available:
           </div>
           <div className="flex flex-wrap gap-1.5">

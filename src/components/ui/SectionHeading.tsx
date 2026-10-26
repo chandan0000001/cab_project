@@ -27,7 +27,7 @@ export function SectionHeading({
   return (
     <div className={cn('flex flex-col max-w-3xl mb-6 md:mb-8', alignClasses[align], className)}>
       {eyebrow && (
-        <span className="text-xs font-bold uppercase tracking-[0.16em] text-blue-600 font-sans mb-1.5">
+        <span className="text-xs font-bold uppercase tracking-[0.16em] text-blue-700 font-sans mb-1.5">
           {eyebrow}
         </span>
       )}

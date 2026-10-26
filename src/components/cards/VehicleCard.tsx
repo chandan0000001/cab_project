@@ -66,7 +66,7 @@ export function VehicleCard({ vehicle, onEnquire }: VehicleCardProps) {
           <h3 className="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors tracking-tight">
             {vehicle.name}
           </h3>
-          <p className="text-xs text-slate-500 font-medium mt-0.5">
+          <p className="text-xs text-slate-600 font-medium mt-0.5">
             Seats {vehicle.seatingCapacity} + professional driver
           </p>
 
@@ -79,19 +79,19 @@ export function VehicleCard({ vehicle, onEnquire }: VehicleCardProps) {
               <span className="flex items-center gap-1 text-xs font-bold text-slate-900">
                 <Users className="w-3.5 h-3.5 text-blue-600" /> {vehicle.seatingCapacity}
               </span>
-              <span className="text-[9px] font-semibold text-slate-500 mt-0.5 uppercase tracking-wider">Capacity</span>
+              <span className="text-[9px] font-semibold text-slate-600 mt-0.5 uppercase tracking-wider">Capacity</span>
             </div>
             <div className="flex flex-col items-center border-x border-slate-200">
               <span className="flex items-center gap-1 text-xs font-bold text-slate-900">
                 <Briefcase className="w-3.5 h-3.5 text-blue-600" /> {vehicle.luggageCapacity} Bags
               </span>
-              <span className="text-[9px] font-semibold text-slate-500 mt-0.5 uppercase tracking-wider">Luggage</span>
+              <span className="text-[9px] font-semibold text-slate-600 mt-0.5 uppercase tracking-wider">Luggage</span>
             </div>
             <div className="flex flex-col items-center">
               <span className="flex items-center gap-1 text-xs font-bold text-slate-900">
                 <Wind className="w-3.5 h-3.5 text-blue-600" /> {vehicle.hasAC ? 'AC' : 'Non-AC'}
               </span>
-              <span className="text-[9px] font-semibold text-slate-500 mt-0.5 uppercase tracking-wider">Climate</span>
+              <span className="text-[9px] font-semibold text-slate-600 mt-0.5 uppercase tracking-wider">Climate</span>
             </div>
           </div>
 

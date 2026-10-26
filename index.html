@@ -7,7 +7,7 @@
     <meta name="description" content="Subham Travelers - Premium cab booking, intercity transportation, and Odisha tourism services. Reliable one-way, round-trip, airport, and local travel across Odisha." />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://berhampurcab.vercel.app/" />
-    <meta name="theme-color" content="#0F172A" />
+    <meta name="theme-color" content="#2563EB" />
 
     <!-- Open Graph / Social SEO -->
     <meta property="og:type" content="website" />
@@ -16,17 +16,76 @@
     <meta property="og:description" content="Silk City's direct cab operator. Verified one-way, round-trip, Bhubaneswar Airport transfer, and tourism cabs across Odisha." />
     <meta property="og:image" content="https://berhampurcab.vercel.app/images/fleet/dzire.webp" />
     
-    <!-- Preconnect & Asynchronous Google Fonts (Non-Render Blocking) -->
+    <!-- Preconnect & Asynchronous Non-Render-Blocking Inter Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" media="print" onload="this.media='all'" />
     <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" />
     </noscript>
 
-    <!-- Preload Hero Image for instant LCP on Mobile -->
-    <link rel="preload" as="image" href="/images/fleet/dzire.webp" type="image/webp" />
+    <!-- Preload Hero LCP Image for Instant Mobile Paint -->
+    <link rel="preload" as="image" href="/images/fleet/dzire.webp" type="image/webp" fetchpriority="high" />
+    
+    <!-- Structured Data for Search Engines & Agentic Browsing (4/4) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TaxiService",
+      "@id": "https://berhampurcab.vercel.app/#service",
+      "name": "Subham Travelers",
+      "url": "https://berhampurcab.vercel.app/",
+      "logo": "https://berhampurcab.vercel.app/favicon.svg",
+      "image": "https://berhampurcab.vercel.app/images/fleet/dzire.webp",
+      "description": "Silk City's direct cab operator. Verified one-way, round-trip, Bhubaneswar Airport transfer, and tourism cabs across all 30 districts of Odisha.",
+      "telephone": "+916371258522",
+      "priceRange": "₹₹",
+      "currenciesAccepted": "INR",
+      "paymentAccepted": "Cash, UPI, Net Banking",
+      "areaServed": [
+        {
+          "@type": "AdministrativeArea",
+          "name": "Odisha"
+        },
+        {
+          "@type": "City",
+          "name": "Berhampur"
+        }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Berhampur",
+        "addressRegion": "Odisha",
+        "postalCode": "760001",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 19.3149,
+        "longitude": 84.7941
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      },
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "Subham Travelers",
+        "telephone": "+916371258522"
+      }
+    }
+    </script>
     
     <title>Subham Travelers | Reliable Cab Booking & Odisha Tours</title>
   </head>

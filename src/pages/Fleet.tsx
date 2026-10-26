@@ -178,7 +178,7 @@ export function Fleet() {
                   }`}
                 >
                   <span className="text-xs font-bold truncate block">{v.name}</span>
-                  <span className={`text-[10px] block mt-0.5 sm:mt-1 ${isSelected ? 'text-blue-700 font-bold' : 'text-slate-500'}`}>
+                  <span className={`text-[10px] block mt-0.5 sm:mt-1 ${isSelected ? 'text-blue-700 font-bold' : 'text-slate-600'}`}>
                     {v.seatingCapacity} Seats • {v.categoryLabel}
                   </span>
                 </button>
@@ -225,24 +225,24 @@ export function Fleet() {
                   <span className="flex items-center gap-1 text-[11px] sm:text-xs font-bold text-slate-900">
                     <Users className="w-3.5 h-3.5 text-blue-600" /> {activeVehicle.seatingCapacity}
                   </span>
-                  <span className="text-[9px] sm:text-[10px] text-slate-500 uppercase font-semibold">Capacity</span>
+                  <span className="text-[9px] sm:text-[10px] text-slate-600 uppercase font-semibold">Capacity</span>
                 </div>
                 <div className="flex flex-col items-center border-x border-slate-200">
                   <span className="flex items-center gap-1 text-[11px] sm:text-xs font-bold text-slate-900">
                     <Briefcase className="w-3.5 h-3.5 text-blue-600" /> {activeVehicle.luggageCapacity}
                   </span>
-                  <span className="text-[9px] sm:text-[10px] text-slate-500 uppercase font-semibold">Bags</span>
+                  <span className="text-[9px] sm:text-[10px] text-slate-600 uppercase font-semibold">Bags</span>
                 </div>
                 <div className="flex flex-col items-center">
                   <span className="flex items-center gap-1 text-[11px] sm:text-xs font-bold text-slate-900">
                     <Snowflake className="w-3.5 h-3.5 text-cyan-600" /> {activeVehicle.hasAC ? 'Dual AC' : 'Non-AC'}
                   </span>
-                  <span className="text-[9px] sm:text-[10px] text-slate-500 uppercase font-semibold">Climate</span>
+                  <span className="text-[9px] sm:text-[10px] text-slate-600 uppercase font-semibold">Climate</span>
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
                   Included Amenities:
                 </span>
                 <div className="flex flex-wrap gap-1.5">

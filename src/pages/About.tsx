@@ -238,7 +238,7 @@ export function About() {
               <p className="text-xs text-blue-600 font-bold uppercase tracking-wider">
                 {ceoProfile.titlePlaceholder}
               </p>
-              <p className="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
+              <p className="text-[11px] text-slate-600 mt-1 flex items-center gap-1">
                 <MapPin className="w-3 h-3 text-slate-400" />
                 Berhampur (Silk City), Odisha
               </p>

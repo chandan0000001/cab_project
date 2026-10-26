@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { 
   MessageSquare, 
   Plane, 
@@ -17,10 +17,13 @@ import {
   Car
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
-import { HeroDispatchShowcase } from '@/components/home/HeroDispatchShowcase';
 import { useBookingFlow } from '@/hooks/useBookingFlow';
 import { isWhatsAppConfigured, getWhatsAppUrl } from '@/lib/contactUtils';
 import { sound } from '@/lib/sound';
+
+const HeroDispatchShowcase = lazy(() =>
+  import('@/components/home/HeroDispatchShowcase').then((m) => ({ default: m.HeroDispatchShowcase }))
+);
 
 interface QuickChip {
   id: string;
@@ -159,7 +162,7 @@ export function HeroSection() {
                   <p className="text-[10px] font-bold text-slate-800 uppercase tracking-wider mt-0.5">
                     Direct Dispatch
                   </p>
-                  <p className="text-[10px] text-slate-500">Active phone & chat</p>
+                  <p className="text-[10px] text-slate-600">Active phone & chat</p>
                 </div>
 
                 <div className="p-3 bg-white rounded-2xl border border-slate-200/90 shadow-2xs text-left">
@@ -167,7 +170,7 @@ export function HeroSection() {
                   <p className="text-[10px] font-bold text-slate-800 uppercase tracking-wider mt-0.5">
                     Commercial AC
                   </p>
-                  <p className="text-[10px] text-slate-500">Chauffeur fleet</p>
+                  <p className="text-[10px] text-slate-600">Chauffeur fleet</p>
                 </div>
 
                 <div className="p-3 bg-white rounded-2xl border border-slate-200/90 shadow-2xs text-left">
@@ -175,7 +178,7 @@ export function HeroSection() {
                   <p className="text-[10px] font-bold text-slate-800 uppercase tracking-wider mt-0.5">
                     Districts
                   </p>
-                  <p className="text-[10px] text-slate-500">All Odisha routes</p>
+                  <p className="text-[10px] text-slate-600">All Odisha routes</p>
                 </div>
 
                 <div className="p-3 bg-white rounded-2xl border border-slate-200/90 shadow-2xs text-left">
@@ -183,7 +186,7 @@ export function HeroSection() {
                   <p className="text-[10px] font-bold text-slate-800 uppercase tracking-wider mt-0.5">
                     Fast Quote
                   </p>
-                  <p className="text-[10px] text-slate-500">Quick WhatsApp desk</p>
+                  <p className="text-[10px] text-slate-600">Quick WhatsApp desk</p>
                 </div>
               </div>
 
@@ -208,6 +211,7 @@ export function HeroSection() {
                       <button
                         key={v.id}
                         type="button"
+                        aria-label={`Select vehicle ${v.name}, capacity ${v.capacity}`}
                         onClick={() => {
                           sound.playCarSelect();
                           setSelectedMobileVehicle(v.id);
@@ -219,7 +223,7 @@ export function HeroSection() {
                         }`}
                       >
                         <span className="text-xs font-bold truncate block">{v.name}</span>
-                        <span className={`text-[9px] block ${isSelected ? 'text-blue-100' : 'text-slate-500'}`}>
+                        <span className={`text-[9px] block ${isSelected ? 'text-blue-100' : 'text-slate-600'}`}>
                           {v.capacity}
                         </span>
                       </button>
@@ -231,8 +235,11 @@ export function HeroSection() {
                   <img
                     src={activeVehicle.image}
                     alt={activeVehicle.fullName}
+                    width={480}
+                    height={270}
                     className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                     loading="eager"
+                    fetchPriority="high"
                   />
                   <div className="absolute top-2 inset-x-2 flex items-center justify-between gap-1.5 pointer-events-none">
                     <span className="inline-flex items-center gap-1 bg-white/95 backdrop-blur-md text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200 shadow-2xs truncate">
@@ -262,7 +269,7 @@ export function HeroSection() {
 
                 <div className="space-y-2 pt-1">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-600 flex items-center gap-1">
                       <MapPin className="w-3 h-3 text-blue-600" />
                       Corridors from Berhampur:
                     </span>
@@ -300,7 +307,7 @@ export function HeroSection() {
                             <span className="text-xs font-bold block text-slate-900 truncate">
                               {chip.name}
                             </span>
-                            <span className="text-[10px] text-slate-500 block">
+                            <span className="text-[10px] text-slate-600 block">
                               {chip.highway}
                             </span>
                           </div>
@@ -331,7 +338,7 @@ export function HeroSection() {
                     Reserve {activeVehicle.name} & Quote
                   </Button>
 
-                  <div className="flex items-center justify-between text-[11px] text-slate-500 pt-2 px-1 border-t border-slate-100">
+                  <div className="flex items-center justify-between text-[11px] text-slate-600 pt-2 px-1 border-t border-slate-100">
                     <span className="flex items-center gap-1">
                       <ShieldCheck className="w-3 h-3 text-emerald-600 shrink-0" />
                       <span>Verified Tourist Cab</span>
@@ -364,6 +371,7 @@ export function HeroSection() {
                       <button
                         key={chip.id}
                         type="button"
+                        aria-label={`Route from Berhampur to ${chip.name}, estimated duration ${chip.duration}`}
                         onClick={() => handleChipClick(chip)}
                         className={`p-3 rounded-xl text-left transition-all cursor-pointer border flex flex-col justify-between min-h-[70px] ${
                           isSelected
@@ -372,14 +380,14 @@ export function HeroSection() {
                         }`}
                       >
                         <div className="flex items-center justify-between w-full">
-                          <Icon className={`w-3.5 h-3.5 ${isSelected ? 'text-blue-600' : 'text-slate-500'}`} />
-                          <span className="text-[10px] font-semibold text-slate-500">{chip.duration}</span>
+                          <Icon className={`w-3.5 h-3.5 ${isSelected ? 'text-blue-600' : 'text-slate-600'}`} />
+                          <span className="text-[10px] font-semibold text-slate-600">{chip.duration}</span>
                         </div>
                         <div className="mt-1.5">
                           <span className="text-xs font-bold block truncate text-slate-900">
                             {chip.name}
                           </span>
-                          <span className="text-[10px] text-slate-500 block truncate">
+                          <span className="text-[10px] text-slate-600 block truncate">
                             {chip.highway}
                           </span>
                         </div>
@@ -419,7 +427,7 @@ export function HeroSection() {
                     <p className="text-[10px] font-bold text-slate-700 uppercase tracking-wider mt-0.5">
                       Dispatch Desk
                     </p>
-                    <p className="text-[10px] text-slate-500">Direct coordinator</p>
+                    <p className="text-[10px] text-slate-600">Direct coordinator</p>
                   </div>
 
                   <div className="p-3 bg-white rounded-xl border border-slate-200 shadow-2xs">
@@ -427,7 +435,7 @@ export function HeroSection() {
                     <p className="text-[10px] font-bold text-slate-700 uppercase tracking-wider mt-0.5">
                       Commercial AC
                     </p>
-                    <p className="text-[10px] text-slate-500">Chauffeur fleet</p>
+                    <p className="text-[10px] text-slate-600">Chauffeur fleet</p>
                   </div>
 
                   <div className="p-3 bg-white rounded-xl border border-slate-200 shadow-2xs">
@@ -435,7 +443,7 @@ export function HeroSection() {
                     <p className="text-[10px] font-bold text-slate-700 uppercase tracking-wider mt-0.5">
                       Districts
                     </p>
-                    <p className="text-[10px] text-slate-500">All Odisha coverage</p>
+                    <p className="text-[10px] text-slate-600">All Odisha coverage</p>
                   </div>
 
                   <div className="p-3 bg-white rounded-xl border border-slate-200 shadow-2xs">
@@ -443,7 +451,7 @@ export function HeroSection() {
                     <p className="text-[10px] font-bold text-slate-700 uppercase tracking-wider mt-0.5">
                       Tariff Guarantee
                     </p>
-                    <p className="text-[10px] text-slate-500">Zero hidden fees</p>
+                    <p className="text-[10px] text-slate-600">Zero hidden fees</p>
                   </div>
                 </div>
               </div>
@@ -451,7 +459,9 @@ export function HeroSection() {
           </div>
 
           <div className="hidden lg:block lg:col-span-6">
-            <HeroDispatchShowcase />
+            <Suspense fallback={<div className="aspect-[4/3] rounded-3xl bg-slate-100 animate-pulse" />}>
+              <HeroDispatchShowcase />
+            </Suspense>
           </div>
         </div>
       </div>

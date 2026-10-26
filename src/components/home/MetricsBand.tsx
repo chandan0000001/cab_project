@@ -165,16 +165,16 @@ export function MetricsBand() {
               <span>Signature Corridors • Direct Silk City Cabs</span>
             </div>
 
-            <h3 className="text-2xl sm:text-4xl font-extrabold text-slate-950 tracking-tight leading-tight">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-950 tracking-tight leading-tight">
               Popular Highway Routes & <span className="text-blue-600">Fixed Tariffs</span>
-            </h3>
+            </h2>
 
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
               Dedicated chauffeur-driven AC cabs departing from Berhampur. Select your vehicle class below for instant transparent quotes:
             </p>
 
             <div className="flex flex-wrap items-center gap-2.5 pt-1">
-              <span className="text-xs text-slate-500 font-semibold">Special Offer:</span>
+              <span className="text-xs text-slate-600 font-semibold">Special Offer:</span>
               <button
                 type="button"
                 onClick={handleCopyPromo}
@@ -193,7 +193,7 @@ export function MetricsBand() {
                   </span>
                 )}
               </button>
-              <span className="text-xs text-slate-500">
+              <span className="text-xs text-slate-600">
                 (Flat 15% outstation discount applied at enquiry)
               </span>
             </div>
@@ -257,10 +257,10 @@ export function MetricsBand() {
                   </div>
 
                   <div>
-                    <h4 className="text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                    <h3 className="text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
                       {deal.route}
-                    </h4>
-                    <p className="text-xs text-slate-500 mt-1 flex items-center gap-1.5 font-medium">
+                    </h3>
+                    <p className="text-xs text-slate-600 mt-1 flex items-center gap-1.5 font-medium">
                       <Clock className="w-3 h-3 text-blue-600 shrink-0" />
                       <span>{deal.duration} • {deal.distance}</span>
                     </p>
@@ -271,7 +271,7 @@ export function MetricsBand() {
                   </p>
 
                   <div className="space-y-1.5 pt-1">
-                    <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                    <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-slate-600">
                       <span>Vehicle Tier:</span>
                       <span className="text-blue-600">{chosenVehicle.seats}</span>
                     </div>
@@ -335,7 +335,7 @@ export function MetricsBand() {
           })}
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500 pt-3 border-t border-slate-200">
+        <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-slate-600 pt-3 border-t border-slate-200">
           <span className="flex items-center gap-1.5">
             <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
             <span>Verified commercial fleet • Valid passenger permits & comprehensive insurance</span>

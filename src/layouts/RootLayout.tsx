@@ -7,11 +7,15 @@ import { BookingProvider } from '@/context/BookingContext';
 import { useBookingFlow } from '@/hooks/useBookingFlow';
 import { BookingLoadingSkeleton } from '@/components/booking/BookingLoadingSkeleton';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
-import { WinterOfferPopup } from '@/components/promotions/WinterOfferPopup';
 
 // Lazy load the full interactive booking modal and route search workflow
 const LazyBookingModal = lazy(() =>
   import('@/components/booking/BookingModal').then((module) => ({ default: module.BookingModal }))
+);
+
+// Lazy load the promotion offer popup to keep initial bundle lean
+const LazyWinterOfferPopup = lazy(() =>
+  import('@/components/promotions/WinterOfferPopup').then((module) => ({ default: module.WinterOfferPopup }))
 );
 
 // Only evaluate and download BookingModal bundle when user actually opens booking
@@ -54,7 +58,9 @@ export function RootLayout() {
         <OnDemandBookingModal />
 
         {/* Interactive Winter & Festival Offer Pop-up */}
-        <WinterOfferPopup />
+        <Suspense fallback={null}>
+          <LazyWinterOfferPopup />
+        </Suspense>
 
         {/* Main Footer */}
         <Footer />

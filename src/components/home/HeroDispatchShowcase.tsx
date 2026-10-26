@@ -193,7 +193,7 @@ export function HeroDispatchShowcase() {
                   <Car className={`w-3.5 h-3.5 shrink-0 ${isSelected ? 'text-white' : 'text-blue-600'}`} />
                   <span className="text-xs font-bold truncate">{v.name.replace('Maruti Suzuki ', '').replace('Toyota ', '')}</span>
                 </div>
-                <span className={`text-[10px] block truncate mt-0.5 ${isSelected ? 'text-blue-100' : 'text-slate-500'}`}>{v.category}</span>
+                <span className={`text-[10px] block truncate mt-0.5 ${isSelected ? 'text-blue-100' : 'text-slate-600'}`}>{v.category}</span>
               </button>
             );
           })}
@@ -239,7 +239,7 @@ export function HeroDispatchShowcase() {
 
         <div className="space-y-2">
           <div className="flex items-center justify-between gap-1 text-xs">
-            <span className="font-bold text-slate-500 uppercase tracking-wider text-[11px] flex items-center gap-1 truncate">
+            <span className="font-bold text-slate-600 uppercase tracking-wider text-[11px] flex items-center gap-1 truncate">
               <MapPin className="w-3.5 h-3.5 text-blue-600 shrink-0" />
               Corridors from Berhampur:
             </span>
@@ -278,7 +278,7 @@ export function HeroDispatchShowcase() {
                       {route.name}
                     </span>
                   </div>
-                  <div className="flex items-center justify-between text-[10px] text-slate-500 mt-1 pl-6">
+                  <div className="flex items-center justify-between text-[10px] text-slate-600 mt-1 pl-6">
                     <span className="truncate">{route.distance}</span>
                     <span className="font-bold text-blue-600 shrink-0">{route.duration}</span>
                   </div>
@@ -291,7 +291,7 @@ export function HeroDispatchShowcase() {
             <span className="flex items-center gap-1.5 truncate min-w-0">
               <Clock className="w-3.5 h-3.5 text-blue-600 shrink-0" />
               <strong className="text-slate-900 truncate shrink-0">{selectedRoute.name}:</strong>
-              <span className="text-slate-500 truncate">{selectedRoute.highlight}</span>
+              <span className="text-slate-600 truncate">{selectedRoute.highlight}</span>
             </span>
             <span className="text-emerald-700 font-bold shrink-0 text-[10px] uppercase tracking-wider bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
               Flat Quote
@@ -323,7 +323,7 @@ export function HeroDispatchShowcase() {
           )}
         </div>
 
-        <div className="flex items-center justify-between text-xs text-slate-500 pt-2 border-t border-slate-200">
+        <div className="flex items-center justify-between text-xs text-slate-600 pt-2 border-t border-slate-200">
           <span className="flex items-center gap-1 font-medium truncate">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
             <span>Direct fleet • Zero broker markup</span>

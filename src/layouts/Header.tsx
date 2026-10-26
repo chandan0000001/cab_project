@@ -66,7 +66,7 @@ export function Header() {
                 <span className="text-base sm:text-2xl font-black tracking-tight text-slate-950 leading-none whitespace-nowrap">
                   Subham <span className="text-blue-600">Travelers</span>
                 </span>
-                <span className="text-[8px] sm:text-[10px] tracking-wider uppercase font-bold text-slate-500 leading-tight mt-1 whitespace-nowrap">
+                <span className="text-[8px] sm:text-[10px] tracking-wider uppercase font-bold text-slate-600 leading-tight mt-1 whitespace-nowrap">
                   ODISHA INTERCITY CABS
                 </span>
               </div>
@@ -82,7 +82,7 @@ export function Header() {
                     `px-3.5 py-1.5 text-xs font-semibold rounded-full transition-all relative ${
                       isActive
                         ? 'text-blue-600 bg-blue-50 border border-blue-200 shadow-2xs font-bold'
-                        : 'text-slate-600 hover:text-slate-950 hover:bg-slate-100'
+                        : 'text-slate-700 hover:text-slate-950 hover:bg-slate-100'
                     }`
                   }
                 >
@@ -196,7 +196,7 @@ export function Header() {
               setIsMobileMenuOpen(false);
             }}
             aria-label="Close menu"
-            className="w-10 h-10 min-w-[40px] min-h-[40px] flex items-center justify-center rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 cursor-pointer"
+            className="w-10 h-10 min-w-[40px] min-h-[40px] flex items-center justify-center rounded-xl text-slate-700 hover:text-slate-900 hover:bg-slate-100 cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -274,7 +274,7 @@ export function Header() {
                 <Phone className="w-4 h-4" />
               </div>
               <div>
-                <p className="text-[10px] text-slate-500 uppercase tracking-wider font-normal">Direct Booking Helpline</p>
+                <p className="text-[10px] text-slate-600 uppercase tracking-wider font-semibold">Direct Booking Helpline</p>
                 <p className="text-sm font-bold text-slate-900">{brandConfig.contact.phoneDisplay}</p>
               </div>
             </a>

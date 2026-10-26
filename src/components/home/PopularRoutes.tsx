@@ -43,7 +43,7 @@ export function PopularRoutes() {
 
       <ScrollReveal direction="up" delay={100}>
         <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-1.5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider shrink-0 flex items-center gap-1 mr-1">
+          <span className="text-xs font-semibold text-slate-600 uppercase tracking-wider shrink-0 flex items-center gap-1 mr-1">
             <Compass className="w-3.5 h-3.5 text-blue-600" /> Corridors:
           </span>
           <button

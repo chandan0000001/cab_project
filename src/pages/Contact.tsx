@@ -217,7 +217,7 @@ export function Contact() {
               <MapPin className="w-6 h-6" />
             </div>
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-600">
                 Physical Depot
               </span>
               <h3 className="text-lg font-bold text-slate-900 mt-0.5">Berhampur Office</h3>
@@ -332,7 +332,7 @@ export function Contact() {
                   size="lg"
                   onClick={handleCopy}
                   className="rounded-xl text-xs font-semibold border-slate-200 min-h-[46px]"
-                  leftIcon={copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4 text-slate-500" />}
+                  leftIcon={copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4 text-slate-600" />}
                 >
                   {copied ? 'Copied to Clipboard' : 'Copy Enquiry'}
                 </Button>

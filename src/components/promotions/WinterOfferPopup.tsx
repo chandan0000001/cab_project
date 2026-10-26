@@ -196,7 +196,7 @@ export function WinterOfferPopup() {
                 <Tag className="w-4 h-4" />
               </div>
               <div>
-                <p className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Use Promo Code</p>
+                <p className="text-[10px] uppercase font-bold text-slate-600 tracking-wider">Use Promo Code</p>
                 <p className="text-base font-black text-slate-900 tracking-wider font-mono">{promoCode}</p>
               </div>
             </div>

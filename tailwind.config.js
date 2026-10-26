@@ -72,13 +72,7 @@ export default {
         },
       },
       fontFamily: {
-        serif: [
-          '"Playfair Display"',
-          'Georgia',
-          'serif',
-        ],
         sans: [
-          '"Plus Jakarta Sans"',
           'Inter',
           '-apple-system',
           'BlinkMacSystemFont',
