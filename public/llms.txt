@@ -1,0 +1,26 @@
+# Subham Travelers
+
+> Direct chauffeur-driven cab operator and outstation taxi service based in Silk City, Berhampur (Ganjam), Odisha. Provides fixed-fare intercity transportation, Bhubaneswar Airport (BBI) transfers, local railway station pickups, and curated Odisha tourism circuits.
+
+Subham Travelers operates 24x7 with verified commercial AC vehicles across all 30 districts of Odisha. Booking and instant quotation coordination is managed directly via telephone (+91 63712 58522) and WhatsApp.
+
+## Core Services & Pages
+- [Home Page](https://berhampurcab.vercel.app/): Main booking desk, live corridor fare estimates, customer guarantees, and fleet overview.
+- [Fleet Directory](https://berhampurcab.vercel.app/fleet): Commercial AC vehicles including Sedan Dzire (4+1), Ertiga MPV (6+1), Innova Crysta (7+1), and Tempo Traveller (12-26 seats).
+- [Curated Destinations & Circuits](https://berhampurcab.vercel.app/destinations): Day tours and multi-day packages to Tara Tarini, Gopalpur-on-Sea, Tampara Lake, Taptapani Hot Springs, Jirang Tibetan Monastery, Daringbadi, Puri, and Chilika.
+- [Popular Highway Routes](https://berhampurcab.vercel.app/routes): Distance, driving duration, and vehicle pricing for Berhampur to Bhubaneswar Airport, Puri, Cuttack, Vizag, and Rayagada.
+- [Direct Contact & Dispatch Desk](https://berhampurcab.vercel.app/contact): 24x7 phone hotline (+91 63712 58522), WhatsApp dispatch desk, and Silk City office coordinates.
+- [About Subham Travelers](https://berhampurcab.vercel.app/about): Company background, commercial fleet standards, chauffeur verification, and Silk City dispatch history.
+- [Customer Feedback](https://berhampurcab.vercel.app/feedback): Traveler reviews, ratings, and customer testimonial submission.
+
+## Service Specifications
+- Primary Operating Hub: Berhampur (Brahmapur), Ganjam District, Odisha 760001, India.
+- Geographic Coordinates: Latitude 19.3149, Longitude 84.7941.
+- Operating Hours: 24 Hours / 7 Days a week (24x7).
+- Fare Model: Transparent fixed highway quotes with zero hidden driver night charges or platform surge pricing.
+- Dispatch Phone: +91 63712 58522
+- Booking Mode: Web application form, instant telephone dispatch, and WhatsApp hotline.
+
+## Optional
+- [Privacy Policy](https://berhampurcab.vercel.app/privacy-policy): Privacy practices and data handling policies.
+- [Terms & Conditions](https://berhampurcab.vercel.app/terms): Rental terms, cancellation policy, and passenger guidelines.
