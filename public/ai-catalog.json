@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Subham Travelers",
+    "documentationUrl": "https://berhampurcab.vercel.app/about",
+    "logoUrl": "https://berhampurcab.vercel.app/favicon.svg"
+  },
+  "entries": [
+    {
+      "identifier": "urn:ai:berhampurcab.vercel.app:services:cab-booking",
+      "displayName": "Subham Travelers Cab Booking & Dispatch",
+      "type": "application/ai-skill",
+      "url": "https://berhampurcab.vercel.app/",
+      "description": "24x7 commercial chauffeur-driven cab booking, outstation tours, and Bhubaneswar Airport transfers from Berhampur (Silk City), Odisha.",
+      "representativeQueries": [
+        "Book a cab from Berhampur to Bhubaneswar Airport",
+        "Taxi service from Berhampur to Puri Jagannath Temple",
+        "Rent an AC cab for Gopalpur and Tara Tarini tour",
+        "Berhampur railway station taxi pickup"
+      ],
+      "tags": [
+        "cab-booking",
+        "taxi-service",
+        "berhampur",
+        "odisha-tourism",
+        "airport-transfer"
+      ],
+      "capabilities": [
+        "instant-quote",
+        "intercity-cab",
+        "tour-planning"
+      ],
+      "version": "1.0.0",
+      "updatedAt": "2026-10-27T00:00:00Z"
+    }
+  ]
+}
