@@ -5,7 +5,10 @@ import { Home, PhoneCall, Compass, MessageSquare } from 'lucide-react';
 import { isPhoneConfigured, getPhoneUrl } from '@/lib/contactUtils';
 
 export function NotFound() {
-  useDocumentTitle('Page Not Found (404)');
+  useDocumentTitle(
+    'Page Not Found (404)',
+    'The requested travel route or page was not found. Return to Subham Travelers homepage or contact our Berhampur 24/7 dispatch desk.'
+  );
   const phoneReady = isPhoneConfigured();
 
   return (

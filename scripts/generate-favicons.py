@@ -1,0 +1,77 @@
+#!/usr/bin/env python3
+import subprocess
+from PIL import Image
+
+# 1. Write the modern vector SVG
+svg_content = '''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="blueGrad" x1="64" y1="64" x2="448" y2="448" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+  </defs>
+
+  <!-- App Icon Background -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)"/>
+  <rect x="8" y="8" width="496" height="496" rx="104" stroke="#2563EB" stroke-width="6" stroke-opacity="0.25"/>
+
+  <!-- Cab Roof Sign / Beacon -->
+  <rect x="216" y="112" width="80" height="24" rx="8" fill="#F8FAFC"/>
+  <rect x="232" y="104" width="48" height="12" rx="4" fill="#3B82F6"/>
+
+  <!-- Upper Cabin / Windshield -->
+  <path d="M140 280 L180 160 C186 142 202 132 222 132 H290 C310 132 326 142 332 160 L372 280 Z" fill="#1E293B" stroke="url(#blueGrad)" stroke-width="16" stroke-linejoin="round"/>
+  
+  <!-- Windshield Glass -->
+  <path d="M168 264 L198 174 C202 162 212 154 226 154 H286 C300 154 310 162 314 174 L344 264 Z" fill="#93C5FD" fill-opacity="0.35"/>
+
+  <!-- Main Vehicle Body -->
+  <path d="M84 280 C84 264 98 252 114 252 H398 C414 252 428 264 428 280 L444 352 C446 362 438 372 426 372 H404 C404 350 386 332 364 332 C342 332 324 350 324 372 H188 C188 350 170 332 148 332 C126 332 108 350 108 372 H86 C74 372 66 362 68 352 Z" fill="url(#blueGrad)"/>
+
+  <!-- Headlights -->
+  <ellipse cx="120" cy="296" rx="20" ry="12" fill="#FEF08A"/>
+  <ellipse cx="392" cy="296" rx="20" ry="12" fill="#FEF08A"/>
+
+  <!-- Front Grille -->
+  <rect x="196" y="294" width="120" height="28" rx="8" fill="#0F172A" stroke="#60A5FA" stroke-width="4"/>
+  <line x1="216" y1="308" x2="296" y2="308" stroke="#93C5FD" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Lower Bumper -->
+  <rect x="144" y="340" width="224" height="24" rx="8" fill="#1E293B"/>
+
+  <!-- Wheels -->
+  <circle cx="148" cy="372" r="42" fill="#020617" stroke="#475569" stroke-width="8"/>
+  <circle cx="148" cy="372" r="18" fill="#3B82F6"/>
+  <circle cx="364" cy="372" r="42" fill="#020617" stroke="#475569" stroke-width="8"/>
+  <circle cx="364" cy="372" r="18" fill="#3B82F6"/>
+</svg>
+'''
+
+with open("public/favicon.svg", "w") as f:
+    f.write(svg_content.strip() + "\n")
+
+# 2. Render PNGs using rsvg-convert
+sizes = [
+    (16, "public/favicon-16x16.png"),
+    (32, "public/favicon-32x32.png"),
+    (48, "public/favicon-48x48.png"),
+    (180, "public/apple-touch-icon.png"),
+    (192, "public/android-chrome-192x192.png"),
+    (512, "public/android-chrome-512x512.png"),
+]
+
+for dim, out_path in sizes:
+    subprocess.run(["rsvg-convert", "-w", str(dim), "-h", str(dim), "public/favicon.svg", "-o", out_path], check=True)
+
+# 3. Create real multi-size favicon.ico using Pillow
+img16 = Image.open("public/favicon-16x16.png")
+img32 = Image.open("public/favicon-32x32.png")
+img48 = Image.open("public/favicon-48x48.png")
+img32.save("public/favicon.ico", format="ICO", sizes=[(16, 16), (32, 32), (48, 48)], append_images=[img16, img48])
+
+# Clean up temp 48x48 png if not needed or keep it
+print("Favicon set successfully generated!")

@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://berhampurcab.vercel.app/sitemap.xml
+Host: https://berhampurcab.vercel.app
