@@ -34,77 +34,8 @@ export function WinterOfferPopup() {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    // Check if user has already dismissed in this session
-    const dismissed = sessionStorage.getItem('st_winter_offer_dismissed');
-    if (dismissed) return;
-
-    let hasScrolledDown = false;
-    let lastScrollY = window.scrollY;
-    let triggered = false;
-
-    const triggerPopup = () => {
-      if (triggered) return;
-      if (sessionStorage.getItem('st_winter_offer_dismissed')) return;
-      triggered = true;
-      setIsOpen(true);
-      cleanup();
-    };
-
-    // 1. Mandatory Scroll Up trigger: when user scrolls down and then scrolls upward
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (currentScrollY > 40) {
-        hasScrolledDown = true;
-      }
-      if (hasScrolledDown && lastScrollY - currentScrollY > 15) {
-        triggerPopup();
-      }
-      lastScrollY = currentScrollY;
-    };
-
-    // 2. Mandatory Touch / Window Interaction trigger: when user touches or clicks the window
-    const handleTouchOrClick = (e: Event) => {
-      const target = e.target as HTMLElement | null;
-      // Do not prematurely trigger if user is interacting with close/reopen controls
-      if (
-        target?.closest('button[aria-label="Close offer popup"]') ||
-        target?.closest('button[aria-label="Open Winter Offer: 15% OFF"]')
-      ) {
-        return;
-      }
-      triggerPopup();
-    };
-
-    // 3. Desktop exit intent: mouse moves toward browser chrome / tab bar
-    const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 10) {
-        triggerPopup();
-      }
-    };
-
-    const cleanup = () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('touchstart', handleTouchOrClick);
-      window.removeEventListener('pointerdown', handleTouchOrClick);
-      window.removeEventListener('click', handleTouchOrClick);
-      document.removeEventListener('mouseleave', handleMouseLeave);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('touchstart', handleTouchOrClick, { passive: true });
-    window.addEventListener('pointerdown', handleTouchOrClick, { passive: true });
-    window.addEventListener('click', handleTouchOrClick, { passive: true });
-    document.addEventListener('mouseleave', handleMouseLeave);
-
-    return () => {
-      cleanup();
-    };
-  }, []);
-
   const handleClose = () => {
     setIsOpen(false);
-    sessionStorage.setItem('st_winter_offer_dismissed', 'true');
   };
 
   const handleCopyCode = () => {

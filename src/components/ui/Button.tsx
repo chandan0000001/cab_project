@@ -27,6 +27,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       type = 'button',
       onClick,
       silent = false,
+      onPointerDown,
       ...props
     },
     ref
@@ -35,7 +36,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       if (!silent && (e.pointerType === 'touch' || e.pointerType === 'pen')) {
         haptics.impactLight(true);
       }
-      props.onPointerDown?.(e);
+      onPointerDown?.(e);
     };
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -86,13 +87,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         type={type}
         disabled={disabled || isLoading}
+        aria-busy={isLoading || undefined}
         onClick={handleClick}
         onPointerDown={handlePointerDown}
         className={cn(baseStyles, variants[variant], sizes[size], className)}
         {...props}
       >
         {isLoading ? (
-          <Loader2 className="w-4 h-4 animate-spin mr-2" />
+          <><Loader2 aria-hidden="true" className="w-4 h-4 animate-spin" /><span>{children}</span></>
         ) : (
           <>
             {leftIcon && <span className="shrink-0">{leftIcon}</span>}

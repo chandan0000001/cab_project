@@ -48,7 +48,7 @@ export function RootLayout() {
         <Header />
 
         {/* Page Content Outlet with Suspense Fallback */}
-        <main id="main-content" className="flex-1 focus:outline-none">
+        <main tabIndex={-1} id="main-content" className="flex-1 focus:outline-none">
           <Suspense fallback={<LoadingSpinner label="Loading page..." className="min-h-[50vh]" />}>
             <Outlet />
           </Suspense>
